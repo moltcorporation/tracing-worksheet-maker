@@ -3,6 +3,8 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+const SITE_URL = "https://nametracingmaker.com";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -14,7 +16,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tracing Worksheet Maker — Free Printable Name, Letter & Number Tracing",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default:
+      "Tracing Worksheet Maker — Free Printable Name, Letter & Number Tracing",
+    template: "%s | Tracing Worksheet Maker",
+  },
   description:
     "Generate free printable tracing worksheets for names, letters A-Z, and numbers 0-9. Dotted letter tracing with writing guidelines. Download as PDF instantly.",
   openGraph: {
@@ -22,6 +29,7 @@ export const metadata: Metadata = {
     description:
       "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
     type: "website",
+    siteName: "Tracing Worksheet Maker",
   },
   twitter: {
     card: "summary_large_image",
@@ -31,6 +39,23 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Tracing Worksheet Maker",
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "Web",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  description:
+    "Free online tool to generate printable tracing worksheets for names, letters A-Z, and numbers 0-9. Download as PDF instantly.",
+  url: SITE_URL,
+  aggregateRating: undefined,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,6 +63,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
