@@ -2,8 +2,11 @@
 
 import { useState, useRef, useCallback } from "react";
 import { jsPDF } from "jspdf";
+import ProUpgradeModal from "./ProUpgradeModal";
 
 type Mode = "name" | "letters" | "numbers";
+type HandwritingStyle = "print" | "cursive" | "dnealian";
+type LineStyle = "standard" | "wide-ruled" | "narrow-ruled" | "blank";
 
 interface WorksheetSettings {
   mode: Mode;
@@ -14,6 +17,10 @@ interface WorksheetSettings {
   showGuideLines: boolean;
   selectedLetters: string[];
   selectedNumbers: string[];
+  handwritingStyle: HandwritingStyle;
+  lineStyle: LineStyle;
+  customWords: string;
+  bulkNames: string;
 }
 
 const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -28,7 +35,34 @@ const DEFAULT_SETTINGS: WorksheetSettings = {
   showGuideLines: true,
   selectedLetters: [...UPPERCASE],
   selectedNumbers: [...DIGITS],
+  handwritingStyle: "print",
+  lineStyle: "standard",
+  customWords: "",
+  bulkNames: "",
 };
+
+// Pro feature lock badge
+function ProBadge({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-xs font-semibold px-2 py-0.5 rounded-full hover:bg-blue-100 transition-colors"
+    >
+      <svg
+        className="w-3 h-3"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fillRule="evenodd"
+          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+          clipRule="evenodd"
+        />
+      </svg>
+      PRO
+    </button>
+  );
+}
 
 // Writing lines component for a single row
 function WritingLines({
@@ -372,6 +406,8 @@ function WorksheetPreview({
 export default function TracingWorksheet() {
   const [settings, setSettings] = useState<WorksheetSettings>(DEFAULT_SETTINGS);
   const [isExporting, setIsExporting] = useState(false);
+  const [showProModal, setShowProModal] = useState(false);
+  const [proFeatureName, setProFeatureName] = useState("");
   const svgRef = useRef<SVGSVGElement>(null);
 
   const updateSetting = useCallback(
@@ -400,6 +436,11 @@ export default function TracingWorksheet() {
         : [...prev.selectedNumbers, num].sort();
       return { ...prev, selectedNumbers: selected };
     });
+  }, []);
+
+  const openProModal = useCallback((feature: string) => {
+    setProFeatureName(feature);
+    setShowProModal(true);
   }, []);
 
   const exportPDF = useCallback(async () => {
@@ -602,6 +643,164 @@ export default function TracingWorksheet() {
               )}
             </div>
 
+            {/* Handwriting Style - Pro Feature */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Handwriting Style
+                </label>
+                <ProBadge onClick={() => openProModal("Handwriting Styles")} />
+              </div>
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm text-gray-700">
+                  <input
+                    type="radio"
+                    name="handwritingStyle"
+                    checked={settings.handwritingStyle === "print"}
+                    onChange={() => updateSetting("handwritingStyle", "print")}
+                    className="text-blue-600"
+                  />
+                  Print (Standard)
+                </label>
+                <label
+                  className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
+                  onClick={() => openProModal("Cursive Style")}
+                >
+                  <input
+                    type="radio"
+                    name="handwritingStyle"
+                    disabled
+                    className="text-gray-300"
+                  />
+                  Cursive
+                  <svg
+                    className="w-3.5 h-3.5 text-blue-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </label>
+                <label
+                  className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
+                  onClick={() => openProModal("D'Nealian Style")}
+                >
+                  <input
+                    type="radio"
+                    name="handwritingStyle"
+                    disabled
+                    className="text-gray-300"
+                  />
+                  D&apos;Nealian
+                  <svg
+                    className="w-3.5 h-3.5 text-blue-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </label>
+              </div>
+            </div>
+
+            {/* Line Style - Pro Feature */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Line Style
+                </label>
+                <ProBadge onClick={() => openProModal("Line Styles")} />
+              </div>
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm text-gray-700">
+                  <input
+                    type="radio"
+                    name="lineStyle"
+                    checked={settings.lineStyle === "standard"}
+                    onChange={() => updateSetting("lineStyle", "standard")}
+                    className="text-blue-600"
+                  />
+                  Standard
+                </label>
+                {(["wide-ruled", "narrow-ruled", "blank"] as const).map(
+                  (style) => (
+                    <label
+                      key={style}
+                      className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
+                      onClick={() => openProModal("Line Styles")}
+                    >
+                      <input
+                        type="radio"
+                        name="lineStyle"
+                        disabled
+                        className="text-gray-300"
+                      />
+                      {style === "wide-ruled"
+                        ? "Wide-Ruled"
+                        : style === "narrow-ruled"
+                          ? "Narrow-Ruled"
+                          : "Blank (No Lines)"}
+                      <svg
+                        className="w-3.5 h-3.5 text-blue-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </label>
+                  )
+                )}
+              </div>
+            </div>
+
+            {/* Custom Words - Pro Feature */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Custom Words / Sight Words
+                </label>
+                <ProBadge onClick={() => openProModal("Custom Words")} />
+              </div>
+              <textarea
+                disabled
+                placeholder="Enter sight words or vocabulary (one per line)..."
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50 text-gray-400 cursor-not-allowed resize-none"
+                rows={3}
+                onClick={() => openProModal("Custom Words")}
+              />
+            </div>
+
+            {/* Bulk Class Generation - Pro Feature */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-semibold text-gray-700">
+                  Bulk Class Generation
+                </label>
+                <ProBadge
+                  onClick={() => openProModal("Bulk Class Generation")}
+                />
+              </div>
+              <textarea
+                disabled
+                placeholder="Paste student names (one per line) to generate all worksheets at once..."
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50 text-gray-400 cursor-not-allowed resize-none"
+                rows={3}
+                onClick={() => openProModal("Bulk Class Generation")}
+              />
+            </div>
+
             {/* Layout Settings */}
             <div className="bg-white rounded-lg shadow p-4 space-y-4">
               <h3 className="text-sm font-semibold text-gray-700">Layout</h3>
@@ -653,6 +852,30 @@ export default function TracingWorksheet() {
                 </label>
               </div>
             </div>
+
+            {/* Save Worksheets - Pro Feature */}
+            <button
+              onClick={() => openProModal("Save & Organize Worksheets")}
+              className="w-full bg-white border border-gray-200 rounded-lg shadow p-3 flex items-center justify-center gap-2 text-sm text-gray-500 hover:bg-gray-50 transition-colors"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                />
+              </svg>
+              Save Worksheet
+              <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-xs font-semibold px-1.5 py-0.5 rounded-full">
+                PRO
+              </span>
+            </button>
 
             {/* Export Button */}
             <button
@@ -740,8 +963,14 @@ export default function TracingWorksheet() {
             </div>
           </div>
         </div>
-
       </div>
+
+      {/* Pro Upgrade Modal */}
+      <ProUpgradeModal
+        isOpen={showProModal}
+        onClose={() => setShowProModal(false)}
+        featureName={proFeatureName}
+      />
     </div>
   );
 }
