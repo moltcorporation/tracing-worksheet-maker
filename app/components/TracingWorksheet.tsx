@@ -466,19 +466,7 @@ export default function TracingWorksheet() {
     settings.mode !== "name" || settings.nameText.trim().length > 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Tracing Worksheet Maker
-          </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Free printable tracing worksheets for names, letters & numbers
-          </p>
-        </div>
-      </header>
-
+    <div className="bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Settings Panel */}
@@ -753,70 +741,7 @@ export default function TracingWorksheet() {
           </div>
         </div>
 
-        {/* Info Section */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow p-6 text-center">
-            <div className="text-3xl mb-2">&#9997;</div>
-            <h3 className="font-semibold text-gray-800">Name Tracing</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              Type any name and get a custom tracing worksheet with dotted
-              letters and writing guides.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6 text-center">
-            <div className="text-3xl mb-2">&#127312;</div>
-            <h3 className="font-semibold text-gray-800">Letter Practice</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              A-Z letter worksheets with stroke guides. Choose specific letters
-              or practice the full alphabet.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6 text-center">
-            <div className="text-3xl mb-2">&#128290;</div>
-            <h3 className="font-semibold text-gray-800">Number Tracing</h3>
-            <p className="text-sm text-gray-500 mt-1">
-              Numbers 0-9 with formation guides. Build confidence with number
-              writing practice.
-            </p>
-          </div>
-        </div>
-
-        {/* SEO Content */}
-        <div className="mt-12 bg-white rounded-lg shadow p-8">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            Free Printable Tracing Worksheets
-          </h2>
-          <div className="prose prose-sm text-gray-600 max-w-none">
-            <p>
-              Create custom tracing worksheets for kids learning to write. Our
-              free worksheet generator lets you make personalized name tracing
-              sheets, letter practice pages, and number formation worksheets
-              &mdash; all downloadable as print-ready PDFs.
-            </p>
-            <p className="mt-3">
-              Perfect for preschool, kindergarten, and early elementary students.
-              Each worksheet includes dotted letters with writing guide lines
-              (baseline, midline, and top line) to help children develop proper
-              letter formation and handwriting skills.
-            </p>
-            <p className="mt-3">
-              <strong>Name tracing</strong> worksheets are great for helping
-              children learn to write their own name.{" "}
-              <strong>Letter tracing</strong> sheets cover A-Z with stroke
-              guides showing where to start each letter.{" "}
-              <strong>Number tracing</strong> worksheets cover 0-9 with
-              formation guides.
-            </p>
-          </div>
-        </div>
       </div>
-
-      {/* Footer */}
-      <footer className="mt-12 border-t border-gray-200 bg-white">
-        <div className="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-gray-400">
-          Tracing Worksheet Maker &mdash; Free printable tracing worksheets
-        </div>
-      </footer>
     </div>
   );
 }

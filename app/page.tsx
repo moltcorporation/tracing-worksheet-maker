@@ -1,5 +1,523 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import TracingWorksheet from "./components/TracingWorksheet";
 
+const SITE_URL = "https://nametracingmaker.com";
+
+export const metadata: Metadata = {
+  title:
+    "Free Tracing Worksheet Maker — Name, Letter & Number Tracing Generator",
+  description:
+    "Create free printable tracing worksheets for names, letters A-Z, and numbers 0-9. Dotted letter tracing with writing guidelines. Download as PDF instantly. Perfect for preschool and kindergarten.",
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    title: "Free Tracing Worksheet Maker — Printable Name & Letter Tracing",
+    description:
+      "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
+    type: "website",
+    url: SITE_URL,
+    siteName: "Tracing Worksheet Maker",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Tracing Worksheet Maker — Printable Name & Letter Tracing",
+    description:
+      "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
+  },
+};
+
 export default function Home() {
-  return <TracingWorksheet />;
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Free Tracing Worksheet Maker
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+            Create custom printable tracing worksheets for names, letters A-Z,
+            and numbers 0-9. Dotted letters with writing guides — download as
+            PDF instantly.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-500">
+            <span className="bg-white border border-gray-200 rounded-full px-3 py-1">
+              100% Free
+            </span>
+            <span className="bg-white border border-gray-200 rounded-full px-3 py-1">
+              No Sign-up Required
+            </span>
+            <span className="bg-white border border-gray-200 rounded-full px-3 py-1">
+              Instant PDF Download
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Tool Section */}
+      <section id="generator" className="py-8">
+        <TracingWorksheet />
+      </section>
+
+      {/* Use Cases */}
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            Tracing Worksheets for Every Learning Need
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Link
+              href="/name-tracing"
+              className="block bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+            >
+              <div className="text-4xl mb-3">&#9997;</div>
+              <h3 className="font-semibold text-gray-800 text-lg">
+                Name Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-2">
+                Type any name and generate a custom tracing worksheet with dotted
+                letters and writing guides. Perfect for helping children learn to
+                write their name.
+              </p>
+              <span className="inline-block mt-3 text-blue-600 text-sm font-medium">
+                Create name worksheets &rarr;
+              </span>
+            </Link>
+            <Link
+              href="/letter-tracing"
+              className="block bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+            >
+              <div className="text-4xl mb-3">&#127312;</div>
+              <h3 className="font-semibold text-gray-800 text-lg">
+                Letter Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-2">
+                A-Z letter tracing worksheets with stroke guides. Choose specific
+                letters or practice the full alphabet. Great for preschool and
+                kindergarten.
+              </p>
+              <span className="inline-block mt-3 text-blue-600 text-sm font-medium">
+                Create letter worksheets &rarr;
+              </span>
+            </Link>
+            <Link
+              href="/number-tracing"
+              className="block bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+            >
+              <div className="text-4xl mb-3">&#128290;</div>
+              <h3 className="font-semibold text-gray-800 text-lg">
+                Number Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-2">
+                Numbers 0-9 tracing worksheets with formation guides. Build
+                confidence with number writing practice for early learners.
+              </p>
+              <span className="inline-block mt-3 text-blue-600 text-sm font-medium">
+                Create number worksheets &rarr;
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="py-12">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            Why Teachers and Parents Love Our Worksheets
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg
+                  className="w-6 h-6 text-blue-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-800 text-sm">
+                Instant Generation
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                Type, customize, and download. No waiting.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg
+                  className="w-6 h-6 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-800 text-sm">
+                Print-Ready PDFs
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                US Letter size, high-quality output for clear printing.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg
+                  className="w-6 h-6 text-purple-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-800 text-sm">
+                Fully Customizable
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                Adjust letter size, rows, and writing guides.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <svg
+                  className="w-6 h-6 text-orange-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-gray-800 text-sm">
+                Completely Free
+              </h3>
+              <p className="text-xs text-gray-500 mt-1">
+                No account, no paywall. Just worksheets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
+            Simple Pricing
+          </h2>
+          <p className="text-gray-500 text-center mb-8">
+            Start free, upgrade when you need more.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <div className="border border-gray-200 rounded-xl p-6">
+              <h3 className="font-bold text-lg text-gray-900">Free</h3>
+              <p className="text-3xl font-bold text-gray-900 mt-2">
+                $0
+                <span className="text-base font-normal text-gray-500">
+                  /forever
+                </span>
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-green-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Name tracing worksheets
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-green-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Letters A-Z & Numbers 0-9
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-green-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Standard print style
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-green-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  PDF download
+                </li>
+              </ul>
+              <a
+                href="#generator"
+                className="block mt-6 text-center bg-gray-100 text-gray-800 py-2 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              >
+                Start Creating
+              </a>
+            </div>
+            <div className="border-2 border-blue-500 rounded-xl p-6 relative">
+              <span className="absolute -top-3 left-4 bg-blue-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                COMING SOON
+              </span>
+              <h3 className="font-bold text-lg text-gray-900">Pro</h3>
+              <p className="text-3xl font-bold text-gray-900 mt-2">
+                $4.99
+                <span className="text-base font-normal text-gray-500">
+                  /month
+                </span>
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-gray-600">
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-blue-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Everything in Free
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-blue-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Cursive &amp; D&apos;Nealian styles
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-blue-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Custom words &amp; sight words
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-blue-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Bulk class generation
+                </li>
+                <li className="flex items-center gap-2">
+                  <svg
+                    className="w-4 h-4 text-blue-500 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Save &amp; organize worksheets
+                </li>
+              </ul>
+              <div className="mt-6 text-center bg-blue-100 text-blue-700 py-2 px-4 rounded-lg font-medium cursor-default">
+                Coming Soon
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ / SEO Content */}
+      <section className="py-12">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-gray-800">
+                How do I print a name tracing worksheet?
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Type a name in the generator above, customize the layout, and
+                click &quot;Download PDF.&quot; Open the PDF and print it on
+                standard US Letter paper. The worksheet is optimized for clear,
+                clean printing.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800">
+                What ages are these worksheets for?
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Our tracing worksheets are designed for children ages 3-7,
+                including preschool, pre-K, and kindergarten students. The
+                adjustable letter size makes them suitable for different skill
+                levels.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800">
+                Can I create letter tracing worksheets for the whole alphabet?
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Yes! Switch to &quot;Letters&quot; mode and select all 26 letters
+                or choose specific ones your child needs to practice. Each letter
+                gets its own practice row with stroke guides.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800">
+                Are number tracing worksheets included?
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Absolutely. Switch to &quot;Numbers&quot; mode to create tracing
+                worksheets for numbers 0-9. Each number includes formation guides
+                to help children learn proper number writing.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800">
+                Is this really free?
+              </h3>
+              <p className="text-sm text-gray-600 mt-1">
+                Yes, the core worksheet generator is completely free with no
+                account required. Create unlimited name, letter, and number
+                tracing worksheets and download them as PDFs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div>
+              <h4 className="font-semibold text-gray-800 mb-2">
+                Tracing Worksheet Maker
+              </h4>
+              <p className="text-gray-500">
+                Free printable tracing worksheets for names, letters, and
+                numbers. Helping children learn to write.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-800 mb-2">Worksheets</h4>
+              <ul className="space-y-1 text-gray-500">
+                <li>
+                  <Link
+                    href="/name-tracing"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Name Tracing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/letter-tracing"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Letter Tracing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/number-tracing"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Number Tracing
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-800 mb-2">About</h4>
+              <p className="text-gray-500">
+                Made for teachers, parents, and homeschoolers who need quick,
+                quality tracing worksheets.
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 pt-6 border-t border-gray-100 text-center text-xs text-gray-400">
+            &copy; {new Date().getFullYear()} Tracing Worksheet Maker. All
+            rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
