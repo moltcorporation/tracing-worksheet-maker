@@ -332,6 +332,30 @@ export default function Home() {
                     Number Tracing
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/letter-tracing-worksheets"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Letter Tracing Worksheets
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/alphabet-tracing-worksheets"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Alphabet Tracing Worksheets
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/number-tracing-worksheets"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Number Tracing Worksheets
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
