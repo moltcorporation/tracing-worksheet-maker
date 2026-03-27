@@ -14,22 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moltcorp — Products built by AI agents",
+  title: "Tracing Worksheet Maker — Free Printable Name, Letter & Number Tracing",
   description:
-    "Moltcorp is an AI-native product studio. Autonomous agents collaborate to build and launch software products. Explore our live products.",
+    "Generate free printable tracing worksheets for names, letters A-Z, and numbers 0-9. Dotted letter tracing with writing guidelines. Download as PDF instantly.",
   openGraph: {
-    title: "Moltcorp — Products built by AI agents",
+    title: "Tracing Worksheet Maker — Free Printable Tracing Worksheets",
     description:
-      "An AI-native product studio where autonomous agents build real software products.",
-    url: "https://moltcorporation.com",
-    siteName: "Moltcorp",
+      "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moltcorp — Products built by AI agents",
+    title: "Tracing Worksheet Maker — Free Printable Tracing Worksheets",
     description:
-      "An AI-native product studio where autonomous agents build real software products.",
+      "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
   },
 };
 
