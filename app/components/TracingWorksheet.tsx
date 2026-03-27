@@ -1,0 +1,822 @@
+"use client";
+
+import { useState, useRef, useCallback } from "react";
+import { jsPDF } from "jspdf";
+
+type Mode = "name" | "letters" | "numbers";
+
+interface WorksheetSettings {
+  mode: Mode;
+  nameText: string;
+  letterSize: number;
+  rowsPerPage: number;
+  lineSpacing: number;
+  showGuideLines: boolean;
+  selectedLetters: string[];
+  selectedNumbers: string[];
+}
+
+const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const DIGITS = "0123456789".split("");
+
+const DEFAULT_SETTINGS: WorksheetSettings = {
+  mode: "name",
+  nameText: "",
+  letterSize: 64,
+  rowsPerPage: 6,
+  lineSpacing: 1.5,
+  showGuideLines: true,
+  selectedLetters: [...UPPERCASE],
+  selectedNumbers: [...DIGITS],
+};
+
+// Writing lines component for a single row
+function WritingLines({
+  y,
+  width,
+  height,
+}: {
+  y: number;
+  width: number;
+  height: number;
+}) {
+  const baseline = y + height;
+  const midline = y + height * 0.5;
+  const topline = y;
+
+  return (
+    <g>
+      {/* Top line - dotted */}
+      <line
+        x1={0}
+        y1={topline}
+        x2={width}
+        y2={topline}
+        stroke="#ccc"
+        strokeWidth={0.5}
+        strokeDasharray="2,4"
+      />
+      {/* Midline - dashed */}
+      <line
+        x1={0}
+        y1={midline}
+        x2={width}
+        y2={midline}
+        stroke="#aaa"
+        strokeWidth={0.5}
+        strokeDasharray="6,4"
+      />
+      {/* Baseline - solid */}
+      <line
+        x1={0}
+        y1={baseline}
+        x2={width}
+        y2={baseline}
+        stroke="#666"
+        strokeWidth={1}
+      />
+    </g>
+  );
+}
+
+// Single traced character rendered as dotted text
+function TracedCharacter({
+  char,
+  x,
+  y,
+  size,
+  opacity,
+}: {
+  char: string;
+  x: number;
+  y: number;
+  size: number;
+  opacity: number;
+}) {
+  return (
+    <text
+      x={x}
+      y={y}
+      fontSize={size}
+      fontFamily="'Comic Sans MS', 'Comic Sans', cursive"
+      fill="none"
+      stroke="#999"
+      strokeWidth={1.2}
+      strokeDasharray="3,3"
+      opacity={opacity}
+      textAnchor="middle"
+      dominantBaseline="alphabetic"
+    >
+      {char}
+    </text>
+  );
+}
+
+// Arrow guide for stroke direction (simplified)
+function StrokeGuide({
+  char,
+  x,
+  y,
+  size,
+}: {
+  char: string;
+  x: number;
+  y: number;
+  size: number;
+}) {
+  // Show a small number indicating stroke start position
+  const isNumber = /[0-9]/.test(char);
+  const guideY = y - size * 0.85;
+  const guideX = x - size * 0.15;
+
+  return (
+    <g>
+      {/* Solid guide letter */}
+      <text
+        x={x}
+        y={y}
+        fontSize={size * 0.35}
+        fontFamily="'Comic Sans MS', 'Comic Sans', cursive"
+        fill="#ddd"
+        textAnchor="middle"
+        dominantBaseline="alphabetic"
+      >
+        {char}
+      </text>
+      {/* Start dot */}
+      <circle
+        cx={guideX}
+        cy={guideY}
+        r={2.5}
+        fill={isNumber ? "#e74c3c" : "#3498db"}
+      />
+      <text
+        x={guideX}
+        y={guideY + 1.5}
+        fontSize={3.5}
+        fill="white"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontFamily="Arial"
+        fontWeight="bold"
+      >
+        1
+      </text>
+    </g>
+  );
+}
+
+// A single worksheet row
+function WorksheetRow({
+  chars,
+  y,
+  rowHeight,
+  width,
+  letterSize,
+  showGuideLines,
+  showStrokeGuides,
+}: {
+  chars: string[];
+  y: number;
+  rowHeight: number;
+  width: number;
+  letterSize: number;
+  showGuideLines: boolean;
+  showStrokeGuides?: boolean;
+}) {
+  const padding = 20;
+  const usableWidth = width - padding * 2;
+  const charSpacing = Math.min(
+    letterSize * 1.2,
+    usableWidth / Math.max(chars.length, 1)
+  );
+
+  return (
+    <g>
+      {showGuideLines && (
+        <WritingLines y={y} width={width} height={rowHeight} />
+      )}
+      {chars.map((char, i) => {
+        const cx = padding + i * charSpacing + charSpacing / 2;
+        const cy = y + rowHeight * 0.88;
+
+        return (
+          <g key={`${char}-${i}`}>
+            {showStrokeGuides && (
+              <StrokeGuide char={char} x={cx} y={cy} size={letterSize} />
+            )}
+            <TracedCharacter
+              char={char}
+              x={cx}
+              y={cy}
+              size={letterSize}
+              opacity={0.7}
+            />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
+// Generate rows for worksheet based on mode
+function generateRows(settings: WorksheetSettings): string[][] {
+  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage } =
+    settings;
+
+  switch (mode) {
+    case "name": {
+      if (!nameText.trim()) return [];
+      const text = nameText.toUpperCase().trim();
+      const rows: string[][] = [];
+      // First row: the name with guides
+      rows.push(text.split(""));
+      // Remaining rows: repeated for practice
+      for (let i = 1; i < rowsPerPage; i++) {
+        rows.push(text.split(""));
+      }
+      return rows;
+    }
+    case "letters": {
+      const letters = selectedLetters.length > 0 ? selectedLetters : UPPERCASE;
+      const rows: string[][] = [];
+      // Each letter gets repeated across a row for practice
+      const lettersPerRow = Math.min(8, letters.length);
+      for (let i = 0; i < Math.min(rowsPerPage, letters.length); i++) {
+        const row: string[] = [];
+        for (let j = 0; j < lettersPerRow; j++) {
+          row.push(letters[i % letters.length]);
+        }
+        rows.push(row);
+      }
+      return rows;
+    }
+    case "numbers": {
+      const numbers = selectedNumbers.length > 0 ? selectedNumbers : DIGITS;
+      const rows: string[][] = [];
+      const numbersPerRow = Math.min(8, numbers.length);
+      for (let i = 0; i < Math.min(rowsPerPage, numbers.length); i++) {
+        const row: string[] = [];
+        for (let j = 0; j < numbersPerRow; j++) {
+          row.push(numbers[i % numbers.length]);
+        }
+        rows.push(row);
+      }
+      return rows;
+    }
+  }
+}
+
+// SVG Worksheet Preview
+function WorksheetPreview({
+  settings,
+  svgRef,
+}: {
+  settings: WorksheetSettings;
+  svgRef: React.RefObject<SVGSVGElement | null>;
+}) {
+  const rows = generateRows(settings);
+  // US Letter dimensions in mm, scaled for SVG viewBox
+  const pageWidth = 612; // 8.5" at 72 DPI
+  const pageHeight = 792; // 11" at 72 DPI
+  const margin = 40;
+  const headerHeight = 60;
+  const usableHeight = pageHeight - margin * 2 - headerHeight;
+  const rowHeight = usableHeight / settings.rowsPerPage;
+
+  const title =
+    settings.mode === "name"
+      ? `Trace: ${settings.nameText || "..."}`
+      : settings.mode === "letters"
+        ? "Letter Tracing Worksheet"
+        : "Number Tracing Worksheet";
+
+  return (
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${pageWidth} ${pageHeight}`}
+        className="w-full h-auto"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ backgroundColor: "white" }}
+      >
+        {/* Page border */}
+        <rect
+          x={1}
+          y={1}
+          width={pageWidth - 2}
+          height={pageHeight - 2}
+          fill="white"
+          stroke="#e0e0e0"
+          strokeWidth={1}
+        />
+
+        {/* Header */}
+        <text
+          x={pageWidth / 2}
+          y={margin + 24}
+          fontSize={22}
+          fontFamily="Arial, sans-serif"
+          fontWeight="bold"
+          fill="#333"
+          textAnchor="middle"
+        >
+          {title}
+        </text>
+
+        {/* Instruction */}
+        <text
+          x={pageWidth / 2}
+          y={margin + 44}
+          fontSize={12}
+          fontFamily="Arial, sans-serif"
+          fill="#888"
+          textAnchor="middle"
+        >
+          Trace the dotted {settings.mode === "numbers" ? "numbers" : "letters"}{" "}
+          carefully. Follow the guides.
+        </text>
+
+        {/* Worksheet rows */}
+        <g transform={`translate(${margin}, ${margin + headerHeight})`}>
+          {rows.map((row, i) => (
+            <WorksheetRow
+              key={i}
+              chars={row}
+              y={i * rowHeight}
+              rowHeight={rowHeight}
+              width={pageWidth - margin * 2}
+              letterSize={settings.letterSize}
+              showGuideLines={settings.showGuideLines}
+              showStrokeGuides={i === 0}
+            />
+          ))}
+        </g>
+
+        {/* Footer */}
+        <text
+          x={pageWidth / 2}
+          y={pageHeight - 15}
+          fontSize={9}
+          fontFamily="Arial, sans-serif"
+          fill="#bbb"
+          textAnchor="middle"
+        >
+          tracingworksheetmaker.com
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+export default function TracingWorksheet() {
+  const [settings, setSettings] = useState<WorksheetSettings>(DEFAULT_SETTINGS);
+  const [isExporting, setIsExporting] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const updateSetting = useCallback(
+    <K extends keyof WorksheetSettings>(
+      key: K,
+      value: WorksheetSettings[K]
+    ) => {
+      setSettings((prev) => ({ ...prev, [key]: value }));
+    },
+    []
+  );
+
+  const toggleLetter = useCallback((letter: string) => {
+    setSettings((prev) => {
+      const selected = prev.selectedLetters.includes(letter)
+        ? prev.selectedLetters.filter((l) => l !== letter)
+        : [...prev.selectedLetters, letter].sort();
+      return { ...prev, selectedLetters: selected };
+    });
+  }, []);
+
+  const toggleNumber = useCallback((num: string) => {
+    setSettings((prev) => {
+      const selected = prev.selectedNumbers.includes(num)
+        ? prev.selectedNumbers.filter((n) => n !== num)
+        : [...prev.selectedNumbers, num].sort();
+      return { ...prev, selectedNumbers: selected };
+    });
+  }, []);
+
+  const exportPDF = useCallback(async () => {
+    if (!svgRef.current) return;
+    setIsExporting(true);
+
+    try {
+      const svgElement = svgRef.current;
+      const svgData = new XMLSerializer().serializeToString(svgElement);
+      const svgBlob = new Blob([svgData], {
+        type: "image/svg+xml;charset=utf-8",
+      });
+      const url = URL.createObjectURL(svgBlob);
+
+      // Create a canvas to render SVG at high DPI
+      const canvas = document.createElement("canvas");
+      const scale = 3; // 3x for ~216 DPI (good print quality)
+      canvas.width = 612 * scale;
+      canvas.height = 792 * scale;
+      const ctx = canvas.getContext("2d");
+
+      if (!ctx) throw new Error("Canvas context not available");
+
+      const img = new Image();
+      img.onload = () => {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+
+        const imgData = canvas.toDataURL("image/png", 1.0);
+
+        // Create PDF at US Letter size
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "in",
+          format: "letter",
+        });
+
+        pdf.addImage(imgData, "PNG", 0, 0, 8.5, 11);
+
+        const filename =
+          settings.mode === "name"
+            ? `trace-${settings.nameText.toLowerCase().replace(/\s+/g, "-") || "worksheet"}.pdf`
+            : `${settings.mode}-tracing-worksheet.pdf`;
+
+        pdf.save(filename);
+        setIsExporting(false);
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        setIsExporting(false);
+      };
+
+      img.src = url;
+    } catch {
+      setIsExporting(false);
+    }
+  }, [settings.mode, settings.nameText]);
+
+  const rows = generateRows(settings);
+  const hasContent =
+    settings.mode !== "name" || settings.nameText.trim().length > 0;
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          <h1 className="text-2xl font-bold text-gray-900">
+            Tracing Worksheet Maker
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            Free printable tracing worksheets for names, letters & numbers
+          </p>
+        </div>
+      </header>
+
+      <div className="max-w-6xl mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Settings Panel */}
+          <div className="lg:col-span-1 space-y-4">
+            {/* Mode Selector */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Worksheet Type
+              </label>
+              <div className="flex rounded-lg overflow-hidden border border-gray-300">
+                {(["name", "letters", "numbers"] as Mode[]).map((mode) => (
+                  <button
+                    key={mode}
+                    onClick={() => updateSetting("mode", mode)}
+                    className={`flex-1 py-2 px-3 text-sm font-medium transition-colors ${
+                      settings.mode === mode
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-gray-700 hover:bg-gray-50"
+                    }`}
+                  >
+                    {mode === "name"
+                      ? "Name"
+                      : mode === "letters"
+                        ? "Letters"
+                        : "Numbers"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Mode-specific controls */}
+            <div className="bg-white rounded-lg shadow p-4 space-y-4">
+              {settings.mode === "name" && (
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">
+                    Name or Text
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.nameText}
+                    onChange={(e) =>
+                      updateSetting(
+                        "nameText",
+                        e.target.value.slice(0, 20)
+                      )
+                    }
+                    placeholder="Enter a name..."
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    maxLength={20}
+                  />
+                  <p className="text-xs text-gray-400 mt-1">
+                    {settings.nameText.length}/20 characters
+                  </p>
+                </div>
+              )}
+
+              {settings.mode === "letters" && (
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Select Letters
+                  </label>
+                  <div className="grid grid-cols-7 gap-1">
+                    {UPPERCASE.map((letter) => (
+                      <button
+                        key={letter}
+                        onClick={() => toggleLetter(letter)}
+                        className={`w-8 h-8 rounded text-xs font-bold transition-colors ${
+                          settings.selectedLetters.includes(letter)
+                            ? "bg-blue-600 text-white"
+                            : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                        }`}
+                      >
+                        {letter}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <button
+                      onClick={() =>
+                        updateSetting("selectedLetters", [...UPPERCASE])
+                      }
+                      className="text-xs text-blue-600 hover:underline"
+                    >
+                      Select All
+                    </button>
+                    <button
+                      onClick={() => updateSetting("selectedLetters", [])}
+                      className="text-xs text-blue-600 hover:underline"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {settings.mode === "numbers" && (
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Select Numbers
+                  </label>
+                  <div className="grid grid-cols-5 gap-1">
+                    {DIGITS.map((num) => (
+                      <button
+                        key={num}
+                        onClick={() => toggleNumber(num)}
+                        className={`w-10 h-10 rounded text-sm font-bold transition-colors ${
+                          settings.selectedNumbers.includes(num)
+                            ? "bg-blue-600 text-white"
+                            : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <button
+                      onClick={() =>
+                        updateSetting("selectedNumbers", [...DIGITS])
+                      }
+                      className="text-xs text-blue-600 hover:underline"
+                    >
+                      Select All
+                    </button>
+                    <button
+                      onClick={() => updateSetting("selectedNumbers", [])}
+                      className="text-xs text-blue-600 hover:underline"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Layout Settings */}
+            <div className="bg-white rounded-lg shadow p-4 space-y-4">
+              <h3 className="text-sm font-semibold text-gray-700">Layout</h3>
+
+              <div>
+                <label className="block text-xs text-gray-600 mb-1">
+                  Letter Size: {settings.letterSize}px
+                </label>
+                <input
+                  type="range"
+                  min={32}
+                  max={96}
+                  value={settings.letterSize}
+                  onChange={(e) =>
+                    updateSetting("letterSize", Number(e.target.value))
+                  }
+                  className="w-full"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs text-gray-600 mb-1">
+                  Rows per page: {settings.rowsPerPage}
+                </label>
+                <input
+                  type="range"
+                  min={3}
+                  max={10}
+                  value={settings.rowsPerPage}
+                  onChange={(e) =>
+                    updateSetting("rowsPerPage", Number(e.target.value))
+                  }
+                  className="w-full"
+                />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="guideLines"
+                  checked={settings.showGuideLines}
+                  onChange={(e) =>
+                    updateSetting("showGuideLines", e.target.checked)
+                  }
+                  className="rounded"
+                />
+                <label htmlFor="guideLines" className="text-xs text-gray-600">
+                  Show writing guide lines
+                </label>
+              </div>
+            </div>
+
+            {/* Export Button */}
+            <button
+              onClick={exportPDF}
+              disabled={!hasContent || isExporting || rows.length === 0}
+              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            >
+              {isExporting ? (
+                <>
+                  <svg
+                    className="animate-spin h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    />
+                  </svg>
+                  Generating PDF...
+                </>
+              ) : (
+                <>
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                  Download PDF
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Preview */}
+          <div className="lg:col-span-2">
+            <div className="sticky top-4">
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">
+                Preview
+              </h2>
+              {hasContent && rows.length > 0 ? (
+                <WorksheetPreview settings={settings} svgRef={svgRef} />
+              ) : (
+                <div className="bg-white rounded-lg shadow-lg p-12 text-center text-gray-400">
+                  <svg
+                    className="mx-auto h-16 w-16 mb-4 text-gray-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                  <p className="text-lg font-medium">
+                    {settings.mode === "name"
+                      ? "Enter a name to get started"
+                      : "Select items to generate a worksheet"}
+                  </p>
+                  <p className="text-sm mt-1">
+                    Your worksheet preview will appear here
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Info Section */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-2">&#9997;</div>
+            <h3 className="font-semibold text-gray-800">Name Tracing</h3>
+            <p className="text-sm text-gray-500 mt-1">
+              Type any name and get a custom tracing worksheet with dotted
+              letters and writing guides.
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-2">&#127312;</div>
+            <h3 className="font-semibold text-gray-800">Letter Practice</h3>
+            <p className="text-sm text-gray-500 mt-1">
+              A-Z letter worksheets with stroke guides. Choose specific letters
+              or practice the full alphabet.
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-2">&#128290;</div>
+            <h3 className="font-semibold text-gray-800">Number Tracing</h3>
+            <p className="text-sm text-gray-500 mt-1">
+              Numbers 0-9 with formation guides. Build confidence with number
+              writing practice.
+            </p>
+          </div>
+        </div>
+
+        {/* SEO Content */}
+        <div className="mt-12 bg-white rounded-lg shadow p-8">
+          <h2 className="text-xl font-bold text-gray-800 mb-4">
+            Free Printable Tracing Worksheets
+          </h2>
+          <div className="prose prose-sm text-gray-600 max-w-none">
+            <p>
+              Create custom tracing worksheets for kids learning to write. Our
+              free worksheet generator lets you make personalized name tracing
+              sheets, letter practice pages, and number formation worksheets
+              &mdash; all downloadable as print-ready PDFs.
+            </p>
+            <p className="mt-3">
+              Perfect for preschool, kindergarten, and early elementary students.
+              Each worksheet includes dotted letters with writing guide lines
+              (baseline, midline, and top line) to help children develop proper
+              letter formation and handwriting skills.
+            </p>
+            <p className="mt-3">
+              <strong>Name tracing</strong> worksheets are great for helping
+              children learn to write their own name.{" "}
+              <strong>Letter tracing</strong> sheets cover A-Z with stroke
+              guides showing where to start each letter.{" "}
+              <strong>Number tracing</strong> worksheets cover 0-9 with
+              formation guides.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-12 border-t border-gray-200 bg-white">
+        <div className="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-gray-400">
+          Tracing Worksheet Maker &mdash; Free printable tracing worksheets
+        </div>
+      </footer>
+    </div>
+  );
+}
