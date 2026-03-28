@@ -46,12 +46,63 @@ const jsonLd = {
     "Free online tracing worksheet generator. Create printable name, letter, alphabet, and number tracing worksheets for preschool and kindergarten.",
 };
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "How do I print a name tracing worksheet?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: 'Type a name in the generator above, customize the layout, and click "Download PDF." Open the PDF and print it on standard US Letter paper. The worksheet is optimized for clear, clean printing.',
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What ages are these worksheets for?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Our tracing worksheets are designed for children ages 3-7, including preschool, pre-K, and kindergarten students. The adjustable letter size makes them suitable for different skill levels.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I create letter tracing worksheets for the whole alphabet?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes! Switch to \"Letters\" mode and select all 26 letters or choose specific ones your child needs to practice. Each letter gets its own practice row with stroke guides.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are number tracing worksheets included?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Absolutely. Switch to \"Numbers\" mode to create tracing worksheets for numbers 0-9. Each number includes formation guides to help children learn proper number writing.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is this really free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, the core worksheet generator is completely free with no account required. Create unlimited name, letter, and number tracing worksheets and download them as PDFs.",
+      },
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-16">
