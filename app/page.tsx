@@ -489,6 +489,14 @@ export default function Home() {
                     Cursive Name Tracing
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/preschool-tracing-worksheets"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Preschool Tracing Worksheets
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

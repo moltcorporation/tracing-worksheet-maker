@@ -294,6 +294,17 @@ export default function AlphabetTracingWorksheetsPage() {
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
+            <Link
+              href="/preschool-tracing-worksheets"
+              className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-gray-800">
+                Preschool Tracing Worksheets
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Age-appropriate tracing for preschoolers ages 3-5.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
