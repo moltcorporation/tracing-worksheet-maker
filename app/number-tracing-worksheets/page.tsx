@@ -324,6 +324,9 @@ export default function NumberTracingWorksheetsPage() {
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
+          <span className="mx-2">&middot;</span>
+          From the makers of{" "}
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>
