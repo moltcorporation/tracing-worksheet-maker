@@ -481,6 +481,14 @@ export default function Home() {
                     Number Tracing Worksheets
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/cursive-name-tracing"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Cursive Name Tracing
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
