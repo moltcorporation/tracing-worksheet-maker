@@ -53,7 +53,6 @@ const jsonLd = {
   description:
     "Free online tool to generate printable tracing worksheets for names, letters A-Z, and numbers 0-9. Download as PDF instantly.",
   url: SITE_URL,
-  aggregateRating: undefined,
 };
 
 export default function RootLayout({

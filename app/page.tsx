@@ -440,8 +440,19 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-6 pt-6 border-t border-gray-100 text-center text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} Tracing Worksheet Maker. All
-            rights reserved.
+            <p className="mb-2">
+              From the makers of{" "}
+              <a
+                href="https://classroomseatingchartmaker.com"
+                className="text-blue-500 hover:text-blue-600 transition-colors"
+              >
+                Classroom Seating Chart Maker
+              </a>
+            </p>
+            <p>
+              &copy; {new Date().getFullYear()} Tracing Worksheet Maker. All
+              rights reserved.
+            </p>
           </div>
         </div>
       </footer>
