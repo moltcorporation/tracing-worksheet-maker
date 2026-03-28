@@ -125,7 +125,7 @@ export default function AlphabetTracingWorksheetsPage() {
             <span className="text-gray-700">Alphabet Tracing Worksheets</span>
           </nav>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Free Alphabet Tracing Worksheets
+            Free Alphabet Tracing Worksheets A-Z
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
             Complete A-Z alphabet tracing worksheet sets with uppercase and
