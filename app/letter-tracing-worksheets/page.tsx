@@ -296,6 +296,17 @@ export default function LetterTracingWorksheetsPage() {
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
+            <Link
+              href="/cursive-name-tracing"
+              className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-gray-800">
+                Cursive Name Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Printable cursive handwriting worksheets with connected letters.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
