@@ -141,7 +141,7 @@ export default function CursiveNameTracingPage() {
             practice sheet as PDF instantly.
           </p>
           <Link
-            href="/name-tracing#generator"
+            href="/name-tracing?style=cursive#generator"
             className="inline-block bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
           >
             Create Cursive Tracing Worksheets
@@ -240,7 +240,7 @@ export default function CursiveNameTracingPage() {
           </div>
           <div className="mt-8 text-center">
             <Link
-              href="/name-tracing#generator"
+              href="/name-tracing?style=cursive#generator"
               className="inline-block text-purple-600 font-medium hover:underline"
             >
               Try the cursive name tracing generator &rarr;
@@ -391,7 +391,7 @@ export default function CursiveNameTracingPage() {
             any name, download as PDF, and print.
           </p>
           <Link
-            href="/name-tracing#generator"
+            href="/name-tracing?style=cursive#generator"
             className="inline-block bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
           >
             Create Your Worksheets &rarr;
