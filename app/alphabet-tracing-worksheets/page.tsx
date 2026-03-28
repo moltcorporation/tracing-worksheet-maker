@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     description:
       "Download free printable alphabet tracing worksheets with uppercase and lowercase sets.",
   },
+  other: {
+    "article:tag": [
+      "alphabet tracing",
+      "ABC worksheets",
+      "printable alphabet practice",
+      "kindergarten worksheets",
+    ],
+  },
 };
 
 const jsonLd = {
