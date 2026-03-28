@@ -292,6 +292,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* More Teacher Tools */}
+      <section className="py-12 bg-white">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">
+            More Free Teacher Tools
+          </h2>
+          <a
+            href="https://classroomseatingchartmaker.com"
+            className="block border border-gray-200 rounded-xl p-6 hover:shadow-md hover:border-blue-200 transition-all"
+          >
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg
+                  className="w-6 h-6 text-indigo-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 text-lg">
+                  Classroom Seating Chart Maker
+                </h3>
+                <p className="text-sm text-gray-600 mt-1">
+                  Create and manage classroom seating charts with drag-and-drop.
+                  Arrange desks, assign students, and print layouts — free for
+                  teachers.
+                </p>
+                <span className="inline-block mt-2 text-indigo-600 text-sm font-medium">
+                  Try it free &rarr;
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-gray-200 bg-white">
         <div className="max-w-5xl mx-auto px-4 py-8">
@@ -359,11 +403,19 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">About</h4>
-              <p className="text-gray-500">
-                Made for teachers, parents, and homeschoolers who need quick,
-                quality tracing worksheets.
-              </p>
+              <h4 className="font-semibold text-gray-800 mb-2">
+                Teacher Tools
+              </h4>
+              <ul className="space-y-1 text-gray-500">
+                <li>
+                  <a
+                    href="https://classroomseatingchartmaker.com"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Seating Chart Maker
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
           <div className="mt-6 pt-6 border-t border-gray-100 text-center text-xs text-gray-400">
