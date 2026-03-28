@@ -50,6 +50,45 @@ const jsonLd = {
   url: `${SITE_URL}/number-tracing-worksheets`,
 };
 
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What age should children start number tracing worksheets?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most children can begin tracing large numbers around age 3-4 with guidance. By age 4-5, they can independently trace numbers 0-9. Number tracing worksheets for 0-20 are typically appropriate for kindergarteners ages 5-6.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Should children learn letters or numbers first?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most educators recommend starting with letters, since children encounter their name first. However, letters and numbers can be taught in parallel. The fine motor skills from letter tracing transfer directly to number formation — both use the same pencil control and stroke patterns.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I teach my child to write numbers correctly?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Start with dotted number tracing worksheets that show the correct stroke direction. Always begin each number from the top. Practice 2-3 numbers per session in small groups (straight-line numbers like 1, 4, 7 first, then curved numbers). Short daily sessions of 5-10 minutes are more effective than longer weekly practice.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are these number tracing worksheets free to print?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Generate and print number tracing worksheets for free with no sign-up required. Choose numbers 0-9, 0-20, or select specific numbers for targeted practice, then download as a PDF.",
+      },
+    },
+  ],
+};
+
 const breadcrumbLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -69,6 +108,10 @@ export default function NumberTracingWorksheetsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
       />
 
       {/* Hero */}
@@ -208,6 +251,32 @@ export default function NumberTracingWorksheetsPage() {
           </div>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+            From Letters to Numbers
+          </h2>
+          <div className="space-y-4 text-gray-600">
+            <p>
+              Number tracing builds directly on letter tracing skills. Children
+              who have practiced{" "}
+              <Link
+                href="/alphabet-tracing-worksheets"
+                className="text-orange-600 hover:underline"
+              >
+                alphabet tracing worksheets
+              </Link>{" "}
+              already have the pencil control and stroke awareness needed for
+              number formation. The curves in letters like C, O, and S transfer
+              to numbers like 0, 6, and 9. Straight strokes from letters like L
+              and T appear in numbers like 1, 4, and 7.
+            </p>
+            <p>
+              If your child is comfortable tracing uppercase letters, they are
+              ready for number tracing. Start with straight-line numbers (1, 4,
+              7) to build confidence, then progress to curved numbers that use
+              familiar letter strokes.
+            </p>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
             Number Writing Practice Tips
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -258,6 +327,61 @@ export default function NumberTracingWorksheetsPage() {
                 patterns.
               </li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 bg-white">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                What age should children start number tracing worksheets?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Most children can begin tracing large numbers around age 3-4
+                with guidance. By age 4-5, they can independently trace numbers
+                0-9. Number tracing worksheets for 0-20 are typically
+                appropriate for kindergarteners ages 5-6.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                Should children learn letters or numbers first?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Most educators recommend starting with letters, since children
+                encounter their name first. However, letters and numbers can be
+                taught in parallel. The fine motor skills from letter tracing
+                transfer directly to number formation.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                How do I teach my child to write numbers correctly?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Start with dotted number tracing worksheets that show the
+                correct stroke direction. Always begin each number from the top.
+                Practice 2-3 numbers per session, starting with straight-line
+                numbers (1, 4, 7) before curved numbers. Short daily sessions of
+                5-10 minutes work best.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                Are these number tracing worksheets free to print?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Yes. Generate and print number tracing worksheets for free with
+                no sign-up required. Choose numbers 0-9, 0-20, or select
+                specific numbers for targeted practice, then download as a PDF.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -319,6 +443,17 @@ export default function NumberTracingWorksheetsPage() {
               </h3>
               <p className="text-sm text-gray-500 mt-1">
                 Create personalized name tracing sheets for your child.
+              </p>
+            </Link>
+            <Link
+              href="/preschool-tracing-worksheets"
+              className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-gray-800">
+                Preschool Tracing Worksheets
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Age-appropriate tracing for preschoolers ages 3-5.
               </p>
             </Link>
           </div>
