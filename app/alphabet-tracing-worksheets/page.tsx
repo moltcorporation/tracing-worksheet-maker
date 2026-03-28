@@ -50,6 +50,45 @@ const jsonLd = {
   url: `${SITE_URL}/alphabet-tracing-worksheets`,
 };
 
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What age should children start alphabet tracing worksheets?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Most children are ready to start tracing large uppercase letters around age 3-4 (preschool). By age 4-5, they can trace all 26 uppercase letters independently. Lowercase letter tracing typically begins around age 5-6 in kindergarten.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Should children learn uppercase or lowercase letters first?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Start with uppercase letters. They use simpler strokes (mostly straight lines and basic curves), making them easier for young hands to form. Once children can write uppercase letters confidently, introduce lowercase letters which require more complex movements.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How many times should a child trace each letter?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Research suggests children need 3-5 repetitions per letter for muscle memory to develop. Print multiple copies of each worksheet and practice over several days rather than doing all repetitions in one sitting.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are these alphabet tracing worksheets free to print?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. You can generate and print alphabet tracing worksheets for free with no sign-up required. Create full A-Z sets or select specific letters for targeted practice, then download as a PDF.",
+      },
+    },
+  ],
+};
+
 const breadcrumbLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -70,6 +109,10 @@ export default function AlphabetTracingWorksheetsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-purple-50 to-white py-12 md:py-16">
@@ -82,7 +125,7 @@ export default function AlphabetTracingWorksheetsPage() {
             <span className="text-gray-700">Alphabet Tracing Worksheets</span>
           </nav>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Free Alphabet Tracing Worksheets
+            Free Alphabet Tracing Worksheets A-Z
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
             Complete A-Z alphabet tracing worksheet sets with uppercase and
@@ -235,6 +278,61 @@ export default function AlphabetTracingWorksheetsPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="py-12 bg-white">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                What age should children start alphabet tracing worksheets?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Most children are ready to start tracing large uppercase letters
+                around age 3-4 (preschool). By age 4-5, they can trace all 26
+                uppercase letters independently. Lowercase letter tracing
+                typically begins around age 5-6 in kindergarten.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                Should children learn uppercase or lowercase letters first?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Start with uppercase letters. They use simpler strokes (mostly
+                straight lines and basic curves), making them easier for young
+                hands to form. Once children can write uppercase letters
+                confidently, introduce lowercase letters which require more
+                complex movements.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                How many times should a child trace each letter?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Research suggests children need 3-5 repetitions per letter for
+                muscle memory to develop. Print multiple copies of each worksheet
+                and practice over several days rather than doing all repetitions
+                in one sitting.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">
+                Are these alphabet tracing worksheets free to print?
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Yes. You can generate and print alphabet tracing worksheets for
+                free with no sign-up required. Create full A-Z sets or select
+                specific letters for targeted practice, then download as a PDF.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-10 bg-purple-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
@@ -303,6 +401,28 @@ export default function AlphabetTracingWorksheetsPage() {
               </h3>
               <p className="text-sm text-gray-500 mt-1">
                 Age-appropriate tracing for preschoolers ages 3-5.
+              </p>
+            </Link>
+            <Link
+              href="/sight-word-tracing"
+              className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-gray-800">
+                Sight Word Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Trace high-frequency sight words for reading readiness.
+              </p>
+            </Link>
+            <Link
+              href="/cursive-name-tracing"
+              className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-gray-800">
+                Cursive Name Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Practice writing names in connected cursive letters.
               </p>
             </Link>
           </div>
