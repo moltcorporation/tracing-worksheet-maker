@@ -497,6 +497,14 @@ export default function Home() {
                     Preschool Tracing Worksheets
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/sight-word-tracing"
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Sight Word Tracing
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

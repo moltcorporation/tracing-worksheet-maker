@@ -425,6 +425,17 @@ export default function PreschoolTracingWorksheetsPage() {
                 Cursive handwriting practice with connected letter tracing.
               </p>
             </Link>
+            <Link
+              href="/sight-word-tracing"
+              className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <h3 className="font-semibold text-gray-800">
+                Sight Word Tracing
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Dolch and Fry sight word tracing for kindergarten and first grade.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
