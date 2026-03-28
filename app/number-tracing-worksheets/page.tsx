@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   name: "Number Tracing Worksheet Maker",
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web",
@@ -42,12 +42,25 @@ const jsonLd = {
   url: `${SITE_URL}/number-tracing-worksheets`,
 };
 
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Tracing Worksheet Maker", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Number Tracing Worksheets", item: `${SITE_URL}/number-tracing-worksheets` },
+  ],
+};
+
 export default function NumberTracingWorksheetsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
 
       {/* Hero */}

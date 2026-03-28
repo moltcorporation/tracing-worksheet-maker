@@ -29,9 +29,30 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Tracing Worksheet Maker",
+  url: "https://nametracingmaker.com",
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "Web",
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "0",
+    highPrice: "39",
+    priceCurrency: "USD",
+  },
+  description:
+    "Free online tracing worksheet generator. Create printable name, letter, alphabet, and number tracing worksheets for preschool and kindergarten.",
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
