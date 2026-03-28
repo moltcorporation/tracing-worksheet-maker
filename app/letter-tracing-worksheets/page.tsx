@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     description:
       "Download free printable letter tracing worksheets for A-Z. Dotted letters with stroke guides.",
   },
+  other: {
+    "article:tag": [
+      "letter tracing",
+      "letter tracing worksheets",
+      "printable letter practice",
+      "preschool handwriting",
+    ],
+  },
 };
 
 const jsonLd = {

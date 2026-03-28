@@ -27,6 +27,15 @@ export const metadata: Metadata = {
     description:
       "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
   },
+  other: {
+    "article:tag": [
+      "name tracing",
+      "letter tracing",
+      "number tracing",
+      "printable worksheets",
+      "preschool worksheets",
+    ],
+  },
 };
 
 const jsonLd = {

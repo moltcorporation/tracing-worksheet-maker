@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     description:
       "Generate free printable tracing worksheets for names, letters, and numbers. Download as PDF instantly.",
   },
+  other: {
+    "pinterest-rich-pin": "true",
+  },
 };
 
 const jsonLd = {

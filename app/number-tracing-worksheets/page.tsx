@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     description:
       "Download free printable number tracing worksheets. Dotted numbers with formation guides.",
   },
+  other: {
+    "article:tag": [
+      "number tracing",
+      "number writing worksheets",
+      "printable number practice",
+      "preschool math worksheets",
+    ],
+  },
 };
 
 const jsonLd = {
