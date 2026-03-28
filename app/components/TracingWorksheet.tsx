@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { jsPDF } from "jspdf";
 import ProUpgradeModal from "./ProUpgradeModal";
 
@@ -25,6 +26,25 @@ interface WorksheetSettings {
 
 const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const DIGITS = "0123456789".split("");
+
+function getFontFamily(style: HandwritingStyle): string {
+  return style === "cursive"
+    ? "'Dancing Script', cursive"
+    : "'Comic Sans MS', 'Comic Sans', cursive";
+}
+
+// Fetch font file and convert to base64 data URL for SVG embedding
+let cachedFontDataUrl: string | null = null;
+async function getCursiveFontDataUrl(): Promise<string> {
+  if (cachedFontDataUrl) return cachedFontDataUrl;
+  const resp = await fetch("/fonts/DancingScript-Regular.ttf");
+  const buf = await resp.arrayBuffer();
+  const base64 = btoa(
+    new Uint8Array(buf).reduce((s, b) => s + String.fromCharCode(b), "")
+  );
+  cachedFontDataUrl = `data:font/truetype;base64,${base64}`;
+  return cachedFontDataUrl;
+}
 
 const DEFAULT_SETTINGS: WorksheetSettings = {
   mode: "name",
@@ -120,19 +140,21 @@ function TracedCharacter({
   y,
   size,
   opacity,
+  handwritingStyle = "print",
 }: {
   char: string;
   x: number;
   y: number;
   size: number;
   opacity: number;
+  handwritingStyle?: HandwritingStyle;
 }) {
   return (
     <text
       x={x}
       y={y}
       fontSize={size}
-      fontFamily="'Comic Sans MS', 'Comic Sans', cursive"
+      fontFamily={getFontFamily(handwritingStyle)}
       fill="none"
       stroke="#999"
       strokeWidth={1.2}
@@ -152,11 +174,13 @@ function StrokeGuide({
   x,
   y,
   size,
+  handwritingStyle = "print",
 }: {
   char: string;
   x: number;
   y: number;
   size: number;
+  handwritingStyle?: HandwritingStyle;
 }) {
   // Show a small number indicating stroke start position
   const isNumber = /[0-9]/.test(char);
@@ -170,7 +194,7 @@ function StrokeGuide({
         x={x}
         y={y}
         fontSize={size * 0.35}
-        fontFamily="'Comic Sans MS', 'Comic Sans', cursive"
+        fontFamily={getFontFamily(handwritingStyle)}
         fill="#ddd"
         textAnchor="middle"
         dominantBaseline="alphabetic"
@@ -209,6 +233,7 @@ function WorksheetRow({
   letterSize,
   showGuideLines,
   showStrokeGuides,
+  handwritingStyle = "print",
 }: {
   chars: string[];
   y: number;
@@ -217,6 +242,7 @@ function WorksheetRow({
   letterSize: number;
   showGuideLines: boolean;
   showStrokeGuides?: boolean;
+  handwritingStyle?: HandwritingStyle;
 }) {
   const padding = 20;
   const usableWidth = width - padding * 2;
@@ -237,7 +263,7 @@ function WorksheetRow({
         return (
           <g key={`${char}-${i}`}>
             {showStrokeGuides && (
-              <StrokeGuide char={char} x={cx} y={cy} size={letterSize} />
+              <StrokeGuide char={char} x={cx} y={cy} size={letterSize} handwritingStyle={handwritingStyle} />
             )}
             <TracedCharacter
               char={char}
@@ -245,6 +271,7 @@ function WorksheetRow({
               y={cy}
               size={letterSize}
               opacity={0.7}
+              handwritingStyle={handwritingStyle}
             />
           </g>
         );
@@ -305,9 +332,11 @@ function generateRows(settings: WorksheetSettings): string[][] {
 function WorksheetPreview({
   settings,
   svgRef,
+  fontDataUrl,
 }: {
   settings: WorksheetSettings;
   svgRef: React.RefObject<SVGSVGElement | null>;
+  fontDataUrl?: string;
 }) {
   const rows = generateRows(settings);
   // US Letter dimensions in mm, scaled for SVG viewBox
@@ -334,6 +363,20 @@ function WorksheetPreview({
         xmlns="http://www.w3.org/2000/svg"
         style={{ backgroundColor: "white" }}
       >
+        {/* Embed cursive font for self-contained SVG (needed for PDF export) */}
+        {settings.handwritingStyle === "cursive" && fontDataUrl && (
+          <defs>
+            <style>{`
+              @font-face {
+                font-family: 'Dancing Script';
+                font-style: normal;
+                font-weight: 400;
+                src: url('${fontDataUrl}') format('truetype');
+              }
+            `}</style>
+          </defs>
+        )}
+
         {/* Page border */}
         <rect
           x={1}
@@ -383,6 +426,7 @@ function WorksheetPreview({
               letterSize={settings.letterSize}
               showGuideLines={settings.showGuideLines}
               showStrokeGuides={i === 0}
+              handwritingStyle={settings.handwritingStyle}
             />
           ))}
         </g>
@@ -404,11 +448,42 @@ function WorksheetPreview({
 }
 
 export default function TracingWorksheet() {
-  const [settings, setSettings] = useState<WorksheetSettings>(DEFAULT_SETTINGS);
+  return (
+    <Suspense>
+      <TracingWorksheetInner />
+    </Suspense>
+  );
+}
+
+function TracingWorksheetInner() {
+  const searchParams = useSearchParams();
+  const [settings, setSettings] = useState<WorksheetSettings>(() => {
+    const style = typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("style")
+      : null;
+    return {
+      ...DEFAULT_SETTINGS,
+      handwritingStyle: style === "cursive" ? "cursive" : "print",
+    };
+  });
   const [isExporting, setIsExporting] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
   const [proFeatureName, setProFeatureName] = useState("");
+  const [fontDataUrl, setFontDataUrl] = useState<string | undefined>();
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // Pre-load cursive font data for SVG embedding
+  useEffect(() => {
+    getCursiveFontDataUrl().then(setFontDataUrl);
+  }, []);
+
+  // Sync style from URL search params
+  useEffect(() => {
+    const style = searchParams.get("style");
+    if (style === "cursive") {
+      setSettings((prev) => ({ ...prev, handwritingStyle: "cursive" }));
+    }
+  }, [searchParams]);
 
   const updateSetting = useCallback(
     <K extends keyof WorksheetSettings>(
@@ -448,6 +523,12 @@ export default function TracingWorksheet() {
     setIsExporting(true);
 
     try {
+      // If cursive, ensure font data is embedded before serialization
+      if (settings.handwritingStyle === "cursive" && !fontDataUrl) {
+        const url = await getCursiveFontDataUrl();
+        setFontDataUrl(url);
+      }
+
       const svgElement = svgRef.current;
       const svgData = new XMLSerializer().serializeToString(svgElement);
       const svgBlob = new Blob([svgData], {
@@ -500,7 +581,7 @@ export default function TracingWorksheet() {
     } catch {
       setIsExporting(false);
     }
-  }, [settings.mode, settings.nameText]);
+  }, [settings.mode, settings.nameText, settings.handwritingStyle, fontDataUrl]);
 
   const rows = generateRows(settings);
   const hasContent =
@@ -643,14 +724,11 @@ export default function TracingWorksheet() {
               )}
             </div>
 
-            {/* Handwriting Style - Pro Feature */}
+            {/* Handwriting Style */}
             <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-semibold text-gray-700">
-                  Handwriting Style
-                </label>
-                <ProBadge onClick={() => openProModal("Handwriting Styles")} />
-              </div>
+              <label className="text-sm font-semibold text-gray-700 mb-2 block">
+                Handwriting Style
+              </label>
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm text-gray-700">
                   <input
@@ -662,28 +740,15 @@ export default function TracingWorksheet() {
                   />
                   Print (Standard)
                 </label>
-                <label
-                  className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
-                  onClick={() => openProModal("Cursive Style")}
-                >
+                <label className="flex items-center gap-2 text-sm text-gray-700">
                   <input
                     type="radio"
                     name="handwritingStyle"
-                    disabled
-                    className="text-gray-300"
+                    checked={settings.handwritingStyle === "cursive"}
+                    onChange={() => updateSetting("handwritingStyle", "cursive")}
+                    className="text-blue-600"
                   />
                   Cursive
-                  <svg
-                    className="w-3.5 h-3.5 text-blue-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
                 </label>
                 <label
                   className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
@@ -934,7 +999,7 @@ export default function TracingWorksheet() {
                 Preview
               </h2>
               {hasContent && rows.length > 0 ? (
-                <WorksheetPreview settings={settings} svgRef={svgRef} />
+                <WorksheetPreview settings={settings} svgRef={svgRef} fontDataUrl={fontDataUrl} />
               ) : (
                 <div className="bg-white rounded-lg shadow-lg p-12 text-center text-gray-400">
                   <svg

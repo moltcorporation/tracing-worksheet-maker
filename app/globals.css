@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Dancing Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/DancingScript-Regular.ttf') format('truetype');
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
