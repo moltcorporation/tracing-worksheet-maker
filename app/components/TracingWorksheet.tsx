@@ -470,7 +470,14 @@ function TracingWorksheetInner() {
   const [showProModal, setShowProModal] = useState(false);
   const [proFeatureName, setProFeatureName] = useState("");
   const [fontDataUrl, setFontDataUrl] = useState<string | undefined>();
+  const [isPro, setIsPro] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // Check for existing Pro access on mount
+  useEffect(() => {
+    const proEmail = localStorage.getItem("pro_email");
+    if (proEmail) setIsPro(true);
+  }, []);
 
   // Pre-load cursive font data for SVG embedding
   useEffect(() => {
@@ -514,8 +521,14 @@ function TracingWorksheetInner() {
   }, []);
 
   const openProModal = useCallback((feature: string) => {
+    if (isPro) return; // Pro users don't see the modal
     setProFeatureName(feature);
     setShowProModal(true);
+  }, [isPro]);
+
+  const handleProVerified = useCallback((email: string) => {
+    localStorage.setItem("pro_email", email);
+    setIsPro(true);
   }, []);
 
   const exportPDF = useCallback(async () => {
@@ -751,27 +764,31 @@ function TracingWorksheetInner() {
                   Cursive
                 </label>
                 <label
-                  className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
-                  onClick={() => openProModal("D'Nealian Style")}
+                  className={`flex items-center gap-2 text-sm ${isPro ? "text-gray-700" : "text-gray-400 cursor-pointer"}`}
+                  onClick={isPro ? undefined : () => openProModal("D'Nealian Style")}
                 >
                   <input
                     type="radio"
                     name="handwritingStyle"
-                    disabled
-                    className="text-gray-300"
+                    checked={settings.handwritingStyle === "dnealian"}
+                    onChange={isPro ? () => updateSetting("handwritingStyle", "dnealian") : undefined}
+                    disabled={!isPro}
+                    className={isPro ? "text-blue-600" : "text-gray-300"}
                   />
                   D&apos;Nealian
-                  <svg
-                    className="w-3.5 h-3.5 text-blue-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  {!isPro && (
+                    <svg
+                      className="w-3.5 h-3.5 text-blue-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
                 </label>
               </div>
             </div>
@@ -782,7 +799,7 @@ function TracingWorksheetInner() {
                 <label className="text-sm font-semibold text-gray-700">
                   Line Style
                 </label>
-                <ProBadge onClick={() => openProModal("Line Styles")} />
+                {!isPro && <ProBadge onClick={() => openProModal("Line Styles")} />}
               </div>
               <div className="space-y-2">
                 <label className="flex items-center gap-2 text-sm text-gray-700">
@@ -799,31 +816,35 @@ function TracingWorksheetInner() {
                   (style) => (
                     <label
                       key={style}
-                      className="flex items-center gap-2 text-sm text-gray-400 cursor-pointer"
-                      onClick={() => openProModal("Line Styles")}
+                      className={`flex items-center gap-2 text-sm ${isPro ? "text-gray-700" : "text-gray-400 cursor-pointer"}`}
+                      onClick={isPro ? undefined : () => openProModal("Line Styles")}
                     >
                       <input
                         type="radio"
                         name="lineStyle"
-                        disabled
-                        className="text-gray-300"
+                        checked={settings.lineStyle === style}
+                        onChange={isPro ? () => updateSetting("lineStyle", style) : undefined}
+                        disabled={!isPro}
+                        className={isPro ? "text-blue-600" : "text-gray-300"}
                       />
                       {style === "wide-ruled"
                         ? "Wide-Ruled"
                         : style === "narrow-ruled"
                           ? "Narrow-Ruled"
                           : "Blank (No Lines)"}
-                      <svg
-                        className="w-3.5 h-3.5 text-blue-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      {!isPro && (
+                        <svg
+                          className="w-3.5 h-3.5 text-blue-400"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
                     </label>
                   )
                 )}
@@ -836,14 +857,16 @@ function TracingWorksheetInner() {
                 <label className="text-sm font-semibold text-gray-700">
                   Custom Words / Sight Words
                 </label>
-                <ProBadge onClick={() => openProModal("Custom Words")} />
+                {!isPro && <ProBadge onClick={() => openProModal("Custom Words")} />}
               </div>
               <textarea
-                disabled
+                disabled={!isPro}
                 placeholder="Enter sight words or vocabulary (one per line)..."
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50 text-gray-400 cursor-not-allowed resize-none"
+                className={`w-full border border-gray-200 rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-gray-50 text-gray-400 cursor-not-allowed"}`}
                 rows={3}
-                onClick={() => openProModal("Custom Words")}
+                value={settings.customWords}
+                onChange={isPro ? (e) => updateSetting("customWords", e.target.value) : undefined}
+                onClick={isPro ? undefined : () => openProModal("Custom Words")}
               />
             </div>
 
@@ -853,16 +876,20 @@ function TracingWorksheetInner() {
                 <label className="text-sm font-semibold text-gray-700">
                   Bulk Class Generation
                 </label>
-                <ProBadge
-                  onClick={() => openProModal("Bulk Class Generation")}
-                />
+                {!isPro && (
+                  <ProBadge
+                    onClick={() => openProModal("Bulk Class Generation")}
+                  />
+                )}
               </div>
               <textarea
-                disabled
+                disabled={!isPro}
                 placeholder="Paste student names (one per line) to generate all worksheets at once..."
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50 text-gray-400 cursor-not-allowed resize-none"
+                className={`w-full border border-gray-200 rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-gray-50 text-gray-400 cursor-not-allowed"}`}
                 rows={3}
-                onClick={() => openProModal("Bulk Class Generation")}
+                value={settings.bulkNames}
+                onChange={isPro ? (e) => updateSetting("bulkNames", e.target.value) : undefined}
+                onClick={isPro ? undefined : () => openProModal("Bulk Class Generation")}
               />
             </div>
 
@@ -1035,6 +1062,7 @@ function TracingWorksheetInner() {
         isOpen={showProModal}
         onClose={() => setShowProModal(false)}
         featureName={proFeatureName}
+        onProVerified={handleProVerified}
       />
     </div>
   );
