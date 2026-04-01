@@ -72,13 +72,13 @@ export default function PricingSection() {
             </span>
             <h3 className="font-bold text-lg text-gray-900">Pro</h3>
             <p className="text-3xl font-bold text-gray-900 mt-2">
-              $4.99
+              $3.99
               <span className="text-base font-normal text-gray-500">
                 /month
               </span>
             </p>
             <p className="text-xs text-gray-500 mt-1">
-              or $39/year (save 35%)
+              or $29.99/year (save 37%)
             </p>
             <ul className="mt-4 space-y-2 text-sm text-gray-600">
               <li className="flex items-center gap-2">
