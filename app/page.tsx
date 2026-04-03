@@ -206,7 +206,7 @@ export default function Home() {
         {/* Decorative floating shapes */}
         <div className="absolute top-10 left-[8%] w-12 h-12 rounded-full bg-pink-200 opacity-40 blur-sm" />
         <div className="absolute top-24 right-[12%] w-8 h-8 rounded-full bg-sky-200 opacity-50 blur-sm" />
-        <div className="absolute bottom-16 left-[15%] w-6 h-6 rounded-full bg-mint opacity-40 blur-sm" />
+        <div className="absolute bottom-16 left-[15%] w-6 h-6 rounded-full bg-[#34d399] opacity-40 blur-sm" />
         <div className="absolute top-16 right-[30%] w-10 h-10 rounded-full bg-amber-200 opacity-30 blur-sm" />
 
         <div className="max-w-5xl mx-auto px-4">
