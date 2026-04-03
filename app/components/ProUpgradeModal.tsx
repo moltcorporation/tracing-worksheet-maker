@@ -4,15 +4,15 @@ import { useState } from "react";
 
 const PAYMENT_LINKS = {
   monthly: {
-    id: "plink_1THUatDT8EiLsMQhkgbCJWus",
-    url: "https://buy.stripe.com/14AdR93lx1lTe1T8Qs3Nm0p",
+    id: "plink_1TI1c6DT8EiLsMQhwCIk4x6s",
+    url: "https://buy.stripe.com/14A6oH7BNd4Bf5X0jW3Nm0T",
     label: "$3.99/month",
     price: "$3.99",
     interval: "month",
   },
   yearly: {
-    id: "plink_1THUavDT8EiLsMQhyWzYZxQv",
-    url: "https://buy.stripe.com/dRmbJ12htc0x6zr7Mo3Nm0q",
+    id: "plink_1TI1c7DT8EiLsMQhFoCGVwTo",
+    url: "https://buy.stripe.com/aFa9AT3lx8OlbTL2s43Nm0U",
     label: "$29.99/year",
     price: "$29.99",
     interval: "year",
