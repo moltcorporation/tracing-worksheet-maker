@@ -66,7 +66,7 @@ function ProBadge({ onClick }: { onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-xs font-semibold px-2 py-0.5 rounded-full hover:bg-blue-100 transition-colors"
+      className="inline-flex items-center gap-1 bg-[#f5f3ff] text-[#7c3aed] text-xs font-semibold px-2 py-0.5 rounded-full hover:bg-[#f3e8ff] transition-colors"
     >
       <svg
         className="w-3 h-3"
@@ -601,7 +601,7 @@ function TracingWorksheetInner() {
     settings.mode !== "name" || settings.nameText.trim().length > 0;
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-[#fef7f0]">
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Settings Panel */}
@@ -618,8 +618,8 @@ function TracingWorksheetInner() {
                     onClick={() => updateSetting("mode", mode)}
                     className={`flex-1 py-2 px-3 text-sm font-medium transition-colors ${
                       settings.mode === mode
-                        ? "bg-blue-600 text-white"
-                        : "bg-white text-gray-700 hover:bg-gray-50"
+                        ? "bg-[#7c3aed] text-white"
+                        : "bg-white text-gray-700 hover:bg-[#fef7f0]"
                     }`}
                   >
                     {mode === "name"
@@ -649,7 +649,7 @@ function TracingWorksheetInner() {
                       )
                     }
                     placeholder="Enter a name..."
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#7c3aed]"
                     maxLength={20}
                   />
                   <p className="text-xs text-gray-400 mt-1">
@@ -670,7 +670,7 @@ function TracingWorksheetInner() {
                         onClick={() => toggleLetter(letter)}
                         className={`w-8 h-8 rounded text-xs font-bold transition-colors ${
                           settings.selectedLetters.includes(letter)
-                            ? "bg-blue-600 text-white"
+                            ? "bg-[#7c3aed] text-white"
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                         }`}
                       >
@@ -683,13 +683,13 @@ function TracingWorksheetInner() {
                       onClick={() =>
                         updateSetting("selectedLetters", [...UPPERCASE])
                       }
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-[#7c3aed] hover:underline"
                     >
                       Select All
                     </button>
                     <button
                       onClick={() => updateSetting("selectedLetters", [])}
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-[#7c3aed] hover:underline"
                     >
                       Clear
                     </button>
@@ -709,7 +709,7 @@ function TracingWorksheetInner() {
                         onClick={() => toggleNumber(num)}
                         className={`w-10 h-10 rounded text-sm font-bold transition-colors ${
                           settings.selectedNumbers.includes(num)
-                            ? "bg-blue-600 text-white"
+                            ? "bg-[#7c3aed] text-white"
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                         }`}
                       >
@@ -722,13 +722,13 @@ function TracingWorksheetInner() {
                       onClick={() =>
                         updateSetting("selectedNumbers", [...DIGITS])
                       }
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-[#7c3aed] hover:underline"
                     >
                       Select All
                     </button>
                     <button
                       onClick={() => updateSetting("selectedNumbers", [])}
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-[#7c3aed] hover:underline"
                     >
                       Clear
                     </button>
@@ -749,7 +749,7 @@ function TracingWorksheetInner() {
                     name="handwritingStyle"
                     checked={settings.handwritingStyle === "print"}
                     onChange={() => updateSetting("handwritingStyle", "print")}
-                    className="text-blue-600"
+                    className="text-[#7c3aed]"
                   />
                   Print (Standard)
                 </label>
@@ -759,7 +759,7 @@ function TracingWorksheetInner() {
                     name="handwritingStyle"
                     checked={settings.handwritingStyle === "cursive"}
                     onChange={() => updateSetting("handwritingStyle", "cursive")}
-                    className="text-blue-600"
+                    className="text-[#7c3aed]"
                   />
                   Cursive
                 </label>
@@ -773,12 +773,12 @@ function TracingWorksheetInner() {
                     checked={settings.handwritingStyle === "dnealian"}
                     onChange={isPro ? () => updateSetting("handwritingStyle", "dnealian") : undefined}
                     disabled={!isPro}
-                    className={isPro ? "text-blue-600" : "text-gray-300"}
+                    className={isPro ? "text-[#7c3aed]" : "text-gray-300"}
                   />
                   D&apos;Nealian
                   {!isPro && (
                     <svg
-                      className="w-3.5 h-3.5 text-blue-400"
+                      className="w-3.5 h-3.5 text-[#a78bfa]"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -808,7 +808,7 @@ function TracingWorksheetInner() {
                     name="lineStyle"
                     checked={settings.lineStyle === "standard"}
                     onChange={() => updateSetting("lineStyle", "standard")}
-                    className="text-blue-600"
+                    className="text-[#7c3aed]"
                   />
                   Standard
                 </label>
@@ -825,7 +825,7 @@ function TracingWorksheetInner() {
                         checked={settings.lineStyle === style}
                         onChange={isPro ? () => updateSetting("lineStyle", style) : undefined}
                         disabled={!isPro}
-                        className={isPro ? "text-blue-600" : "text-gray-300"}
+                        className={isPro ? "text-[#7c3aed]" : "text-gray-300"}
                       />
                       {style === "wide-ruled"
                         ? "Wide-Ruled"
@@ -834,7 +834,7 @@ function TracingWorksheetInner() {
                           : "Blank (No Lines)"}
                       {!isPro && (
                         <svg
-                          className="w-3.5 h-3.5 text-blue-400"
+                          className="w-3.5 h-3.5 text-[#a78bfa]"
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -862,7 +862,7 @@ function TracingWorksheetInner() {
               <textarea
                 disabled={!isPro}
                 placeholder="Enter sight words or vocabulary (one per line)..."
-                className={`w-full border border-gray-200 rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-gray-50 text-gray-400 cursor-not-allowed"}`}
+                className={`w-full border border-[#e9d5ff] rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-[#fef7f0] text-gray-400 cursor-not-allowed"}`}
                 rows={3}
                 value={settings.customWords}
                 onChange={isPro ? (e) => updateSetting("customWords", e.target.value) : undefined}
@@ -885,7 +885,7 @@ function TracingWorksheetInner() {
               <textarea
                 disabled={!isPro}
                 placeholder="Paste student names (one per line) to generate all worksheets at once..."
-                className={`w-full border border-gray-200 rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-gray-50 text-gray-400 cursor-not-allowed"}`}
+                className={`w-full border border-[#e9d5ff] rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-[#fef7f0] text-gray-400 cursor-not-allowed"}`}
                 rows={3}
                 value={settings.bulkNames}
                 onChange={isPro ? (e) => updateSetting("bulkNames", e.target.value) : undefined}
@@ -948,7 +948,7 @@ function TracingWorksheetInner() {
             {/* Save Worksheets - Pro Feature */}
             <button
               onClick={() => openProModal("Save & Organize Worksheets")}
-              className="w-full bg-white border border-gray-200 rounded-lg shadow p-3 flex items-center justify-center gap-2 text-sm text-gray-500 hover:bg-gray-50 transition-colors"
+              className="w-full bg-white border border-[#e9d5ff] rounded-lg shadow p-3 flex items-center justify-center gap-2 text-sm text-gray-500 hover:bg-[#fef7f0] transition-colors"
             >
               <svg
                 className="w-4 h-4"
@@ -964,7 +964,7 @@ function TracingWorksheetInner() {
                 />
               </svg>
               Save Worksheet
-              <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-xs font-semibold px-1.5 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 bg-[#f5f3ff] text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded-full">
                 PRO
               </span>
             </button>
@@ -973,7 +973,7 @@ function TracingWorksheetInner() {
             <button
               onClick={exportPDF}
               disabled={!hasContent || isExporting || rows.length === 0}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[#7c3aed] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#6d28d9] disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               {isExporting ? (
                 <>

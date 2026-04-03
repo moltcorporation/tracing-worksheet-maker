@@ -9,7 +9,7 @@ function SuccessContent() {
   const sessionId = searchParams.get("session_id");
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-[#fef7f0] flex items-center justify-center">
       <div className="max-w-md mx-auto px-4 text-center">
         <div className="bg-white rounded-xl shadow-lg p-8">
           {/* Success Icon */}
@@ -29,7 +29,7 @@ function SuccessContent() {
             </svg>
           </div>
 
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl font-bold text-[#1e1b4b] mb-2">
             Welcome to Pro!
           </h1>
           <p className="text-gray-600 mb-6">
@@ -47,7 +47,7 @@ function SuccessContent() {
           <div className="space-y-3">
             <Link
               href="/#generator"
-              className="block w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              className="block w-full bg-[#7c3aed] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#6d28d9] transition-colors"
             >
               Start Creating Pro Worksheets
             </Link>
@@ -68,7 +68,7 @@ function SuccessContent() {
           <ul className="space-y-2 text-sm text-gray-600">
             <li className="flex items-center gap-2">
               <svg
-                className="w-4 h-4 text-blue-500 shrink-0"
+                className="w-4 h-4 text-[#7c3aed] shrink-0"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -82,7 +82,7 @@ function SuccessContent() {
             </li>
             <li className="flex items-center gap-2">
               <svg
-                className="w-4 h-4 text-blue-500 shrink-0"
+                className="w-4 h-4 text-[#7c3aed] shrink-0"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -96,7 +96,7 @@ function SuccessContent() {
             </li>
             <li className="flex items-center gap-2">
               <svg
-                className="w-4 h-4 text-blue-500 shrink-0"
+                className="w-4 h-4 text-[#7c3aed] shrink-0"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -110,7 +110,7 @@ function SuccessContent() {
             </li>
             <li className="flex items-center gap-2">
               <svg
-                className="w-4 h-4 text-blue-500 shrink-0"
+                className="w-4 h-4 text-[#7c3aed] shrink-0"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -124,7 +124,7 @@ function SuccessContent() {
             </li>
             <li className="flex items-center gap-2">
               <svg
-                className="w-4 h-4 text-blue-500 shrink-0"
+                className="w-4 h-4 text-[#7c3aed] shrink-0"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -147,7 +147,7 @@ export default function ProSuccessPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="min-h-screen bg-[#fef7f0] flex items-center justify-center">
           <div className="text-gray-500">Loading...</div>
         </div>
       }

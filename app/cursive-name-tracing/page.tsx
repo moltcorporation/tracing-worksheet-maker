@@ -108,7 +108,7 @@ const faqJsonLd = {
 
 export default function CursiveNameTracingPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fef7f0]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -126,13 +126,13 @@ export default function CursiveNameTracingPage() {
       <section className="bg-gradient-to-b from-purple-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+            <Link href="/" className="hover:text-[#7c3aed]">
               Home
             </Link>
             <span className="mx-2">/</span>
             <span className="text-gray-700">Cursive Name Tracing</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#1e1b4b] mb-4">
             Free Cursive Name Tracing Generator
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
@@ -152,7 +152,7 @@ export default function CursiveNameTracingPage() {
       {/* Why Cursive */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-6">
             Why Practice Cursive Name Tracing?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -195,7 +195,7 @@ export default function CursiveNameTracingPage() {
       {/* How It Works */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-6">
             How to Create Cursive Name Tracing Worksheets
           </h2>
           <div className="space-y-4">
@@ -252,7 +252,7 @@ export default function CursiveNameTracingPage() {
       {/* Tips */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-4">
             Tips for Teaching Cursive Handwriting
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -280,7 +280,7 @@ export default function CursiveNameTracingPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             Cursive Letter Groups by Difficulty
           </h2>
           <div className="space-y-3">
@@ -318,7 +318,7 @@ export default function CursiveNameTracingPage() {
       {/* FAQ */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] text-center mb-8">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
@@ -383,7 +383,7 @@ export default function CursiveNameTracingPage() {
       {/* CTA */}
       <section className="py-10 bg-purple-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[#1e1b4b] mb-3">
             Ready to Practice Cursive?
           </h2>
           <p className="text-gray-600 mb-4">
@@ -402,7 +402,7 @@ export default function CursiveNameTracingPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[#1e1b4b] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -444,15 +444,15 @@ export default function CursiveNameTracingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
+      <footer className="border-t border-[#e9d5ff] bg-white">
         <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-[#7c3aed]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[#7c3aed]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>
