@@ -2,6 +2,41 @@
 
 import { useState } from "react";
 
+// Style preview samples
+const StylePreview = ({ style, label }: { style: "print" | "cursive" | "dnealian"; label: string }) => {
+  const fontFamily = style === "cursive"
+    ? "'Dancing Script', cursive"
+    : style === "dnealian"
+    ? "'Comic Sans MS', 'Comic Sans', cursive"
+    : "'Arial', sans-serif";
+
+  const sampleText = "Abc";
+  const isPro = style !== "print";
+
+  return (
+    <div className="flex-1 text-center">
+      <div className="mb-2 text-xs font-semibold text-gray-500">{label}</div>
+      <div
+        className={`p-4 rounded-lg border-2 ${
+          isPro ? "border-purple-200 bg-purple-50" : "border-gray-200 bg-gray-50"
+        } relative`}
+      >
+        <div
+          style={{ fontFamily }}
+          className="text-4xl font-bold text-gray-700"
+        >
+          {sampleText}
+        </div>
+        {isPro && (
+          <div className="absolute top-1 right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold">
+            PRO
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const PAYMENT_LINKS = {
   monthly: {
     id: "plink_1THUatDT8EiLsMQhkgbCJWus",
@@ -222,6 +257,20 @@ export default function ProUpgradeModal({
             >
               Already Pro? Verify access
             </button>
+
+            {/* Handwriting Style Preview */}
+            {!featureName || featureName.includes("D'Nealian") || featureName.includes("style") ? (
+              <div className="mt-5 pt-4 border-t border-gray-100">
+                <p className="text-xs font-medium text-gray-500 mb-3">
+                  See the Difference:
+                </p>
+                <div className="flex gap-2 mb-4">
+                  <StylePreview style="print" label="Free" />
+                  <StylePreview style="cursive" label="Pro - Cursive" />
+                  <StylePreview style="dnealian" label="Pro - D'Nealian" />
+                </div>
+              </div>
+            ) : null}
 
             {/* Features list */}
             <div className="mt-5 pt-4 border-t border-gray-100">

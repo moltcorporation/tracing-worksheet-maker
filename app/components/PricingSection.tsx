@@ -3,6 +3,32 @@
 import { useState } from "react";
 import ProUpgradeModal from "./ProUpgradeModal";
 
+// Style preview samples for pricing
+const PricingStylePreview = ({ style, label }: { style: "print" | "cursive" | "dnealian"; label: string }) => {
+  const fontFamily = style === "cursive"
+    ? "'Dancing Script', cursive"
+    : style === "dnealian"
+    ? "'Comic Sans MS', 'Comic Sans', cursive"
+    : "'Arial', sans-serif";
+
+  return (
+    <div className="text-center">
+      <div className="mb-2 text-sm font-semibold text-[#2d2235]">{label}</div>
+      <div
+        style={{ fontFamily }}
+        className="text-5xl font-bold text-[#2d2235] py-4 bg-white rounded-lg border-2 border-[#e9ddf5]"
+      >
+        Abc
+      </div>
+      <p className="mt-2 text-xs text-[#9889a8]">
+        {style === "print" && "Free"}
+        {style === "cursive" && "Pro - Cursive"}
+        {style === "dnealian" && "Pro - D'Nealian"}
+      </p>
+    </div>
+  );
+};
+
 const CheckIcon = ({ color }: { color: string }) => (
   <svg
     className={`w-4 h-4 ${color} shrink-0`}
@@ -29,6 +55,14 @@ export default function PricingSection() {
         <p className="text-[#9889a8] text-center mb-8 text-sm">
           Start free, upgrade when you need more.
         </p>
+
+        {/* Visual Style Preview */}
+        <div className="mb-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+          <PricingStylePreview style="print" label="Free Tier" />
+          <PricingStylePreview style="cursive" label="Pro Upgrade" />
+          <PricingStylePreview style="dnealian" label="Pro Upgrade" />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {/* Free Tier */}
           <div className="rounded-2xl border-2 border-[#e9ddf5] bg-white p-6">
