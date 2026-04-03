@@ -3,114 +3,155 @@
 import { useState } from "react";
 import ProUpgradeModal from "./ProUpgradeModal";
 
-const CheckIcon = ({ color }: { color: string }) => (
-  <svg
-    className={`w-4 h-4 ${color} shrink-0`}
-    fill="currentColor"
-    viewBox="0 0 20 20"
-  >
-    <path
-      fillRule="evenodd"
-      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-      clipRule="evenodd"
-    />
-  </svg>
-);
+const CheckIcon = ({ color }: { color: string }) => {
+  const colorMap: { [key: string]: string } = {
+    "text-mint": "var(--mint)",
+    "text-primary": "var(--primary)",
+  };
+
+  return (
+    <svg
+      className="w-4 h-4 shrink-0"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      style={{ color: colorMap[color] || color }}
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+};
 
 export default function PricingSection() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <section id="pricing" className="py-12 bg-white">
+    <section id="pricing" className="py-16">
       <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-gray-900 text-center mb-2">
-          Simple Pricing
+        <h2
+          className="text-3xl font-black text-center mb-3 leading-tight"
+          style={{ color: "var(--foreground)" }}
+        >
+          Simple, Fair Pricing
         </h2>
-        <p className="text-gray-500 text-center mb-8">
-          Start free, upgrade when you need more.
+        <p
+          className="text-center mb-10"
+          style={{ color: "var(--muted)" }}
+        >
+          Free forever. Upgrade only if you need advanced features.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {/* Free Tier */}
-          <div className="border border-gray-200 rounded-xl p-6">
-            <h3 className="font-bold text-lg text-gray-900">Free</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">
+          <div
+            className="rounded-2xl p-7 border"
+            style={{
+              borderColor: "var(--border)",
+              background: "rgba(255, 255, 255, 0.5)",
+            }}
+          >
+            <h3 className="font-bold text-lg" style={{ color: "var(--foreground)" }}>
+              Free
+            </h3>
+            <p className="text-4xl font-black mt-3" style={{ color: "var(--foreground)" }}>
               $0
-              <span className="text-base font-normal text-gray-500">
-                /forever
+              <span className="text-base font-normal ml-2" style={{ color: "var(--muted)" }}>
+                forever
               </span>
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-600">
+            <ul className="mt-6 space-y-3 text-sm" style={{ color: "var(--muted)" }}>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-green-500" />
-                Name tracing worksheets
+                <CheckIcon color="text-mint" />
+                <span>Name tracing worksheets</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-green-500" />
-                Letters A-Z &amp; Numbers 0-9
+                <CheckIcon color="text-mint" />
+                <span>Letters A-Z &amp; Numbers 0-9</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-green-500" />
-                Standard print style
+                <CheckIcon color="text-mint" />
+                <span>Standard print style</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-green-500" />
-                PDF download
+                <CheckIcon color="text-mint" />
+                <span>Unlimited PDF downloads</span>
               </li>
             </ul>
             <a
               href="#generator"
-              className="block mt-6 text-center bg-gray-100 text-gray-800 py-2 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              className="block mt-6 text-center font-bold py-3 px-4 rounded-lg transition-all hover:translate-y-[-2px]"
+              style={{
+                background: "var(--surface)",
+                color: "var(--foreground)",
+                border: "1px solid var(--border)",
+              }}
             >
-              Start Creating
+              Start Creating Free
             </a>
           </div>
 
           {/* Pro Tier */}
-          <div className="border-2 border-blue-500 rounded-xl p-6 relative">
-            <span className="absolute -top-3 left-4 bg-blue-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
-              POPULAR
+          <div
+            className="rounded-2xl p-7 border-2 relative"
+            style={{
+              borderColor: "var(--primary)",
+              background: "rgba(124, 58, 237, 0.05)",
+            }}
+          >
+            <span
+              className="absolute -top-4 left-6 text-xs font-bold px-3 py-1 rounded-full text-white"
+              style={{ background: "var(--primary)" }}
+            >
+              🚀 MOST POPULAR
             </span>
-            <h3 className="font-bold text-lg text-gray-900">Pro</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">
+            <h3 className="font-bold text-lg mt-1" style={{ color: "var(--foreground)" }}>
+              Pro
+            </h3>
+            <p className="text-4xl font-black mt-3" style={{ color: "var(--foreground)" }}>
               $3.99
-              <span className="text-base font-normal text-gray-500">
+              <span className="text-base font-normal ml-2" style={{ color: "var(--muted)" }}>
                 /month
               </span>
             </p>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs font-semibold mt-2" style={{ color: "var(--primary)" }}>
               or $29.99/year (save 37%)
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-600">
+            <ul className="mt-6 space-y-3 text-sm" style={{ color: "var(--muted)" }}>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-blue-500" />
-                Everything in Free
+                <CheckIcon color="text-primary" />
+                <span>Everything in Free</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-blue-500" />
-                Cursive &amp; D&apos;Nealian styles
+                <CheckIcon color="text-primary" />
+                <span>Cursive &amp; D&apos;Nealian styles</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-blue-500" />
-                Custom words &amp; sight words
+                <CheckIcon color="text-primary" />
+                <span>Custom words &amp; sight words</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-blue-500" />
-                Bulk class generation
+                <CheckIcon color="text-primary" />
+                <span>Bulk class generation</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-blue-500" />
-                Save &amp; organize worksheets
+                <CheckIcon color="text-primary" />
+                <span>Save &amp; organize worksheets</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckIcon color="text-blue-500" />
-                Multiple line styles
+                <CheckIcon color="text-primary" />
+                <span>Multiple line styles</span>
               </li>
             </ul>
             <button
               onClick={() => setShowModal(true)}
-              className="block w-full mt-6 text-center bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="block w-full mt-6 text-center font-bold py-3 px-4 rounded-lg text-white transition-all hover:translate-y-[-2px] hover:shadow-lg"
+              style={{
+                background: "linear-gradient(135deg, var(--primary), var(--pink))",
+              }}
             >
-              Get Pro
+              Upgrade to Pro
             </button>
           </div>
         </div>

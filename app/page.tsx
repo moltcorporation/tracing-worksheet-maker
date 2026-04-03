@@ -104,7 +104,7 @@ const faqJsonLd = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ background: "var(--background)" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -114,25 +114,59 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Free Tracing Worksheet Maker
+      <section className="py-16 md:py-20 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 20% 50%, var(--primary) 0%, transparent 50%), radial-gradient(circle at 80% 80%, var(--pink) 0%, transparent 50%)",
+          }}
+        />
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <span
+            className="inline-block px-3 py-1 rounded-full text-sm font-medium mb-4"
+            style={{
+              background: "var(--primary-light)",
+              color: "var(--primary)",
+            }}
+          >
+            ✨ Handwriting practice made easy
+          </span>
+          <h1
+            className="text-4xl md:text-5xl font-black mb-4 leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Your Free Tracing Worksheet Maker
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-            Create custom printable tracing worksheets for names, letters A-Z,
-            and numbers 0-9. Dotted letters with writing guides — download as
-            PDF instantly.
+          <p
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed"
+            style={{ color: "var(--muted)" }}
+          >
+            Teachers and parents love our tool. Create custom printable tracing
+            worksheets for names, letters, and numbers in seconds. No ads, no
+            sign-up needed.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 text-sm text-gray-500">
-            <span className="bg-white border border-gray-200 rounded-full px-3 py-1">
-              100% Free
+          <div className="flex flex-wrap justify-center gap-3 text-sm">
+            <span
+              className="px-3 py-1 rounded-full font-medium"
+              style={{ background: "var(--sky-light)", color: "var(--sky)" }}
+            >
+              💯 100% Free
             </span>
-            <span className="bg-white border border-gray-200 rounded-full px-3 py-1">
-              No Sign-up Required
+            <span
+              className="px-3 py-1 rounded-full font-medium"
+              style={{ background: "var(--pink-light)", color: "var(--pink)" }}
+            >
+              🚀 No Sign-up
             </span>
-            <span className="bg-white border border-gray-200 rounded-full px-3 py-1">
-              Instant PDF Download
+            <span
+              className="px-3 py-1 rounded-full font-medium"
+              style={{
+                background: "var(--primary-light)",
+                color: "var(--primary)",
+              }}
+            >
+              📥 Instant PDF
             </span>
           </div>
         </div>
@@ -144,60 +178,156 @@ export default function Home() {
       </section>
 
       {/* Use Cases */}
-      <section className="py-12 bg-white">
+      <section className="py-16">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            Tracing Worksheets for Every Learning Need
+          <h2
+            className="text-3xl font-black text-center mb-12 leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Choose Your Worksheet Type
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               href="/name-tracing"
-              className="block bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+              className="group rounded-2xl p-7 transition-all duration-200 hover:shadow-lg"
+              style={{
+                background: "rgba(236, 72, 153, 0.08)",
+                borderLeft: "4px solid var(--pink)",
+              }}
             >
-              <div className="text-4xl mb-3">&#9997;</div>
-              <h3 className="font-semibold text-gray-800 text-lg">
+              <div
+                className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                style={{ background: "var(--pink-light)" }}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  style={{ color: "var(--pink)" }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 4a2 2 0 114 0V4a2 2 0 11-4 0V4zm6 2a1 1 0 100-2 1 1 0 000 2zm0 4a1 1 0 11-2 0 1 1 0 012 0zm0 4a1 1 0 11-2 0 1 1 0 012 0zm-6 4a1 1 0 100-2 1 1 0 000 2z"
+                  />
+                </svg>
+              </div>
+              <h3
+                className="font-bold text-lg mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
                 Name Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-2">
-                Type any name and generate a custom tracing worksheet with dotted
-                letters and writing guides. Perfect for helping children learn to
-                write their name.
+              <p
+                className="text-sm mb-4 leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Type any name and generate a personalized tracing worksheet.
+                Perfect for helping kids learn to write their own name.
               </p>
-              <span className="inline-block mt-3 text-blue-600 text-sm font-medium">
-                Create name worksheets &rarr;
+              <span
+                className="inline-block text-sm font-semibold"
+                style={{ color: "var(--pink)" }}
+              >
+                Get started &rarr;
               </span>
             </Link>
+
             <Link
               href="/letter-tracing"
-              className="block bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+              className="group rounded-2xl p-7 transition-all duration-200 hover:shadow-lg"
+              style={{
+                background: "rgba(56, 189, 248, 0.08)",
+                borderLeft: "4px solid var(--sky)",
+              }}
             >
-              <div className="text-4xl mb-3">&#127312;</div>
-              <h3 className="font-semibold text-gray-800 text-lg">
+              <div
+                className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                style={{ background: "var(--sky-light)" }}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  style={{ color: "var(--sky)" }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M7 19h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3
+                className="font-bold text-lg mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
                 Letter Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-2">
-                A-Z letter tracing worksheets with stroke guides. Choose specific
-                letters or practice the full alphabet. Great for preschool and
-                kindergarten.
+              <p
+                className="text-sm mb-4 leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                A-Z worksheets with stroke guides. Practice individual letters or
+                the whole alphabet. Ideal for all ages and skill levels.
               </p>
-              <span className="inline-block mt-3 text-blue-600 text-sm font-medium">
-                Create letter worksheets &rarr;
+              <span
+                className="inline-block text-sm font-semibold"
+                style={{ color: "var(--sky)" }}
+              >
+                Get started &rarr;
               </span>
             </Link>
+
             <Link
               href="/number-tracing"
-              className="block bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+              className="group rounded-2xl p-7 transition-all duration-200 hover:shadow-lg"
+              style={{
+                background: "rgba(52, 211, 153, 0.08)",
+                borderLeft: "4px solid var(--mint)",
+              }}
             >
-              <div className="text-4xl mb-3">&#128290;</div>
-              <h3 className="font-semibold text-gray-800 text-lg">
+              <div
+                className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                style={{ background: "linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(251, 146, 60, 0.2))" }}
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  style={{ color: "var(--mint)" }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3
+                className="font-bold text-lg mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
                 Number Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-2">
-                Numbers 0-9 tracing worksheets with formation guides. Build
-                confidence with number writing practice for early learners.
+              <p
+                className="text-sm mb-4 leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Numbers 0-9 with formation guides. Build number recognition and
+                writing confidence with structured practice.
               </p>
-              <span className="inline-block mt-3 text-blue-600 text-sm font-medium">
-                Create number worksheets &rarr;
+              <span
+                className="inline-block text-sm font-semibold"
+                style={{ color: "var(--mint)" }}
+              >
+                Get started &rarr;
               </span>
             </Link>
           </div>
@@ -205,102 +335,162 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section className="py-12">
+      <section className="py-16">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            Why Teachers and Parents Love Our Worksheets
+          <h2
+            className="text-3xl font-black text-center mb-12 leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Why Teachers & Parents Love This
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div
+              className="p-6 rounded-xl text-center"
+              style={{
+                background: "rgba(124, 58, 237, 0.05)",
+                border: "1px solid rgba(124, 58, 237, 0.1)",
+              }}
+            >
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"
+                style={{
+                  background: "var(--primary-light)",
+                  color: "var(--primary)",
+                }}
+              >
                 <svg
-                  className="w-6 h-6 text-blue-600"
+                  className="w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M13 10V3L4 14h7v7l9-11h-7z"
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-800 text-sm">
-                Instant Generation
+              <h3
+                className="font-bold text-sm mb-1"
+                style={{ color: "var(--foreground)" }}
+              >
+                Instant Creation
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                Type, customize, and download. No waiting.
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Type, customize, download. Done in seconds.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div
+              className="p-6 rounded-xl text-center"
+              style={{
+                background: "rgba(236, 72, 153, 0.05)",
+                border: "1px solid rgba(236, 72, 153, 0.1)",
+              }}
+            >
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"
+                style={{ background: "var(--pink-light)", color: "var(--pink)" }}
+              >
                 <svg
-                  className="w-6 h-6 text-green-600"
+                  className="w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2z"
+                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-800 text-sm">
+              <h3
+                className="font-bold text-sm mb-1"
+                style={{ color: "var(--foreground)" }}
+              >
                 Print-Ready PDFs
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                US Letter size, high-quality output for clear printing.
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                High-quality output, perfect for printing.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div
+              className="p-6 rounded-xl text-center"
+              style={{
+                background: "rgba(56, 189, 248, 0.05)",
+                border: "1px solid rgba(56, 189, 248, 0.1)",
+              }}
+            >
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"
+                style={{ background: "var(--sky-light)", color: "var(--sky)" }}
+              >
                 <svg
-                  className="w-6 h-6 text-purple-600"
+                  className="w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
                     d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
                   />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-800 text-sm">
+              <h3
+                className="font-bold text-sm mb-1"
+                style={{ color: "var(--foreground)" }}
+              >
                 Fully Customizable
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                Adjust letter size, rows, and writing guides.
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Adjust size, rows, and writing guides.
               </p>
             </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div
+              className="p-6 rounded-xl text-center"
+              style={{
+                background: "rgba(251, 146, 60, 0.05)",
+                border: "1px solid rgba(251, 146, 60, 0.1)",
+              }}
+            >
+              <div
+                className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3"
+                style={{ background: "linear-gradient(135deg, var(--peach), var(--mint))", color: "white" }}
+              >
                 <svg
-                  className="w-6 h-6 text-orange-600"
-                  fill="none"
+                  className="w-6 h-6"
+                  fill="currentColor"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                  />
+                  <path d="M13.876 4.314a2 2 0 00-3.752 0l-.5 1.5a2 2 0 01-1.898 1.384H6.75a2 2 0 00-2 2.121l.159 1.906a2 2 0 01-1.987 2.16H3a2 2 0 00-1.983 2.25l.221 2.653a2 2 0 001.967 1.75h1.923a2 2 0 001.983-2.25l-.221-2.653a2 2 0 01-.08-.813v-.023a2 2 0 01.016-.216l.159-1.906H8.75a2 2 0 001.898-1.384l.5-1.5zM3 23a1 1 0 011-1h8a1 1 0 011 1v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-1zm8-3H3v2h8v-2z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-800 text-sm">
+              <h3
+                className="font-bold text-sm mb-1"
+                style={{ color: "var(--foreground)" }}
+              >
                 Completely Free
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
-                No account, no paywall. Just worksheets.
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                No account, no paywall, no limitations.
               </p>
             </div>
           </div>
@@ -311,62 +501,121 @@ export default function Home() {
       <PricingSection />
 
       {/* FAQ / SEO Content */}
-      <section className="py-12">
+      <section className="py-16">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
-            Frequently Asked Questions
+          <h2
+            className="text-3xl font-black text-center mb-12 leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Questions? We've Got Answers
           </h2>
           <div className="space-y-6">
-            <div>
-              <h3 className="font-semibold text-gray-800">
-                How do I print a name tracing worksheet?
+            <div
+              className="p-5 rounded-xl"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <h3
+                className="font-bold text-sm mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
+                🎨 How do I print a name tracing worksheet?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
-                Type a name in the generator above, customize the layout, and
-                click &quot;Download PDF.&quot; Open the PDF and print it on
-                standard US Letter paper. The worksheet is optimized for clear,
-                clean printing.
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Type a name, customize the layout, and click "Download PDF." Open
+                the PDF and print on US Letter paper. Optimized for crystal-clear
+                printing.
               </p>
             </div>
-            <div>
-              <h3 className="font-semibold text-gray-800">
-                What ages are these worksheets for?
+            <div
+              className="p-5 rounded-xl"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <h3
+                className="font-bold text-sm mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
+                👧 What ages are these worksheets for?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
-                Our tracing worksheets are designed for children ages 3-7,
-                including preschool, pre-K, and kindergarten students. The
-                adjustable letter size makes them suitable for different skill
-                levels.
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Designed for ages 3-7 (preschool, pre-K, kindergarten). Adjustable
+                letter sizes work for all skill levels, from early writers to
+                advanced.
               </p>
             </div>
-            <div>
-              <h3 className="font-semibold text-gray-800">
-                Can I create letter tracing worksheets for the whole alphabet?
+            <div
+              className="p-5 rounded-xl"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <h3
+                className="font-bold text-sm mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
+                🔤 Can I create letter worksheets for the whole alphabet?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
-                Yes! Switch to &quot;Letters&quot; mode and select all 26 letters
-                or choose specific ones your child needs to practice. Each letter
-                gets its own practice row with stroke guides.
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Yes! Switch to "Letters" mode and choose specific letters or all
+                26. Each letter includes stroke guides to teach proper formation.
               </p>
             </div>
-            <div>
-              <h3 className="font-semibold text-gray-800">
-                Are number tracing worksheets included?
+            <div
+              className="p-5 rounded-xl"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <h3
+                className="font-bold text-sm mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
+                🔢 Are number worksheets included?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
-                Absolutely. Switch to &quot;Numbers&quot; mode to create tracing
-                worksheets for numbers 0-9. Each number includes formation guides
-                to help children learn proper number writing.
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                Absolutely. "Numbers" mode creates worksheets for 0-9 with
+                formation guides. Great for building number recognition and
+                writing.
               </p>
             </div>
-            <div>
-              <h3 className="font-semibold text-gray-800">
-                Is this really free?
+            <div
+              className="p-5 rounded-xl"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border)",
+              }}
+            >
+              <h3
+                className="font-bold text-sm mb-2"
+                style={{ color: "var(--foreground)" }}
+              >
+                ✨ Is this really free?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
-                Yes, the core worksheet generator is completely free with no
-                account required. Create unlimited name, letter, and number
-                tracing worksheets and download them as PDFs.
+              <p
+                className="text-sm leading-relaxed"
+                style={{ color: "var(--muted)" }}
+              >
+                100% free. Create unlimited worksheets, no sign-up, no ads, no
+                account required. Just pure worksheet-making goodness.
               </p>
             </div>
           </div>
@@ -374,41 +623,62 @@ export default function Home() {
       </section>
 
       {/* More Teacher Tools */}
-      <section className="py-12 bg-white">
+      <section className="py-16">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">
-            More Free Teacher Tools
+          <h2
+            className="text-3xl font-black text-center mb-8 leading-tight"
+            style={{ color: "var(--foreground)" }}
+          >
+            Part of Our Teacher Toolkit
           </h2>
           <a
             href="https://classroomseatingchartmaker.com"
-            className="block border border-gray-200 rounded-xl p-6 hover:shadow-md hover:border-blue-200 transition-all"
+            className="block rounded-xl p-6 hover:shadow-xl transition-all group"
+            style={{
+              border: "2px solid var(--border)",
+              background: "rgba(124, 58, 237, 0.02)",
+            }}
           >
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <div
+                className="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
+                style={{
+                  background: "var(--primary-light)",
+                  color: "var(--primary)",
+                }}
+              >
                 <svg
-                  className="w-6 h-6 text-indigo-600"
+                  className="w-7 h-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  strokeWidth={2}
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                    d="M9 17V7m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 0V7a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2h-2a2 2 0 01-2-2m0 0V7a2 2 0 00-2-2H9a2 2 0 00-2 2v10a2 2 0 002 2h2a2 2 0 002-2z"
                   />
                 </svg>
               </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 text-lg">
+              <div className="flex-1">
+                <h3
+                  className="font-bold text-lg mb-2"
+                  style={{ color: "var(--foreground)" }}
+                >
                   Classroom Seating Chart Maker
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
-                  Create and manage classroom seating charts with drag-and-drop.
-                  Arrange desks, assign students, and print layouts — free for
-                  teachers.
+                <p
+                  className="text-sm leading-relaxed mb-3"
+                  style={{ color: "var(--muted)" }}
+                >
+                  The #2 tool teachers use. Create seating charts with drag-and-drop,
+                  assign students, print instantly. Free for all teachers.
                 </p>
-                <span className="inline-block mt-2 text-indigo-600 text-sm font-medium">
+                <span
+                  className="inline-block text-sm font-semibold group-hover:translate-x-1 transition-transform"
+                  style={{ color: "var(--primary)" }}
+                >
                   Try it free &rarr;
                 </span>
               </div>
@@ -418,25 +688,40 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+      <footer
+        className="border-t"
+        style={{
+          borderColor: "var(--border)",
+          background: "var(--surface)",
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm mb-8">
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">
+              <h4
+                className="font-bold mb-3"
+                style={{ color: "var(--foreground)" }}
+              >
                 Tracing Worksheet Maker
               </h4>
-              <p className="text-gray-500">
-                Free printable tracing worksheets for names, letters, and
-                numbers. Helping children learn to write.
+              <p style={{ color: "var(--muted)" }}>
+                Free worksheets for names, letters, and numbers. Helping children
+                learn to write since 2024.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">Worksheets</h4>
-              <ul className="space-y-1 text-gray-500">
+              <h4
+                className="font-bold mb-3"
+                style={{ color: "var(--foreground)" }}
+              >
+                Worksheet Types
+              </h4>
+              <ul className="space-y-2" style={{ color: "var(--muted)" }}>
                 <li>
                   <Link
                     href="/name-tracing"
-                    className="hover:text-blue-600 transition-colors"
+                    className="hover:font-semibold transition-all"
+                    style={{ color: "var(--primary)" }}
                   >
                     Name Tracing
                   </Link>
@@ -444,7 +729,8 @@ export default function Home() {
                 <li>
                   <Link
                     href="/letter-tracing"
-                    className="hover:text-blue-600 transition-colors"
+                    className="hover:font-semibold transition-all"
+                    style={{ color: "var(--primary)" }}
                   >
                     Letter Tracing
                   </Link>
@@ -452,70 +738,36 @@ export default function Home() {
                 <li>
                   <Link
                     href="/number-tracing"
-                    className="hover:text-blue-600 transition-colors"
+                    className="hover:font-semibold transition-all"
+                    style={{ color: "var(--primary)" }}
                   >
                     Number Tracing
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/letter-tracing-worksheets"
-                    className="hover:text-blue-600 transition-colors"
-                  >
-                    Letter Tracing Worksheets
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/alphabet-tracing-worksheets"
-                    className="hover:text-blue-600 transition-colors"
+                    className="hover:font-semibold transition-all"
+                    style={{ color: "var(--primary)" }}
                   >
-                    Alphabet Tracing Worksheets
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/number-tracing-worksheets"
-                    className="hover:text-blue-600 transition-colors"
-                  >
-                    Number Tracing Worksheets
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/cursive-name-tracing"
-                    className="hover:text-blue-600 transition-colors"
-                  >
-                    Cursive Name Tracing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/preschool-tracing-worksheets"
-                    className="hover:text-blue-600 transition-colors"
-                  >
-                    Preschool Tracing Worksheets
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/sight-word-tracing"
-                    className="hover:text-blue-600 transition-colors"
-                  >
-                    Sight Word Tracing
+                    Alphabet Worksheets
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-800 mb-2">
-                Teacher Tools
+              <h4
+                className="font-bold mb-3"
+                style={{ color: "var(--foreground)" }}
+              >
+                More Teacher Tools
               </h4>
-              <ul className="space-y-1 text-gray-500">
+              <ul className="space-y-2">
                 <li>
                   <a
                     href="https://classroomseatingchartmaker.com"
-                    className="hover:text-blue-600 transition-colors"
+                    className="hover:font-semibold transition-all"
+                    style={{ color: "var(--primary)" }}
                   >
                     Seating Chart Maker
                   </a>
@@ -523,12 +775,19 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="mt-6 pt-6 border-t border-gray-100 text-center text-xs text-gray-400">
-            <p className="mb-2">
+          <div
+            className="pt-6 border-t text-center text-xs"
+            style={{
+              borderColor: "var(--border)",
+              color: "var(--muted-light)",
+            }}
+          >
+            <p className="mb-1">
               From the makers of{" "}
               <a
                 href="https://classroomseatingchartmaker.com"
-                className="text-blue-500 hover:text-blue-600 transition-colors"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
               >
                 Classroom Seating Chart Maker
               </a>
