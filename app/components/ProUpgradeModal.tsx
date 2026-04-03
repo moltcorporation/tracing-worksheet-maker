@@ -144,7 +144,7 @@ export default function ProUpgradeModal({
               value={verifyEmail}
               onChange={(e) => setVerifyEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent mb-3"
               required
             />
             {verifyError && (

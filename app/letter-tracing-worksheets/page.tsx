@@ -61,7 +61,7 @@ const breadcrumbLd = {
 
 export default function LetterTracingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -74,24 +74,24 @@ export default function LetterTracingWorksheetsPage() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-green-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">Letter Tracing Worksheets</span>
+            <span className="text-[var(--foreground)]">Letter Tracing Worksheets</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Letter Tracing Worksheets
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Printable A-Z letter tracing worksheets with dotted letters, stroke
             guides, and writing lines. Perfect for preschool, pre-K, and
             kindergarten handwriting practice.
           </p>
           <Link
             href="/letter-tracing#generator"
-            className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-block bg-[var(--primary)] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-dark)] transition-colors"
           >
             Create Letter Tracing Worksheets
           </Link>
@@ -101,10 +101,10 @@ export default function LetterTracingWorksheetsPage() {
       {/* Letter Overview */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             A-Z Letter Tracing Worksheets Overview
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-[var(--muted)] mb-6">
             Our letter tracing worksheets cover every letter of the alphabet.
             Each worksheet features dotted outlines with three-line writing
             guides (baseline, midline, and top line) so children learn correct
@@ -115,9 +115,9 @@ export default function LetterTracingWorksheetsPage() {
             {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => (
               <div
                 key={letter}
-                className="bg-gray-50 rounded-lg p-3 text-center border border-gray-200"
+                className="bg-[var(--background)] rounded-lg p-3 text-center border border-[var(--border)]"
               >
-                <span className="text-2xl font-bold text-gray-800 tracking-wider">
+                <span className="text-2xl font-bold text-[var(--foreground)] tracking-wider">
                   {letter}
                 </span>
               </div>
@@ -127,7 +127,7 @@ export default function LetterTracingWorksheetsPage() {
           <div className="text-center">
             <Link
               href="/letter-tracing#generator"
-              className="inline-block text-blue-600 font-medium hover:underline"
+              className="inline-block text-[var(--primary)] font-medium hover:underline"
             >
               Generate worksheets for any letter combination &rarr;
             </Link>
@@ -138,10 +138,10 @@ export default function LetterTracingWorksheetsPage() {
       {/* Content Sections */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             What Makes Good Letter Tracing Worksheets?
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               Effective letter tracing worksheets provide more than just outlines
               to follow. They include stroke direction indicators, properly
@@ -167,10 +167,10 @@ export default function LetterTracingWorksheetsPage() {
             </ul>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Letter Tracing by Difficulty Level
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               Not all letters are equally easy to write. Start children with
               simple straight-line letters before progressing to curves and
@@ -178,7 +178,7 @@ export default function LetterTracingWorksheetsPage() {
             </p>
             <div className="space-y-3">
               <div className="bg-green-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-1">
+                <h3 className="font-semibold text-[var(--foreground)] mb-1">
                   Beginner Letters
                 </h3>
                 <p className="text-sm">
@@ -187,7 +187,7 @@ export default function LetterTracingWorksheetsPage() {
                 </p>
               </div>
               <div className="bg-yellow-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-1">
+                <h3 className="font-semibold text-[var(--foreground)] mb-1">
                   Intermediate Letters
                 </h3>
                 <p className="text-sm">
@@ -196,7 +196,7 @@ export default function LetterTracingWorksheetsPage() {
                 </p>
               </div>
               <div className="bg-orange-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-1">
+                <h3 className="font-semibold text-[var(--foreground)] mb-1">
                   Advanced Letters
                 </h3>
                 <p className="text-sm">
@@ -207,10 +207,10 @@ export default function LetterTracingWorksheetsPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Tips for Teaching Letter Formation
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ol className="list-decimal list-inside space-y-2">
               <li>
                 <strong>Start with uppercase</strong> — uppercase letters are
@@ -238,18 +238,18 @@ export default function LetterTracingWorksheetsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-10 bg-blue-50">
+      <section className="py-10 bg-[var(--primary-light)]">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">
             Ready to Print?
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--muted)] mb-4">
             Generate custom letter tracing worksheets in seconds. Choose any
             letters, adjust size, and download as PDF.
           </p>
           <Link
             href="/letter-tracing#generator"
-            className="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-block bg-[var(--primary)] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[var(--primary-dark)] transition-colors"
           >
             Create Your Worksheets &rarr;
           </Link>
@@ -259,7 +259,7 @@ export default function LetterTracingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -267,10 +267,10 @@ export default function LetterTracingWorksheetsPage() {
               href="/alphabet-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Alphabet Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Full alphabet sets with uppercase and lowercase options.
               </p>
             </Link>
@@ -278,10 +278,10 @@ export default function LetterTracingWorksheetsPage() {
               href="/number-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Number Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Numbers 0-9 and 0-20 tracing with formation guides.
               </p>
             </Link>
@@ -289,10 +289,10 @@ export default function LetterTracingWorksheetsPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
@@ -300,10 +300,10 @@ export default function LetterTracingWorksheetsPage() {
               href="/cursive-name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Cursive Name Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Printable cursive handwriting worksheets with connected letters.
               </p>
             </Link>
@@ -311,10 +311,10 @@ export default function LetterTracingWorksheetsPage() {
               href="/preschool-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Preschool Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Age-appropriate tracing for preschoolers ages 3-5.
               </p>
             </Link>
@@ -323,15 +323,15 @@ export default function LetterTracingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[var(--primary)]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

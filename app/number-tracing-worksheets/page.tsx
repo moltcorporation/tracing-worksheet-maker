@@ -100,7 +100,7 @@ const breadcrumbLd = {
 
 export default function NumberTracingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -117,17 +117,17 @@ export default function NumberTracingWorksheetsPage() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-orange-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">Number Tracing Worksheets</span>
+            <span className="text-[var(--foreground)]">Number Tracing Worksheets</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Number Tracing Worksheets
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Printable number tracing worksheets for 0-9 and 0-20 with dotted
             numbers, formation guides, and writing lines. Build number writing
             confidence for preschool and kindergarten learners.
@@ -144,10 +144,10 @@ export default function NumberTracingWorksheetsPage() {
       {/* Number Sets */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Number Tracing Worksheet Sets
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-[var(--muted)] mb-8">
             Choose from focused number sets designed for different skill levels.
             Each worksheet includes dotted number outlines with formation guides
             showing where to start each stroke.
@@ -155,10 +155,10 @@ export default function NumberTracingWorksheetsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="bg-orange-50 rounded-xl p-6">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Numbers 0-9 Set
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 The essential single-digit number set. Each number gets
                 dedicated practice rows with dotted outlines and three-line
                 writing guides. Start here for children learning to write
@@ -168,7 +168,7 @@ export default function NumberTracingWorksheetsPage() {
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
                   <span
                     key={n}
-                    className="w-8 h-8 bg-white rounded flex items-center justify-center text-lg font-bold text-gray-800 border border-orange-200"
+                    className="w-8 h-8 bg-white rounded flex items-center justify-center text-lg font-bold text-[var(--foreground)] border border-orange-200"
                   >
                     {n}
                   </span>
@@ -181,23 +181,23 @@ export default function NumberTracingWorksheetsPage() {
                 Generate 0-9 worksheets &rarr;
               </Link>
             </div>
-            <div className="bg-blue-50 rounded-xl p-6">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+            <div className="bg-[var(--primary-light)] rounded-xl p-6">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Numbers 0-20 Set
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Extended number set for children ready to practice teen numbers.
                 Includes single digits plus 10-20 for complete early math
                 readiness. Great for kindergarten students building number
                 fluency.
               </p>
-              <p className="text-xs text-gray-500 mb-3">
+              <p className="text-xs text-[var(--muted-light)] mb-3">
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
                 18, 19, 20
               </p>
               <Link
                 href="/number-tracing#generator"
-                className="text-blue-600 font-medium text-sm hover:underline"
+                className="text-[var(--primary)] font-medium text-sm hover:underline"
               >
                 Generate 0-20 worksheets &rarr;
               </Link>
@@ -209,10 +209,10 @@ export default function NumberTracingWorksheetsPage() {
       {/* Content */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             Teaching Number Formation
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               Correct number formation matters. Children who learn to write
               numbers with proper stroke order write faster and more legibly as
@@ -221,7 +221,7 @@ export default function NumberTracingWorksheetsPage() {
             </p>
             <div className="space-y-3">
               <div className="bg-green-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-1">
+                <h3 className="font-semibold text-[var(--foreground)] mb-1">
                   Straight-Line Numbers (Start Here)
                 </h3>
                 <p className="text-sm">
@@ -230,7 +230,7 @@ export default function NumberTracingWorksheetsPage() {
                 </p>
               </div>
               <div className="bg-yellow-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-1">
+                <h3 className="font-semibold text-[var(--foreground)] mb-1">
                   Curve Numbers
                 </h3>
                 <p className="text-sm">
@@ -239,7 +239,7 @@ export default function NumberTracingWorksheetsPage() {
                 </p>
               </div>
               <div className="bg-orange-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-1">
+                <h3 className="font-semibold text-[var(--foreground)] mb-1">
                   Complex Numbers
                 </h3>
                 <p className="text-sm">
@@ -250,10 +250,10 @@ export default function NumberTracingWorksheetsPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             From Letters to Numbers
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               Number tracing builds directly on letter tracing skills. Children
               who have practiced{" "}
@@ -276,10 +276,10 @@ export default function NumberTracingWorksheetsPage() {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Number Writing Practice Tips
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ol className="list-decimal list-inside space-y-2">
               <li>
                 <strong>Always start at the top</strong> — every single-digit
@@ -304,10 +304,10 @@ export default function NumberTracingWorksheetsPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Number Writing Milestones by Age
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ul className="list-disc list-inside space-y-2">
               <li>
                 <strong>Ages 3-4:</strong> Recognize numbers 0-9. Trace large
@@ -334,15 +334,15 @@ export default function NumberTracingWorksheetsPage() {
       {/* FAQ */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 What age should children start number tracing worksheets?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Most children can begin tracing large numbers around age 3-4
                 with guidance. By age 4-5, they can independently trace numbers
                 0-9. Number tracing worksheets for 0-20 are typically
@@ -350,10 +350,10 @@ export default function NumberTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Should children learn letters or numbers first?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Most educators recommend starting with letters, since children
                 encounter their name first. However, letters and numbers can be
                 taught in parallel. The fine motor skills from letter tracing
@@ -361,10 +361,10 @@ export default function NumberTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 How do I teach my child to write numbers correctly?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Start with dotted number tracing worksheets that show the
                 correct stroke direction. Always begin each number from the top.
                 Practice 2-3 numbers per session, starting with straight-line
@@ -373,10 +373,10 @@ export default function NumberTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Are these number tracing worksheets free to print?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Yes. Generate and print number tracing worksheets for free with
                 no sign-up required. Choose numbers 0-9, 0-20, or select
                 specific numbers for targeted practice, then download as a PDF.
@@ -389,10 +389,10 @@ export default function NumberTracingWorksheetsPage() {
       {/* CTA */}
       <section className="py-10 bg-orange-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">
             Ready to Print Number Worksheets?
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--muted)] mb-4">
             Generate custom number tracing worksheets in seconds. Choose 0-9 or
             select specific numbers for targeted practice.
           </p>
@@ -408,7 +408,7 @@ export default function NumberTracingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -416,10 +416,10 @@ export default function NumberTracingWorksheetsPage() {
               href="/letter-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Letter Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 A-Z letter tracing sheets with stroke guides.
               </p>
             </Link>
@@ -427,10 +427,10 @@ export default function NumberTracingWorksheetsPage() {
               href="/alphabet-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Alphabet Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Full A-Z alphabet sets with uppercase and lowercase options.
               </p>
             </Link>
@@ -438,10 +438,10 @@ export default function NumberTracingWorksheetsPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
@@ -449,10 +449,10 @@ export default function NumberTracingWorksheetsPage() {
               href="/preschool-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Preschool Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Age-appropriate tracing for preschoolers ages 3-5.
               </p>
             </Link>
@@ -461,15 +461,15 @@ export default function NumberTracingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[var(--primary)]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

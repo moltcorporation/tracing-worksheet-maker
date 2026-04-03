@@ -100,7 +100,7 @@ const breadcrumbLd = {
 
 export default function AlphabetTracingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -117,17 +117,17 @@ export default function AlphabetTracingWorksheetsPage() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-purple-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">Alphabet Tracing Worksheets</span>
+            <span className="text-[var(--foreground)]">Alphabet Tracing Worksheets</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Alphabet Tracing Worksheets A-Z
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Complete A-Z alphabet tracing worksheet sets with uppercase and
             lowercase options. Dotted letters, multi-page bundles, and writing
             guides for early handwriting practice.
@@ -144,10 +144,10 @@ export default function AlphabetTracingWorksheetsPage() {
       {/* Alphabet Sets */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Printable Alphabet Worksheet Sets
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-[var(--muted)] mb-8">
             Generate complete alphabet tracing worksheet bundles — all 26
             letters in a single PDF. Choose uppercase, or mix and match specific
             letters for targeted practice.
@@ -155,16 +155,16 @@ export default function AlphabetTracingWorksheetsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="bg-purple-50 rounded-xl p-6">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Uppercase Alphabet Set
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 All 26 uppercase letters A through Z. Each letter gets its own
                 practice rows with dotted outlines and three-line writing guides.
                 Ideal for preschool and pre-K students starting their
                 handwriting journey.
               </p>
-              <div className="text-xs text-gray-500 font-mono tracking-widest mb-3">
+              <div className="text-xs text-[var(--muted-light)] font-mono tracking-widest mb-3">
                 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
               </div>
               <Link
@@ -174,21 +174,21 @@ export default function AlphabetTracingWorksheetsPage() {
                 Generate uppercase set &rarr;
               </Link>
             </div>
-            <div className="bg-blue-50 rounded-xl p-6">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+            <div className="bg-[var(--primary-light)] rounded-xl p-6">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Custom Letter Selection
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Pick exactly which letters to practice. Focus on tricky letters
                 your child struggles with, or create themed sets (child&apos;s
                 name letters, sight word letters, or letter-of-the-week sets).
               </p>
-              <p className="text-xs text-gray-500 mb-3">
+              <p className="text-xs text-[var(--muted-light)] mb-3">
                 Select any combination of A-Z for a custom worksheet
               </p>
               <Link
                 href="/letter-tracing#generator"
-                className="text-blue-600 font-medium text-sm hover:underline"
+                className="text-[var(--primary)] font-medium text-sm hover:underline"
               >
                 Build custom set &rarr;
               </Link>
@@ -200,10 +200,10 @@ export default function AlphabetTracingWorksheetsPage() {
       {/* Content */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             How to Use Alphabet Tracing Worksheets
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               Alphabet tracing worksheets are most effective when used
               systematically. Rather than working through all 26 letters at once,
@@ -231,10 +231,10 @@ export default function AlphabetTracingWorksheetsPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Alphabet Learning Milestones
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ul className="list-disc list-inside space-y-2">
               <li>
                 <strong>Ages 3-4 (Preschool):</strong> Recognize and name
@@ -259,10 +259,10 @@ export default function AlphabetTracingWorksheetsPage() {
             </ul>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Why Multi-Page Alphabet Bundles Work
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               A complete alphabet worksheet bundle gives teachers and parents a
               ready-made resource for weeks of practice. Instead of generating
@@ -281,15 +281,15 @@ export default function AlphabetTracingWorksheetsPage() {
       {/* FAQ */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 What age should children start alphabet tracing worksheets?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Most children are ready to start tracing large uppercase letters
                 around age 3-4 (preschool). By age 4-5, they can trace all 26
                 uppercase letters independently. Lowercase letter tracing
@@ -297,10 +297,10 @@ export default function AlphabetTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Should children learn uppercase or lowercase letters first?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Start with uppercase letters. They use simpler strokes (mostly
                 straight lines and basic curves), making them easier for young
                 hands to form. Once children can write uppercase letters
@@ -309,10 +309,10 @@ export default function AlphabetTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 How many times should a child trace each letter?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Research suggests children need 3-5 repetitions per letter for
                 muscle memory to develop. Print multiple copies of each worksheet
                 and practice over several days rather than doing all repetitions
@@ -320,10 +320,10 @@ export default function AlphabetTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Are these alphabet tracing worksheets free to print?
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-[var(--muted)] text-sm">
                 Yes. You can generate and print alphabet tracing worksheets for
                 free with no sign-up required. Create full A-Z sets or select
                 specific letters for targeted practice, then download as a PDF.
@@ -336,10 +336,10 @@ export default function AlphabetTracingWorksheetsPage() {
       {/* CTA */}
       <section className="py-10 bg-purple-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">
             Print Your Alphabet Worksheets
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--muted)] mb-4">
             Generate a full A-Z alphabet tracing bundle or pick specific letters.
             Free PDF download, no sign-up required.
           </p>
@@ -355,7 +355,7 @@ export default function AlphabetTracingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -363,10 +363,10 @@ export default function AlphabetTracingWorksheetsPage() {
               href="/letter-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Letter Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Individual A-Z letter tracing sheets with stroke guides.
               </p>
             </Link>
@@ -374,10 +374,10 @@ export default function AlphabetTracingWorksheetsPage() {
               href="/number-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Number Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Numbers 0-9 and 0-20 tracing with formation guides.
               </p>
             </Link>
@@ -385,10 +385,10 @@ export default function AlphabetTracingWorksheetsPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
@@ -396,10 +396,10 @@ export default function AlphabetTracingWorksheetsPage() {
               href="/preschool-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Preschool Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Age-appropriate tracing for preschoolers ages 3-5.
               </p>
             </Link>
@@ -407,10 +407,10 @@ export default function AlphabetTracingWorksheetsPage() {
               href="/sight-word-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Sight Word Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Trace high-frequency sight words for reading readiness.
               </p>
             </Link>
@@ -418,10 +418,10 @@ export default function AlphabetTracingWorksheetsPage() {
               href="/cursive-name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Cursive Name Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Practice writing names in connected cursive letters.
               </p>
             </Link>
@@ -430,15 +430,15 @@ export default function AlphabetTracingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[var(--primary)]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

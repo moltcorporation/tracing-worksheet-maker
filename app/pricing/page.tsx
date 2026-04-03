@@ -52,7 +52,7 @@ export default function PricingPage() {
       <section className="relative overflow-hidden py-12 md:py-16">
         <div className="absolute top-10 left-[8%] w-12 h-12 rounded-full bg-pink-200 opacity-40 blur-sm" />
         <div className="absolute top-24 right-[12%] w-8 h-8 rounded-full bg-sky-200 opacity-50 blur-sm" />
-        <div className="absolute bottom-16 left-[15%] w-6 h-6 rounded-full bg-mint opacity-40 blur-sm" />
+        <div className="absolute bottom-16 left-[15%] w-6 h-6 rounded-full bg-[var(--mint)] opacity-40 blur-sm" />
 
         <div className="max-w-3xl mx-auto px-4 text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-extrabold text-[#2d2235] mb-4">

@@ -92,7 +92,7 @@ const faqJsonLd = {
 
 export default function PreschoolTracingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -109,17 +109,17 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-green-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">Preschool Tracing Worksheets</span>
+            <span className="text-[var(--foreground)]">Preschool Tracing Worksheets</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Preschool Tracing Worksheets
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Printable tracing worksheets designed for preschoolers ages 3-5.
             Letters, numbers, shapes, and lines with dotted outlines and writing
             guides to build early handwriting skills.
@@ -136,10 +136,10 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Worksheet Types for Preschool */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Tracing Worksheets for Preschool
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-[var(--muted)] mb-8">
             Preschoolers learn best when activities match their developmental
             stage. Our worksheets progress from simple line tracing to letters
             and numbers, building fine motor skills at each step.
@@ -150,10 +150,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/letter-tracing#generator"
               className="block bg-green-50 rounded-xl p-6 hover:shadow-md transition-shadow"
             >
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Letter Tracing for Preschool
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Start with uppercase letters — they use simpler strokes than
                 lowercase. Focus on letters in the child&apos;s name first, then
                 expand to the full alphabet. Large dotted outlines with
@@ -165,17 +165,17 @@ export default function PreschoolTracingWorksheetsPage() {
             </Link>
             <Link
               href="/number-tracing#generator"
-              className="block bg-blue-50 rounded-xl p-6 hover:shadow-md transition-shadow"
+              className="block bg-[var(--primary-light)] rounded-xl p-6 hover:shadow-md transition-shadow"
             >
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Number Tracing for Preschool
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Numbers 0-9 with formation guides showing stroke direction.
                 Start with 0-5 for younger preschoolers, then add 6-9 as
                 confidence builds. Pairs naturally with counting activities.
               </p>
-              <span className="text-blue-600 font-medium text-sm">
+              <span className="text-[var(--primary)] font-medium text-sm">
                 Create number worksheets &rarr;
               </span>
             </Link>
@@ -183,10 +183,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/name-tracing#generator"
               className="block bg-purple-50 rounded-xl p-6 hover:shadow-md transition-shadow"
             >
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Name Tracing for Preschool
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 The most motivating first tracing activity — their own name.
                 Type any name to generate custom dotted-letter worksheets.
                 Children learn letter shapes while practicing something
@@ -200,10 +200,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/alphabet-tracing-worksheets"
               className="block bg-orange-50 rounded-xl p-6 hover:shadow-md transition-shadow"
             >
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Shape &amp; Line Tracing
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Before letters come shapes. Circles, squares, triangles, and
                 zigzag lines build the pencil control preschoolers need for
                 letter formation. The foundation of all handwriting.
@@ -219,12 +219,12 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Developmental Guide */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             Preschool Tracing by Age
           </h2>
-          <div className="space-y-6 text-gray-600">
+          <div className="space-y-6 text-[var(--muted)]">
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Ages 3-3.5: Pre-Writing Skills
               </h3>
               <ul className="list-disc list-inside space-y-1 text-sm">
@@ -239,7 +239,7 @@ export default function PreschoolTracingWorksheetsPage() {
               </p>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Ages 3.5-4: Shape &amp; Letter Introduction
               </h3>
               <ul className="list-disc list-inside space-y-1 text-sm">
@@ -255,7 +255,7 @@ export default function PreschoolTracingWorksheetsPage() {
               </p>
             </div>
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="font-bold text-gray-800 text-lg mb-2">
+              <h3 className="font-bold text-[var(--foreground)] text-lg mb-2">
                 Ages 4-5: Letter &amp; Number Mastery
               </h3>
               <ul className="list-disc list-inside space-y-1 text-sm">
@@ -272,10 +272,10 @@ export default function PreschoolTracingWorksheetsPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Tips for Preschool Tracing Success
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ol className="list-decimal list-inside space-y-2">
               <li>
                 <strong>Start with their name</strong> — it&apos;s the most
@@ -302,15 +302,15 @@ export default function PreschoolTracingWorksheetsPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 What tracing worksheets are best for preschoolers?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Start with line tracing (straight lines, curves, zigzags) to
                 build pencil control. Then move to shapes (circles, squares,
                 triangles), uppercase letters in their name, and numbers 0-5.
@@ -318,10 +318,10 @@ export default function PreschoolTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 At what age should a child start tracing worksheets?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Most children are ready for basic line tracing around age 3. By
                 age 4, they can trace simple shapes and large letters. Every
                 child develops differently — if they can hold a crayon and follow
@@ -329,10 +329,10 @@ export default function PreschoolTracingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 How do I make tracing worksheets for preschool?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Use our free tracing worksheet generator. Type any name, word,
                 or select letters and numbers. The tool creates dotted outlines
                 with writing guides sized for young learners. Download as a PDF
@@ -346,10 +346,10 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* CTA */}
       <section className="py-10 bg-green-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">
             Print Preschool Tracing Worksheets
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--muted)] mb-4">
             Create custom tracing worksheets for your preschooler — names,
             letters, and numbers with age-appropriate dotted outlines. Free PDF
             download, no sign-up required.
@@ -366,7 +366,7 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -374,10 +374,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/letter-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Letter Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Individual A-Z letter tracing sheets with stroke guides.
               </p>
             </Link>
@@ -385,10 +385,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/alphabet-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Alphabet Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Complete A-Z alphabet sets for systematic practice.
               </p>
             </Link>
@@ -396,10 +396,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/number-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Number Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Numbers 0-9 and 0-20 tracing with formation guides.
               </p>
             </Link>
@@ -407,10 +407,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
@@ -418,10 +418,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/cursive-name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Cursive Name Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Cursive handwriting practice with connected letter tracing.
               </p>
             </Link>
@@ -429,10 +429,10 @@ export default function PreschoolTracingWorksheetsPage() {
               href="/sight-word-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Sight Word Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Dolch and Fry sight word tracing for kindergarten and first grade.
               </p>
             </Link>
@@ -441,15 +441,15 @@ export default function PreschoolTracingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[var(--primary)]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>
