@@ -109,9 +109,9 @@ export default function ProUpgradeModal({
 
         {/* Header */}
         <div className="text-center mb-5">
-          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+          <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
             <svg
-              className="w-6 h-6 text-blue-600"
+              className="w-6 h-6 text-[#7c3aed]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -124,7 +124,7 @@ export default function ProUpgradeModal({
               />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-gray-900">Upgrade to Pro</h2>
+          <h2 className="text-xl font-extrabold text-[#2d2235]">Upgrade to Pro</h2>
           {featureName && (
             <p className="text-sm text-gray-500 mt-1">
               Unlock <span className="font-medium">{featureName}</span> and all
@@ -153,7 +153,7 @@ export default function ProUpgradeModal({
             <button
               type="submit"
               disabled={verifying}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors"
+              className="w-full bg-gradient-to-r from-[#7c3aed] to-[#ec4899] text-white py-3 px-4 rounded-xl font-bold hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               {verifying ? "Verifying..." : "Verify Access"}
             </button>
@@ -210,7 +210,7 @@ export default function ProUpgradeModal({
               href={selectedPlan.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              className="block w-full text-center bg-gradient-to-r from-[#7c3aed] to-[#ec4899] text-white py-3 px-4 rounded-xl font-bold hover:shadow-lg transition-all"
             >
               Subscribe Now
             </a>
@@ -218,7 +218,7 @@ export default function ProUpgradeModal({
             {/* Already Pro? */}
             <button
               onClick={() => setShowVerify(true)}
-              className="w-full mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium"
+              className="w-full mt-3 text-sm text-[#7c3aed] hover:text-[#6d28d9] font-semibold"
             >
               Already Pro? Verify access
             </button>
@@ -238,7 +238,7 @@ export default function ProUpgradeModal({
                 ].map((feature) => (
                   <li key={feature} className="flex items-center gap-1.5">
                     <svg
-                      className="w-3.5 h-3.5 text-blue-500 shrink-0"
+                      className="w-3.5 h-3.5 text-[#7c3aed] shrink-0"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
