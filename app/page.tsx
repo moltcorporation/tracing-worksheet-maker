@@ -131,9 +131,9 @@ function NotebookIcon({ className }: { className?: string }) {
 }
 
 /* Star SVG icon */
-function StarIcon({ className }: { className?: string }) {
+function StarIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg className={className} viewBox="0 0 48 48" fill="none">
+    <svg className={className} style={style} viewBox="0 0 48 48" fill="none">
       <path d="M24 6l5.5 11.5L42 19l-9 8.5L35 40 24 34l-11 6 2-12.5-9-8.5 12.5-1.5L24 6z" fill="#FDE68A" stroke="#D97706" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
@@ -201,56 +201,67 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      {/* Hero Section — warm, playful, education-focused */}
-      <section className="relative overflow-hidden pb-12 pt-10 md:pt-14 md:pb-16">
-        {/* Decorative floating shapes */}
-        <div className="absolute top-10 left-[8%] w-12 h-12 rounded-full bg-pink-200 opacity-40 blur-sm" />
-        <div className="absolute top-24 right-[12%] w-8 h-8 rounded-full bg-sky-200 opacity-50 blur-sm" />
-        <div className="absolute bottom-16 left-[15%] w-6 h-6 rounded-full bg-mint opacity-40 blur-sm" />
-        <div className="absolute top-16 right-[30%] w-10 h-10 rounded-full bg-amber-200 opacity-30 blur-sm" />
+      {/* Hero Section — vibrant, playful, education-focused */}
+      <section className="relative overflow-hidden pb-16 pt-12 md:pt-20 md:pb-20" style={{ background: "linear-gradient(135deg, #fef3f0 0%, #f0f9ff 50%, #fef3c7 100%)" }}>
+        {/* Decorative floating shapes with more vibrant colors */}
+        <div className="absolute top-8 left-[5%] w-16 h-16 rounded-full bg-gradient-to-br from-pink-300 to-rose-200 opacity-50 blur-md animate-bounce" style={{ animationDuration: "4s" }} />
+        <div className="absolute top-32 right-[10%] w-12 h-12 rounded-full bg-gradient-to-br from-cyan-300 to-blue-300 opacity-60 blur-md animate-bounce" style={{ animationDuration: "5s", animationDelay: "0.5s" }} />
+        <div className="absolute bottom-20 left-[10%] w-14 h-14 rounded-full bg-gradient-to-br from-yellow-300 to-amber-300 opacity-50 blur-md" style={{ animation: "float 6s ease-in-out infinite" }} />
+        <div className="absolute top-20 right-[25%] w-10 h-10 rounded-full bg-gradient-to-br from-teal-300 to-green-300 opacity-40 blur-md animate-bounce" style={{ animationDuration: "6s", animationDelay: "1s" }} />
+
+        {/* Animated background pattern */}
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+          }
+        `}</style>
 
         <div className="max-w-5xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Left — copy */}
-            <div className="text-center md:text-left">
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 border border-amber-200 px-3 py-1 text-xs font-semibold text-amber-800 mb-4">
-                <StarIcon className="w-4 h-4" />
-                Loved by parents &amp; teachers
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left — copy with stronger visual hierarchy */}
+            <div className="text-center md:text-left order-2 md:order-1">
+              <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-yellow-100 to-orange-100 border-2 border-yellow-300 px-4 py-2 text-xs font-bold text-yellow-900 mb-5">
+                <StarIcon className="w-4 h-4 animate-spin" style={{ animationDuration: "3s" }} />
+                Loved by 1000s of parents &amp; teachers
               </div>
-              <h1 className="text-3xl md:text-[2.6rem] md:leading-tight font-extrabold text-[#2d2235] mb-4">
-                Free Tracing<br />Worksheet Maker
+              <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 mb-5 leading-tight">
+                Free Tracing<br />Worksheets for<br />Kids
               </h1>
-              <p className="text-base md:text-lg text-[#6b5b7b] max-w-md mb-6">
-                Create custom printable tracing worksheets for <strong>names</strong>,{" "}
-                <strong>letters A-Z</strong>, and <strong>numbers 0-9</strong>.
-                Dotted letters with writing guides — download as PDF instantly.
+              <p className="text-base md:text-lg text-gray-700 max-w-lg mb-7 leading-relaxed font-medium">
+                Create custom printable tracing worksheets in seconds. Perfect for <strong className="text-pink-600">names</strong>, <strong className="text-purple-600">letters A-Z</strong>, and <strong className="text-blue-600">numbers 0-9</strong>. Dotted letters with writing guides — download as PDF instantly.
               </p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-2 text-xs font-medium mb-6">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-green-50 border border-green-200 px-3 py-1.5 text-green-800">
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              <div className="flex flex-wrap justify-center md:justify-start gap-3 text-xs font-bold mb-8">
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-400 px-4 py-2 text-green-900">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   100% Free
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-50 border border-purple-200 px-3 py-1.5 text-purple-800">
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-400 px-4 py-2 text-purple-900">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   No Sign-up
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 border border-amber-200 px-3 py-1.5 text-amber-800">
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 border-2 border-blue-400 px-4 py-2 text-blue-900">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   Instant PDF
                 </span>
               </div>
               <a
                 href="#generator"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#ec4899] text-white font-bold px-6 py-3 text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
+                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white font-black px-7 py-4 text-base shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 hover:-translate-y-1"
               >
-                <PencilIcon className="w-5 h-5" />
-                Start Creating Worksheets
+                <PencilIcon className="w-6 h-6" />
+                Start Creating Worksheets Now
               </a>
             </div>
 
-            {/* Right — worksheet preview */}
-            <div className="hidden md:block">
-              <WorksheetPreview />
+            {/* Right — enhanced worksheet preview */}
+            <div className="hidden md:flex justify-center order-1 md:order-2">
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-pink-400 via-purple-400 to-blue-400 rounded-3xl blur-2xl opacity-30" />
+                <div className="relative">
+                  <WorksheetPreview />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -261,130 +272,137 @@ export default function Home() {
         <TracingWorksheet />
       </section>
 
-      {/* Worksheet Types — with custom icons */}
-      <section className="py-12" style={{ background: "#fffbf7" }}>
+      {/* Worksheet Types — with vibrant, distinctive cards */}
+      <section className="py-16" style={{ background: "linear-gradient(to bottom, #ffffff, #faf5ff)" }}>
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-extrabold text-[#2d2235] text-center mb-2">
-            Tracing Worksheets for Every Learning Need
+          <h2 className="text-3xl md:text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 mb-3">
+            Choose Your Worksheet Type
           </h2>
-          <p className="text-sm text-[#9889a8] text-center mb-8">
-            Pick a worksheet type and start creating in seconds
+          <p className="text-base text-gray-600 text-center mb-12 font-medium">
+            Pick any type and create unlimited worksheets in seconds
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             <Link
               href="/name-tracing"
-              className="group block rounded-2xl border-2 border-[#e9ddf5] bg-white p-6 text-center hover:border-[#7c3aed] hover:shadow-lg transition-all"
+              className="group relative block rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <PencilIcon className="w-10 h-10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-yellow-300 via-orange-300 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative rounded-3xl border-3 border-yellow-200 bg-gradient-to-br from-yellow-50 to-orange-50 p-8 text-center hover:border-yellow-400 transition-colors">
+                <div className="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-br from-yellow-200 to-orange-200 flex items-center justify-center group-hover:scale-125 transition-transform duration-300 shadow-lg">
+                  <PencilIcon className="w-11 h-11" />
+                </div>
+                <h3 className="font-black text-2xl text-gray-900 mb-2">
+                  Name Tracing
+                </h3>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+                  Type any name and create a custom tracing worksheet. Perfect for personalizing practice.
+                </p>
+                <span className="inline-block text-yellow-700 text-sm font-black group-hover:translate-x-2 transition-transform">
+                  Start Now &rarr;
+                </span>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-lg">
-                Name Tracing
-              </h3>
-              <p className="text-sm text-[#6b5b7b] mt-2">
-                Type any name and generate a custom tracing worksheet with dotted
-                letters and writing guides.
-              </p>
-              <span className="inline-block mt-3 text-[#7c3aed] text-sm font-semibold group-hover:translate-x-1 transition-transform">
-                Create name worksheets &rarr;
-              </span>
             </Link>
             <Link
               href="/letter-tracing"
-              className="group block rounded-2xl border-2 border-[#e9ddf5] bg-white p-6 text-center hover:border-[#7c3aed] hover:shadow-lg transition-all"
+              className="group relative block rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <ABCIcon className="w-10 h-10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-300 via-pink-300 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative rounded-3xl border-3 border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 p-8 text-center hover:border-purple-400 transition-colors">
+                <div className="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center group-hover:scale-125 transition-transform duration-300 shadow-lg">
+                  <ABCIcon className="w-11 h-11" />
+                </div>
+                <h3 className="font-black text-2xl text-gray-900 mb-2">
+                  Letter Tracing
+                </h3>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+                  A-Z letter practice with stroke guides. Full alphabet or pick specific letters.
+                </p>
+                <span className="inline-block text-purple-700 text-sm font-black group-hover:translate-x-2 transition-transform">
+                  Start Now &rarr;
+                </span>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-lg">
-                Letter Tracing
-              </h3>
-              <p className="text-sm text-[#6b5b7b] mt-2">
-                A-Z letter tracing worksheets with stroke guides. Choose specific
-                letters or practice the full alphabet.
-              </p>
-              <span className="inline-block mt-3 text-[#7c3aed] text-sm font-semibold group-hover:translate-x-1 transition-transform">
-                Create letter worksheets &rarr;
-              </span>
             </Link>
             <Link
               href="/number-tracing"
-              className="group block rounded-2xl border-2 border-[#e9ddf5] bg-white p-6 text-center hover:border-[#7c3aed] hover:shadow-lg transition-all"
+              className="group relative block rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-300"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-green-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <NotebookIcon className="w-10 h-10" />
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-300 via-blue-300 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative rounded-3xl border-3 border-blue-200 bg-gradient-to-br from-blue-50 to-cyan-50 p-8 text-center hover:border-blue-400 transition-colors">
+                <div className="w-20 h-20 mx-auto mb-5 rounded-3xl bg-gradient-to-br from-blue-200 to-cyan-200 flex items-center justify-center group-hover:scale-125 transition-transform duration-300 shadow-lg">
+                  <NotebookIcon className="w-11 h-11" />
+                </div>
+                <h3 className="font-black text-2xl text-gray-900 mb-2">
+                  Number Tracing
+                </h3>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">
+                  Numbers 0-9 with formation guides. Build number writing confidence.
+                </p>
+                <span className="inline-block text-blue-700 text-sm font-black group-hover:translate-x-2 transition-transform">
+                  Start Now &rarr;
+                </span>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-lg">
-                Number Tracing
-              </h3>
-              <p className="text-sm text-[#6b5b7b] mt-2">
-                Numbers 0-9 tracing worksheets with formation guides. Build
-                confidence with number writing practice.
-              </p>
-              <span className="inline-block mt-3 text-[#7c3aed] text-sm font-semibold group-hover:translate-x-1 transition-transform">
-                Create number worksheets &rarr;
-              </span>
             </Link>
           </div>
         </div>
       </section>
 
       {/* Why Parents & Teachers Love It */}
-      <section className="py-12">
+      <section className="py-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-extrabold text-[#2d2235] text-center mb-8">
-            Why Parents &amp; Teachers Love Our Worksheets
+          <h2 className="text-3xl md:text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-700 mb-3">
+            Why Teachers Love It
           </h2>
+          <p className="text-center text-gray-600 mb-12 font-medium">Everything you need to support early learners</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <svg className="w-7 h-7 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="rounded-3xl bg-gradient-to-br from-amber-100 to-amber-50 border-3 border-amber-300 p-6 text-center hover:shadow-xl transition-shadow hover:scale-105 duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-300 to-orange-300 flex items-center justify-center mx-auto mb-4 shadow-md">
+                <svg className="w-8 h-8 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-sm">
+              <h3 className="font-black text-gray-900 text-base mb-2">
                 Instant Generation
               </h3>
-              <p className="text-xs text-[#9889a8] mt-1">
-                Type, customize, and download in seconds. No waiting.
+              <p className="text-sm text-gray-700 leading-relaxed">
+                Type, customize, and download in seconds. No complex steps.
               </p>
             </div>
-            <div className="text-center p-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <svg className="w-7 h-7 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="rounded-3xl bg-gradient-to-br from-green-100 to-emerald-50 border-3 border-green-300 p-6 text-center hover:shadow-xl transition-shadow hover:scale-105 duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-400 flex items-center justify-center mx-auto mb-4 shadow-md">
+                <svg className="w-8 h-8 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-sm">
+              <h3 className="font-black text-gray-900 text-base mb-2">
                 Print-Ready PDFs
               </h3>
-              <p className="text-xs text-[#9889a8] mt-1">
-                US Letter size, crisp output that prints beautifully.
+              <p className="text-sm text-gray-700 leading-relaxed">
+                US Letter size, crisp output that prints perfectly every time.
               </p>
             </div>
-            <div className="text-center p-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <svg className="w-7 h-7 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="rounded-3xl bg-gradient-to-br from-purple-100 to-pink-50 border-3 border-purple-300 p-6 text-center hover:shadow-xl transition-shadow hover:scale-105 duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center mx-auto mb-4 shadow-md">
+                <svg className="w-8 h-8 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-sm">
+              <h3 className="font-black text-gray-900 text-base mb-2">
                 Fully Customizable
               </h3>
-              <p className="text-xs text-[#9889a8] mt-1">
-                Adjust letter size, rows, and writing guides to fit any level.
+              <p className="text-sm text-gray-700 leading-relaxed">
+                Adjust letter size, rows, and guides for any skill level.
               </p>
             </div>
-            <div className="text-center p-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center mx-auto mb-3 shadow-sm">
-                <svg className="w-7 h-7 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="rounded-3xl bg-gradient-to-br from-pink-100 to-rose-50 border-3 border-pink-300 p-6 text-center hover:shadow-xl transition-shadow hover:scale-105 duration-300">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-400 to-rose-400 flex items-center justify-center mx-auto mb-4 shadow-md">
+                <svg className="w-8 h-8 text-white font-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
-              <h3 className="font-bold text-[#2d2235] text-sm">
+              <h3 className="font-black text-gray-900 text-base mb-2">
                 Made for Kids
               </h3>
-              <p className="text-xs text-[#9889a8] mt-1">
+              <p className="text-sm text-gray-700 leading-relaxed">
                 Designed for ages 3-7 with proper letter formation guides.
               </p>
             </div>
@@ -393,11 +411,12 @@ export default function Home() {
       </section>
 
       {/* Social Proof Banner */}
-      <section className="py-6 bg-gradient-to-r from-[#7c3aed]/5 via-[#ec4899]/5 to-[#f59e0b]/5">
+      <section className="py-8 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <p className="text-sm font-semibold text-[#6b5b7b]">
-            Trusted by <span className="text-[#7c3aed] font-extrabold">thousands</span> of parents, teachers, and homeschoolers to create tracing worksheets every week
+          <p className="text-lg font-black text-white drop-shadow-lg">
+            Trusted by <span className="text-yellow-200">thousands</span> of parents, teachers, and homeschoolers
           </p>
+          <p className="text-white text-sm font-bold mt-2 opacity-95">Creating custom tracing worksheets every single week</p>
         </div>
       </section>
 
@@ -450,23 +469,23 @@ export default function Home() {
       </section>
 
       {/* More Teacher Tools */}
-      <section className="py-12" style={{ background: "#fffbf7" }}>
+      <section className="py-16" style={{ background: "linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%)" }}>
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-extrabold text-[#2d2235] text-center mb-6">
-            More Free Teacher Tools
+          <h2 className="text-3xl md:text-4xl font-black text-center text-gray-900 mb-10">
+            Explore More Teacher Tools
           </h2>
           <a
             href="https://classroomseatingchartmaker.com"
-            className="group block rounded-2xl border-2 border-[#e9ddf5] bg-white p-6 hover:shadow-lg hover:border-[#7c3aed] transition-all"
+            className="group block rounded-3xl border-4 border-yellow-400 bg-white p-8 hover:shadow-2xl hover:scale-105 transition-all duration-300"
           >
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center flex-shrink-0 shadow-sm">
+            <div className="flex items-start gap-6">
+              <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-indigo-300 to-indigo-200 flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform">
                 <svg
-                  className="w-7 h-7 text-indigo-600"
+                  className="w-10 h-10 text-white font-black"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                 >
                   <path
                     strokeLinecap="round"
@@ -475,16 +494,14 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <div>
-                <h3 className="font-bold text-[#2d2235] text-lg">
+              <div className="flex-1">
+                <h3 className="font-black text-2xl text-gray-900 mb-2">
                   Classroom Seating Chart Maker
                 </h3>
-                <p className="text-sm text-[#6b5b7b] mt-1">
-                  Create and manage classroom seating charts with drag-and-drop.
-                  Arrange desks, assign students, and print layouts — free for
-                  teachers.
+                <p className="text-base text-gray-700 mb-3 leading-relaxed font-medium">
+                  Create and manage classroom seating charts with drag-and-drop. Arrange desks, assign students, and print layouts — completely free for teachers.
                 </p>
-                <span className="inline-block mt-2 text-[#7c3aed] text-sm font-semibold group-hover:translate-x-1 transition-transform">
+                <span className="inline-block text-indigo-600 text-base font-black group-hover:translate-x-2 transition-transform">
                   Try it free &rarr;
                 </span>
               </div>

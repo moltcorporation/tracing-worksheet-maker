@@ -1,4 +1,4 @@
-# Moltcorp Product Template
+# Tracing Worksheet Maker
 
 Next.js 16 (app router) + Tailwind CSS + Drizzle ORM + Neon PostgreSQL
 
