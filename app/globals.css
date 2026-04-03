@@ -30,8 +30,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-nunito-sans);
+  --font-mono: monospace;
+  --font-heading: var(--font-nunito);
 }
 
 @media print {
@@ -46,9 +47,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  font-family: var(--font-nunito-sans, system-ui, -apple-system, sans-serif);
   line-height: 1.65;
   padding-top: 5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-nunito, var(--font-nunito-sans, system-ui));
 }
 
 /* Playful rainbow top bar */
@@ -64,75 +69,24 @@ body::before {
   z-index: 100;
 }
 
-/* ===== OVERRIDE ZINC PALETTE ===== */
-.bg-white { background-color: #fffbf7 !important; }
-.bg-zinc-50, .bg-gray-50 { background-color: var(--surface) !important; }
-.bg-zinc-100, .bg-gray-100 { background-color: var(--primary-light) !important; }
-.bg-zinc-900, .bg-gray-900 {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--pink) 100%) !important;
-  color: white !important;
-}
-.bg-zinc-900:hover, .hover\:bg-zinc-800:hover, .bg-gray-900:hover {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, #db2777 100%) !important;
+/* Worksheet preview card styling */
+.worksheet-preview {
+  background: white !important;
 }
 
-.text-zinc-900, .text-gray-900 { color: var(--foreground) !important; }
-.text-zinc-700, .text-gray-700 { color: #3d2d4a !important; }
-.text-zinc-600, .text-gray-600 { color: var(--muted) !important; }
-.text-zinc-500, .text-gray-500 { color: var(--muted-light) !important; }
-
-.border-zinc-200, .border-gray-200 { border-color: var(--border) !important; }
-.border-zinc-300, .border-gray-300 { border-color: var(--border-dark) !important; }
-
-.text-blue-600, .text-indigo-600 { color: var(--primary) !important; }
-.ring-2 { --tw-ring-color: var(--pink) !important; }
-
-/* ===== HEADINGS ===== */
-main > h1:first-of-type, h1.text-3xl, h1.text-4xl, h1.text-2xl {
-  font-weight: 800 !important;
-  letter-spacing: -0.5px;
+/* Smooth details/summary animation */
+details summary {
+  list-style: none;
+}
+details summary::-webkit-details-marker {
+  display: none;
 }
 
-/* Section heading pastel underline */
-.text-2xl.font-semibold, .text-xl.font-semibold, h2.text-2xl, h2.text-xl {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 8px;
-}
-.text-2xl.font-semibold::after, .text-xl.font-semibold::after, h2.text-2xl::after, h2.text-xl::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 48px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--pink), var(--peach));
-  border-radius: 2px;
-}
-
-/* ===== CARDS ===== */
-.rounded-lg.border, .rounded-xl.border {
-  border-color: var(--border) !important;
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.04);
-  transition: all 0.2s ease;
-}
-.rounded-lg.border:hover, .rounded-xl.border:hover {
-  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.08);
-  border-color: var(--primary) !important;
-  transform: translateY(-2px);
-}
-
-/* ===== PRICING ===== */
-.ring-2.ring-offset-2 {
-  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.12) !important;
-}
-
-/* ===== FOOTER ===== */
-footer, .border-t {
-  border-color: var(--border) !important;
-  background: var(--surface) !important;
+/* Card hover effects for worksheet type cards */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
 }
 
 @media (max-width: 640px) {
-  main > h1:first-of-type { font-size: 28px !important; }
+  h1 { font-size: 28px !important; }
 }
