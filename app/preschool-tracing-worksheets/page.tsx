@@ -92,7 +92,7 @@ const faqJsonLd = {
 
 export default function PreschoolTracingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fef7f0]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -110,13 +110,13 @@ export default function PreschoolTracingWorksheetsPage() {
       <section className="bg-gradient-to-b from-green-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+            <Link href="/" className="hover:text-[#7c3aed]">
               Home
             </Link>
             <span className="mx-2">/</span>
             <span className="text-gray-700">Preschool Tracing Worksheets</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#1e1b4b] mb-4">
             Free Preschool Tracing Worksheets
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
@@ -136,7 +136,7 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Worksheet Types for Preschool */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-6">
             Tracing Worksheets for Preschool
           </h2>
           <p className="text-gray-600 mb-8">
@@ -165,7 +165,7 @@ export default function PreschoolTracingWorksheetsPage() {
             </Link>
             <Link
               href="/number-tracing#generator"
-              className="block bg-blue-50 rounded-xl p-6 hover:shadow-md transition-shadow"
+              className="block bg-[#f5f3ff] rounded-xl p-6 hover:shadow-md transition-shadow"
             >
               <h3 className="font-bold text-gray-800 text-lg mb-2">
                 Number Tracing for Preschool
@@ -175,7 +175,7 @@ export default function PreschoolTracingWorksheetsPage() {
                 Start with 0-5 for younger preschoolers, then add 6-9 as
                 confidence builds. Pairs naturally with counting activities.
               </p>
-              <span className="text-blue-600 font-medium text-sm">
+              <span className="text-[#7c3aed] font-medium text-sm">
                 Create number worksheets &rarr;
               </span>
             </Link>
@@ -219,7 +219,7 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Developmental Guide */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-4">
             Preschool Tracing by Age
           </h2>
           <div className="space-y-6 text-gray-600">
@@ -272,7 +272,7 @@ export default function PreschoolTracingWorksheetsPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             Tips for Preschool Tracing Success
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -302,7 +302,7 @@ export default function PreschoolTracingWorksheetsPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
@@ -346,7 +346,7 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* CTA */}
       <section className="py-10 bg-green-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[#1e1b4b] mb-3">
             Print Preschool Tracing Worksheets
           </h2>
           <p className="text-gray-600 mb-4">
@@ -366,7 +366,7 @@ export default function PreschoolTracingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[#1e1b4b] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -441,15 +441,15 @@ export default function PreschoolTracingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
+      <footer className="border-t border-[#e9d5ff] bg-white">
         <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-[#7c3aed]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[#7c3aed]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

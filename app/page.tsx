@@ -165,17 +165,17 @@ function WorksheetPreview() {
       </div>
       {/* Simulated tracing lines */}
       <div className="space-y-3">
-        <div className="border-b-2 border-dashed border-gray-200 pb-2">
+        <div className="border-b-2 border-dashed border-[#e9d5ff] pb-2">
           <span className="text-2xl font-bold tracking-[0.3em] text-gray-200" style={{ fontFamily: "serif" }}>
             E m m a
           </span>
         </div>
-        <div className="border-b-2 border-dashed border-gray-200 pb-2">
+        <div className="border-b-2 border-dashed border-[#e9d5ff] pb-2">
           <span className="text-2xl font-bold tracking-[0.3em] text-gray-200" style={{ fontFamily: "serif" }}>
             E m m a
           </span>
         </div>
-        <div className="border-b-2 border-dashed border-gray-200 pb-2">
+        <div className="border-b-2 border-dashed border-[#e9d5ff] pb-2">
           <span className="text-2xl font-bold tracking-[0.3em] text-gray-150" style={{ fontFamily: "serif", opacity: 0.4 }}>
             E m m a
           </span>
@@ -293,7 +293,7 @@ export default function Home() {
               href="/letter-tracing"
               className="group block rounded-2xl border-2 border-[#e9ddf5] bg-white p-6 text-center hover:border-[#7c3aed] hover:shadow-lg transition-all"
             >
-              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#f5f3ff] flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ABCIcon className="w-10 h-10" />
               </div>
               <h3 className="font-bold text-[#2d2235] text-lg">

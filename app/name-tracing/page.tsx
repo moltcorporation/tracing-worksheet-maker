@@ -29,18 +29,18 @@ export const metadata: Metadata = {
 
 export default function NameTracingPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fef7f0]">
       {/* Hero */}
       <section className="bg-gradient-to-b from-blue-50 to-white py-10 md:py-14">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+            <Link href="/" className="hover:text-[#7c3aed]">
               Home
             </Link>
             <span className="mx-2">/</span>
             <span className="text-gray-700">Name Tracing</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#1e1b4b] mb-4">
             Free Name Tracing Worksheet Generator
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -59,7 +59,7 @@ export default function NameTracingPage() {
       {/* Content */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-4">
             How to Create a Name Tracing Worksheet
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -91,7 +91,7 @@ export default function NameTracingPage() {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             Tips for Teaching Name Writing
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -126,7 +126,7 @@ export default function NameTracingPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[#1e1b4b] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -169,15 +169,15 @@ export default function NameTracingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
+      <footer className="border-t border-[#e9d5ff] bg-white">
         <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-[#7c3aed]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[#7c3aed]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

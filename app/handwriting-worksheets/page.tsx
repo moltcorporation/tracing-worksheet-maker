@@ -150,7 +150,7 @@ export default function HandwritingWorksheets() {
           </Link>
           <Link
             href="/name-tracing"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="rounded-lg bg-[#7c3aed] px-4 py-2 text-sm font-medium text-white hover:bg-[#6d28d9]"
           >
             Create Worksheet
           </Link>
@@ -170,7 +170,7 @@ export default function HandwritingWorksheets() {
           <div className="mt-8">
             <Link
               href="/name-tracing"
-              className="rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
+              className="rounded-lg bg-[#7c3aed] px-6 py-3 text-base font-medium text-white hover:bg-[#6d28d9]"
             >
               Create Your Worksheet
             </Link>
@@ -192,15 +192,15 @@ export default function HandwritingWorksheets() {
               <Link
                 key={type.title}
                 href={type.href}
-                className="group rounded-xl border border-zinc-200 p-6 transition-colors hover:border-blue-300 dark:border-zinc-800 dark:hover:border-blue-700"
+                className="group rounded-xl border border-zinc-200 p-6 transition-colors hover:border-[#e9d5ff] dark:border-zinc-800 dark:hover:border-blue-700"
               >
-                <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                <h3 className="text-lg font-semibold text-zinc-900 group-hover:text-[#7c3aed] dark:text-white dark:group-hover:text-[#a78bfa]">
                   {type.title}
                 </h3>
                 <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
                   {type.desc}
                 </p>
-                <p className="mt-3 text-xs font-medium text-blue-600 dark:text-blue-400">
+                <p className="mt-3 text-xs font-medium text-[#7c3aed] dark:text-[#a78bfa]">
                   {type.audience}
                 </p>
               </Link>
@@ -225,21 +225,21 @@ export default function HandwritingWorksheets() {
               Start with{" "}
               <Link
                 href="/preschool-tracing-worksheets"
-                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+                className="text-[#7c3aed] underline hover:text-[#6d28d9] dark:text-[#a78bfa]"
               >
                 preschool tracing worksheets
               </Link>{" "}
               for pre-writing skills, then move to{" "}
               <Link
                 href="/alphabet-tracing-worksheets"
-                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+                className="text-[#7c3aed] underline hover:text-[#6d28d9] dark:text-[#a78bfa]"
               >
                 alphabet tracing
               </Link>{" "}
               for letter formation. Personalize practice with{" "}
               <Link
                 href="/name-tracing"
-                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+                className="text-[#7c3aed] underline hover:text-[#6d28d9] dark:text-[#a78bfa]"
               >
                 name tracing worksheets
               </Link>{" "}
@@ -264,7 +264,7 @@ export default function HandwritingWorksheets() {
               letterforms, then progress to common words and full sentences. Our{" "}
               <Link
                 href="/cursive-handwriting-worksheets"
-                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+                className="text-[#7c3aed] underline hover:text-[#6d28d9] dark:text-[#a78bfa]"
               >
                 cursive handwriting worksheets
               </Link>{" "}
@@ -362,7 +362,7 @@ export default function HandwritingWorksheets() {
           </p>
           <Link
             href="/name-tracing"
-            className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 text-base font-medium text-white hover:bg-blue-700"
+            className="mt-6 inline-block rounded-lg bg-[#7c3aed] px-6 py-3 text-base font-medium text-white hover:bg-[#6d28d9]"
           >
             Create Your Worksheet
           </Link>

@@ -100,7 +100,7 @@ const breadcrumbLd = {
 
 export default function NumberTracingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#fef7f0]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -118,13 +118,13 @@ export default function NumberTracingWorksheetsPage() {
       <section className="bg-gradient-to-b from-orange-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+            <Link href="/" className="hover:text-[#7c3aed]">
               Home
             </Link>
             <span className="mx-2">/</span>
             <span className="text-gray-700">Number Tracing Worksheets</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#1e1b4b] mb-4">
             Free Number Tracing Worksheets
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
@@ -144,7 +144,7 @@ export default function NumberTracingWorksheetsPage() {
       {/* Number Sets */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-6">
             Number Tracing Worksheet Sets
           </h2>
           <p className="text-gray-600 mb-8">
@@ -181,7 +181,7 @@ export default function NumberTracingWorksheetsPage() {
                 Generate 0-9 worksheets &rarr;
               </Link>
             </div>
-            <div className="bg-blue-50 rounded-xl p-6">
+            <div className="bg-[#f5f3ff] rounded-xl p-6">
               <h3 className="font-bold text-gray-800 text-lg mb-2">
                 Numbers 0-20 Set
               </h3>
@@ -197,7 +197,7 @@ export default function NumberTracingWorksheetsPage() {
               </p>
               <Link
                 href="/number-tracing#generator"
-                className="text-blue-600 font-medium text-sm hover:underline"
+                className="text-[#7c3aed] font-medium text-sm hover:underline"
               >
                 Generate 0-20 worksheets &rarr;
               </Link>
@@ -209,7 +209,7 @@ export default function NumberTracingWorksheetsPage() {
       {/* Content */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-4">
             Teaching Number Formation
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -250,7 +250,7 @@ export default function NumberTracingWorksheetsPage() {
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             From Letters to Numbers
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -276,7 +276,7 @@ export default function NumberTracingWorksheetsPage() {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             Number Writing Practice Tips
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -304,7 +304,7 @@ export default function NumberTracingWorksheetsPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mt-10 mb-4">
             Number Writing Milestones by Age
           </h2>
           <div className="space-y-4 text-gray-600">
@@ -334,7 +334,7 @@ export default function NumberTracingWorksheetsPage() {
       {/* FAQ */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[#1e1b4b] mb-6">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
@@ -389,7 +389,7 @@ export default function NumberTracingWorksheetsPage() {
       {/* CTA */}
       <section className="py-10 bg-orange-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[#1e1b4b] mb-3">
             Ready to Print Number Worksheets?
           </h2>
           <p className="text-gray-600 mb-4">
@@ -408,7 +408,7 @@ export default function NumberTracingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[#1e1b4b] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -461,15 +461,15 @@ export default function NumberTracingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
+      <footer className="border-t border-[#e9d5ff] bg-white">
         <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-[#7c3aed]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[#7c3aed]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

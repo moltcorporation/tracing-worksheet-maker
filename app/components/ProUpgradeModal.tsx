@@ -144,7 +144,7 @@ export default function ProUpgradeModal({
               value={verifyEmail}
               onChange={(e) => setVerifyEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#7c3aed] focus:border-transparent mb-3"
               required
             />
             {verifyError && (
@@ -176,7 +176,7 @@ export default function ProUpgradeModal({
                 onClick={() => setPlan("monthly")}
                 className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
                   plan === "monthly"
-                    ? "bg-white text-gray-900 shadow-sm"
+                    ? "bg-white text-[#1e1b4b] shadow-sm"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -186,7 +186,7 @@ export default function ProUpgradeModal({
                 onClick={() => setPlan("yearly")}
                 className={`flex-1 py-2 px-3 rounded-md text-sm font-medium transition-colors ${
                   plan === "yearly"
-                    ? "bg-white text-gray-900 shadow-sm"
+                    ? "bg-white text-[#1e1b4b] shadow-sm"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -199,7 +199,7 @@ export default function ProUpgradeModal({
 
             {/* Price */}
             <div className="text-center mb-5">
-              <span className="text-3xl font-bold text-gray-900">
+              <span className="text-3xl font-bold text-[#1e1b4b]">
                 {selectedPlan.price}
               </span>
               <span className="text-gray-500">/{selectedPlan.interval}</span>
