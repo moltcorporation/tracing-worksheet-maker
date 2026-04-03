@@ -7,14 +7,14 @@ const SITE_URL = "https://nametracingmaker.com";
 export const metadata: Metadata = {
   title: "Pricing — Tracing Worksheet Maker",
   description:
-    "Upgrade to Pro for unlimited custom worksheets, cursive styles, and advanced features. Start free, upgrade when you need more.",
+    "Upgrade to Pro for cursive handwriting styles. Start free, upgrade when you need more.",
   alternates: {
     canonical: `${SITE_URL}/pricing`,
   },
   openGraph: {
     title: "Pricing — Tracing Worksheet Maker",
     description:
-      "Upgrade to Pro for unlimited custom worksheets, cursive styles, and advanced features.",
+      "Upgrade to Pro for cursive handwriting styles.",
     type: "website",
     url: `${SITE_URL}/pricing`,
   },
@@ -59,7 +59,7 @@ export default function PricingPage() {
             Simple, Transparent Pricing
           </h1>
           <p className="text-lg text-[#6b5b7b] max-w-2xl mx-auto">
-            Start free with all the core features. Upgrade to Pro when you need advanced tools like cursive styles, bulk generation, and worksheet organization.
+            Start free with all the core features. Upgrade to Pro when you need cursive handwriting styles for a more natural writing experience.
           </p>
         </div>
       </section>
@@ -81,7 +81,7 @@ export default function PricingPage() {
               },
               {
                 q: "What features do I get with Pro?",
-                a: "Pro unlocks Cursive and D'Nealian writing styles, the ability to create custom words and sight words, bulk class generation for multiple students, worksheet organization and saving, and multiple line style options.",
+                a: "Pro unlocks Cursive writing style for a more natural handwriting experience.",
               },
               {
                 q: "Can I cancel my Pro subscription anytime?",

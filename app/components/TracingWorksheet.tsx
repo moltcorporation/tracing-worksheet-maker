@@ -6,8 +6,7 @@ import { jsPDF } from "jspdf";
 import ProUpgradeModal from "./ProUpgradeModal";
 
 type Mode = "name" | "letters" | "numbers";
-type HandwritingStyle = "print" | "cursive" | "dnealian";
-type LineStyle = "standard" | "wide-ruled" | "narrow-ruled" | "blank";
+type HandwritingStyle = "print" | "cursive";
 
 interface WorksheetSettings {
   mode: Mode;
@@ -19,9 +18,6 @@ interface WorksheetSettings {
   selectedLetters: string[];
   selectedNumbers: string[];
   handwritingStyle: HandwritingStyle;
-  lineStyle: LineStyle;
-  customWords: string;
-  bulkNames: string;
 }
 
 const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -56,9 +52,6 @@ const DEFAULT_SETTINGS: WorksheetSettings = {
   selectedLetters: [...UPPERCASE],
   selectedNumbers: [...DIGITS],
   handwritingStyle: "print",
-  lineStyle: "standard",
-  customWords: "",
-  bulkNames: "",
 };
 
 // Pro feature lock badge
@@ -440,7 +433,7 @@ function WorksheetPreview({
           fill="#bbb"
           textAnchor="middle"
         >
-          tracingworksheetmaker.com
+          nametracingmaker.com
         </text>
       </svg>
     </div>
@@ -763,135 +756,11 @@ function TracingWorksheetInner() {
                   />
                   Cursive
                 </label>
-                <label
-                  className={`flex items-center gap-2 text-sm ${isPro ? "text-gray-700" : "text-gray-400 cursor-pointer"}`}
-                  onClick={isPro ? undefined : () => openProModal("D'Nealian Style")}
-                >
-                  <input
-                    type="radio"
-                    name="handwritingStyle"
-                    checked={settings.handwritingStyle === "dnealian"}
-                    onChange={isPro ? () => updateSetting("handwritingStyle", "dnealian") : undefined}
-                    disabled={!isPro}
-                    className={isPro ? "text-[#7c3aed]" : "text-gray-300"}
-                  />
-                  D&apos;Nealian
-                  {!isPro && (
-                    <svg
-                      className="w-3.5 h-3.5 text-[#a78bfa]"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  )}
-                </label>
               </div>
             </div>
 
-            {/* Line Style - Pro Feature */}
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-semibold text-gray-700">
-                  Line Style
-                </label>
-                {!isPro && <ProBadge onClick={() => openProModal("Line Styles")} />}
-              </div>
-              <div className="space-y-2">
-                <label className="flex items-center gap-2 text-sm text-gray-700">
-                  <input
-                    type="radio"
-                    name="lineStyle"
-                    checked={settings.lineStyle === "standard"}
-                    onChange={() => updateSetting("lineStyle", "standard")}
-                    className="text-[#7c3aed]"
-                  />
-                  Standard
-                </label>
-                {(["wide-ruled", "narrow-ruled", "blank"] as const).map(
-                  (style) => (
-                    <label
-                      key={style}
-                      className={`flex items-center gap-2 text-sm ${isPro ? "text-gray-700" : "text-gray-400 cursor-pointer"}`}
-                      onClick={isPro ? undefined : () => openProModal("Line Styles")}
-                    >
-                      <input
-                        type="radio"
-                        name="lineStyle"
-                        checked={settings.lineStyle === style}
-                        onChange={isPro ? () => updateSetting("lineStyle", style) : undefined}
-                        disabled={!isPro}
-                        className={isPro ? "text-[#7c3aed]" : "text-gray-300"}
-                      />
-                      {style === "wide-ruled"
-                        ? "Wide-Ruled"
-                        : style === "narrow-ruled"
-                          ? "Narrow-Ruled"
-                          : "Blank (No Lines)"}
-                      {!isPro && (
-                        <svg
-                          className="w-3.5 h-3.5 text-[#a78bfa]"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                    </label>
-                  )
-                )}
-              </div>
-            </div>
 
-            {/* Custom Words - Pro Feature */}
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-semibold text-gray-700">
-                  Custom Words / Sight Words
-                </label>
-                {!isPro && <ProBadge onClick={() => openProModal("Custom Words")} />}
-              </div>
-              <textarea
-                disabled={!isPro}
-                placeholder="Enter sight words or vocabulary (one per line)..."
-                className={`w-full border border-[#e9d5ff] rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-[#fef7f0] text-gray-400 cursor-not-allowed"}`}
-                rows={3}
-                value={settings.customWords}
-                onChange={isPro ? (e) => updateSetting("customWords", e.target.value) : undefined}
-                onClick={isPro ? undefined : () => openProModal("Custom Words")}
-              />
-            </div>
 
-            {/* Bulk Class Generation - Pro Feature */}
-            <div className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-sm font-semibold text-gray-700">
-                  Bulk Class Generation
-                </label>
-                {!isPro && (
-                  <ProBadge
-                    onClick={() => openProModal("Bulk Class Generation")}
-                  />
-                )}
-              </div>
-              <textarea
-                disabled={!isPro}
-                placeholder="Paste student names (one per line) to generate all worksheets at once..."
-                className={`w-full border border-[#e9d5ff] rounded-lg px-3 py-2 text-sm resize-none ${isPro ? "bg-white text-gray-700" : "bg-[#fef7f0] text-gray-400 cursor-not-allowed"}`}
-                rows={3}
-                value={settings.bulkNames}
-                onChange={isPro ? (e) => updateSetting("bulkNames", e.target.value) : undefined}
-                onClick={isPro ? undefined : () => openProModal("Bulk Class Generation")}
-              />
-            </div>
 
             {/* Layout Settings */}
             <div className="bg-white rounded-lg shadow p-4 space-y-4">
@@ -945,29 +814,6 @@ function TracingWorksheetInner() {
               </div>
             </div>
 
-            {/* Save Worksheets - Pro Feature */}
-            <button
-              onClick={() => openProModal("Save & Organize Worksheets")}
-              className="w-full bg-white border border-[#e9d5ff] rounded-lg shadow p-3 flex items-center justify-center gap-2 text-sm text-gray-500 hover:bg-[#fef7f0] transition-colors"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                />
-              </svg>
-              Save Worksheet
-              <span className="inline-flex items-center gap-1 bg-[#f5f3ff] text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded-full">
-                PRO
-              </span>
-            </button>
 
             {/* Export Button */}
             <button
