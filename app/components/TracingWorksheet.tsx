@@ -89,46 +89,52 @@ function WritingLines({
   y,
   width,
   height,
+  lineStyle = "standard",
 }: {
   y: number;
   width: number;
   height: number;
+  lineStyle?: LineStyle;
 }) {
+  if (lineStyle === "blank") return null;
+
   const baseline = y + height;
-  const midline = y + height * 0.5;
   const topline = y;
 
+  if (lineStyle === "wide-ruled") {
+    // Wide-ruled: just baseline and topline, no midline, more spacing feel
+    return (
+      <g>
+        <line x1={0} y1={topline} x2={width} y2={topline} stroke="#ccc" strokeWidth={0.5} strokeDasharray="2,4" />
+        <line x1={0} y1={baseline} x2={width} y2={baseline} stroke="#666" strokeWidth={1} />
+      </g>
+    );
+  }
+
+  if (lineStyle === "narrow-ruled") {
+    // Narrow-ruled: topline, two midlines at 1/3 and 2/3, baseline
+    const third = y + height * 0.33;
+    const twoThird = y + height * 0.66;
+    return (
+      <g>
+        <line x1={0} y1={topline} x2={width} y2={topline} stroke="#ccc" strokeWidth={0.5} strokeDasharray="2,4" />
+        <line x1={0} y1={third} x2={width} y2={third} stroke="#bbb" strokeWidth={0.3} strokeDasharray="4,4" />
+        <line x1={0} y1={twoThird} x2={width} y2={twoThird} stroke="#bbb" strokeWidth={0.3} strokeDasharray="4,4" />
+        <line x1={0} y1={baseline} x2={width} y2={baseline} stroke="#666" strokeWidth={1} />
+      </g>
+    );
+  }
+
+  // Standard: topline, midline, baseline
+  const midline = y + height * 0.5;
   return (
     <g>
       {/* Top line - dotted */}
-      <line
-        x1={0}
-        y1={topline}
-        x2={width}
-        y2={topline}
-        stroke="#ccc"
-        strokeWidth={0.5}
-        strokeDasharray="2,4"
-      />
+      <line x1={0} y1={topline} x2={width} y2={topline} stroke="#ccc" strokeWidth={0.5} strokeDasharray="2,4" />
       {/* Midline - dashed */}
-      <line
-        x1={0}
-        y1={midline}
-        x2={width}
-        y2={midline}
-        stroke="#aaa"
-        strokeWidth={0.5}
-        strokeDasharray="6,4"
-      />
+      <line x1={0} y1={midline} x2={width} y2={midline} stroke="#aaa" strokeWidth={0.5} strokeDasharray="6,4" />
       {/* Baseline - solid */}
-      <line
-        x1={0}
-        y1={baseline}
-        x2={width}
-        y2={baseline}
-        stroke="#666"
-        strokeWidth={1}
-      />
+      <line x1={0} y1={baseline} x2={width} y2={baseline} stroke="#666" strokeWidth={1} />
     </g>
   );
 }
@@ -234,6 +240,7 @@ function WorksheetRow({
   showGuideLines,
   showStrokeGuides,
   handwritingStyle = "print",
+  lineStyle = "standard",
 }: {
   chars: string[];
   y: number;
@@ -243,6 +250,7 @@ function WorksheetRow({
   showGuideLines: boolean;
   showStrokeGuides?: boolean;
   handwritingStyle?: HandwritingStyle;
+  lineStyle?: LineStyle;
 }) {
   const padding = 20;
   const usableWidth = width - padding * 2;
@@ -254,7 +262,7 @@ function WorksheetRow({
   return (
     <g>
       {showGuideLines && (
-        <WritingLines y={y} width={width} height={rowHeight} />
+        <WritingLines y={y} width={width} height={rowHeight} lineStyle={lineStyle} />
       )}
       {chars.map((char, i) => {
         const cx = padding + i * charSpacing + charSpacing / 2;
@@ -282,8 +290,28 @@ function WorksheetRow({
 
 // Generate rows for worksheet based on mode
 function generateRows(settings: WorksheetSettings): string[][] {
-  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage } =
+  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage, customWords, bulkNames } =
     settings;
+
+  // If custom words are provided (Pro), use them instead of the normal mode
+  if (customWords.trim()) {
+    const words = customWords.split("\n").map(w => w.trim()).filter(Boolean);
+    const rows: string[][] = [];
+    for (let i = 0; i < Math.min(rowsPerPage, words.length); i++) {
+      rows.push(words[i].toUpperCase().split(""));
+    }
+    return rows;
+  }
+
+  // If bulk names are provided (Pro) in name mode, generate one row per name
+  if (bulkNames.trim() && mode === "name") {
+    const names = bulkNames.split("\n").map(n => n.trim()).filter(Boolean);
+    const rows: string[][] = [];
+    for (const name of names.slice(0, rowsPerPage)) {
+      rows.push(name.toUpperCase().split(""));
+    }
+    return rows;
+  }
 
   switch (mode) {
     case "name": {
@@ -347,12 +375,15 @@ function WorksheetPreview({
   const usableHeight = pageHeight - margin * 2 - headerHeight;
   const rowHeight = usableHeight / settings.rowsPerPage;
 
-  const title =
-    settings.mode === "name"
-      ? `Trace: ${settings.nameText || "..."}`
-      : settings.mode === "letters"
-        ? "Letter Tracing Worksheet"
-        : "Number Tracing Worksheet";
+  const title = settings.customWords.trim()
+    ? "Sight Word Tracing Worksheet"
+    : settings.bulkNames.trim()
+      ? "Class Name Tracing Worksheet"
+      : settings.mode === "name"
+        ? `Trace: ${settings.nameText || "..."}`
+        : settings.mode === "letters"
+          ? "Letter Tracing Worksheet"
+          : "Number Tracing Worksheet";
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -427,6 +458,7 @@ function WorksheetPreview({
               showGuideLines={settings.showGuideLines}
               showStrokeGuides={i === 0}
               handwritingStyle={settings.handwritingStyle}
+              lineStyle={settings.lineStyle}
             />
           ))}
         </g>
@@ -598,7 +630,10 @@ function TracingWorksheetInner() {
 
   const rows = generateRows(settings);
   const hasContent =
-    settings.mode !== "name" || settings.nameText.trim().length > 0;
+    settings.customWords.trim().length > 0 ||
+    settings.bulkNames.trim().length > 0 ||
+    settings.mode !== "name" ||
+    settings.nameText.trim().length > 0;
 
   return (
     <div className="bg-gray-50">
