@@ -471,12 +471,33 @@ function TracingWorksheetInner() {
   const [proFeatureName, setProFeatureName] = useState("");
   const [fontDataUrl, setFontDataUrl] = useState<string | undefined>();
   const [isPro, setIsPro] = useState(false);
+  const [isCheckingLicense, setIsCheckingLicense] = useState(true);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Check for existing Pro access on mount
+  // Check for existing Pro access on mount via API
   useEffect(() => {
-    const proEmail = localStorage.getItem("pro_email");
-    if (proEmail) setIsPro(true);
+    const checkProAccess = async () => {
+      setIsCheckingLicense(true);
+      try {
+        const proEmail = localStorage.getItem("pro_email");
+        if (!proEmail) {
+          setIsPro(false);
+          return;
+        }
+
+        // Verify Pro status server-side
+        const response = await fetch(`/api/license?email=${encodeURIComponent(proEmail)}`);
+        const data = await response.json();
+        setIsPro(data.pro === true);
+      } catch (error) {
+        console.error("Failed to check license:", error);
+        setIsPro(false);
+      } finally {
+        setIsCheckingLicense(false);
+      }
+    };
+
+    checkProAccess();
   }, []);
 
   // Pre-load cursive font data for SVG embedding
@@ -526,9 +547,18 @@ function TracingWorksheetInner() {
     setShowProModal(true);
   }, [isPro]);
 
-  const handleProVerified = useCallback((email: string) => {
-    localStorage.setItem("pro_email", email);
-    setIsPro(true);
+  const handleProVerified = useCallback(async (email: string) => {
+    try {
+      // Verify Pro status server-side before storing
+      const response = await fetch(`/api/license?email=${encodeURIComponent(email)}`);
+      const data = await response.json();
+      if (data.pro === true) {
+        localStorage.setItem("pro_email", email);
+        setIsPro(true);
+      }
+    } catch (error) {
+      console.error("Failed to verify Pro access:", error);
+    }
   }, []);
 
   const exportPDF = useCallback(async () => {
