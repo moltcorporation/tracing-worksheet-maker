@@ -30,21 +30,21 @@ export const metadata: Metadata = {
 
 export default function LetterTracingPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       {/* Hero */}
       <section className="bg-gradient-to-b from-green-50 to-white py-10 md:py-14">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">Letter Tracing</span>
+            <span className="text-[var(--foreground)]">Letter Tracing</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Letter Tracing Worksheets
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto">
             Create printable A-Z letter tracing worksheets with dotted letters
             and stroke guides. Choose specific letters or practice the full
             alphabet. Download as PDF instantly.
@@ -60,10 +60,10 @@ export default function LetterTracingPage() {
       {/* Content */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             Printable Alphabet Tracing Worksheets
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <p>
               Letter tracing is a foundational skill for early literacy. Our free
               worksheet generator creates custom A-Z tracing sheets that help
@@ -77,10 +77,10 @@ export default function LetterTracingPage() {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             How to Use Letter Tracing Worksheets
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ol className="list-decimal list-inside space-y-2">
               <li>
                 Select <strong>&quot;Letters&quot;</strong> mode in the generator
@@ -105,10 +105,10 @@ export default function LetterTracingPage() {
             </p>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Teaching the Alphabet: Age Guidelines
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ul className="list-disc list-inside space-y-2">
               <li>
                 <strong>Ages 3-4 (Preschool):</strong> Focus on letter
@@ -134,7 +134,7 @@ export default function LetterTracingPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -142,10 +142,10 @@ export default function LetterTracingPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets for your child.
               </p>
             </Link>
@@ -153,10 +153,10 @@ export default function LetterTracingPage() {
               href="/number-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Number Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Numbers 0-9 tracing practice with formation guides.
               </p>
             </Link>
@@ -165,15 +165,15 @@ export default function LetterTracingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[var(--primary)]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

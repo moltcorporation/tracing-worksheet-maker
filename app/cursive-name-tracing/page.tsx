@@ -108,7 +108,7 @@ const faqJsonLd = {
 
 export default function CursiveNameTracingPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -125,17 +125,17 @@ export default function CursiveNameTracingPage() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-purple-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">Cursive Name Tracing</span>
+            <span className="text-[var(--foreground)]">Cursive Name Tracing</span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Cursive Name Tracing Generator
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Create printable cursive name tracing worksheets with connected
             letters and writing guides. Type any name and download a
             practice sheet as PDF instantly.
@@ -152,37 +152,37 @@ export default function CursiveNameTracingPage() {
       {/* Why Cursive */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Why Practice Cursive Name Tracing?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-purple-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">Personal Connection</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">Personal Connection</h3>
+              <p className="text-sm text-[var(--muted)]">
                 Children are naturally motivated to write their own name.
                 Starting cursive practice with their name builds confidence
                 and gives them a personal reason to learn connected letter forms.
               </p>
             </div>
             <div className="bg-purple-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">Motor Skill Development</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">Motor Skill Development</h3>
+              <p className="text-sm text-[var(--muted)]">
                 Cursive writing develops fine motor control and hand-eye
                 coordination. The flowing, connected strokes build muscle
                 memory that improves overall handwriting fluency.
               </p>
             </div>
             <div className="bg-purple-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">Brain Benefits</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">Brain Benefits</h3>
+              <p className="text-sm text-[var(--muted)]">
                 Research shows cursive writing activates different brain
                 regions than print. It supports reading comprehension, memory
                 retention, and cognitive development in young learners.
               </p>
             </div>
             <div className="bg-purple-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">Practical Skill</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">Practical Skill</h3>
+              <p className="text-sm text-[var(--muted)]">
                 A cursive signature remains essential for legal documents,
                 checks, and official forms. Learning cursive early gives
                 children a skill they will use throughout their lives.
@@ -195,7 +195,7 @@ export default function CursiveNameTracingPage() {
       {/* How It Works */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             How to Create Cursive Name Tracing Worksheets
           </h2>
           <div className="space-y-4">
@@ -204,8 +204,8 @@ export default function CursiveNameTracingPage() {
                 1
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">Type a name or word</h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <h3 className="font-semibold text-[var(--foreground)]">Type a name or word</h3>
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Enter any name, word, or short phrase you want children to
                   practice in cursive. Our generator handles uppercase and
                   lowercase letters.
@@ -217,8 +217,8 @@ export default function CursiveNameTracingPage() {
                 2
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">Choose your cursive style</h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <h3 className="font-semibold text-[var(--foreground)]">Choose your cursive style</h3>
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Select from dotted cursive letters with connected strokes.
                   Adjust the size and number of practice rows to match your
                   student&apos;s level.
@@ -230,8 +230,8 @@ export default function CursiveNameTracingPage() {
                 3
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">Download and print</h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <h3 className="font-semibold text-[var(--foreground)]">Download and print</h3>
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Download your worksheet as a print-ready PDF on US Letter
                   paper. Print as many copies as you need for repeated practice.
                 </p>
@@ -252,10 +252,10 @@ export default function CursiveNameTracingPage() {
       {/* Tips */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             Tips for Teaching Cursive Handwriting
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ol className="list-decimal list-inside space-y-2">
               <li>
                 <strong>Start with their name</strong> — children are most
@@ -280,12 +280,12 @@ export default function CursiveNameTracingPage() {
             </ol>
           </div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mt-10 mb-4">
             Cursive Letter Groups by Difficulty
           </h2>
           <div className="space-y-3">
             <div className="bg-green-50 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-800 mb-1">
+              <h3 className="font-semibold text-[var(--foreground)] mb-1">
                 Easiest Cursive Letters
               </h3>
               <p className="text-sm">
@@ -294,7 +294,7 @@ export default function CursiveNameTracingPage() {
               </p>
             </div>
             <div className="bg-yellow-50 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-800 mb-1">
+              <h3 className="font-semibold text-[var(--foreground)] mb-1">
                 Intermediate Cursive Letters
               </h3>
               <p className="text-sm">
@@ -303,7 +303,7 @@ export default function CursiveNameTracingPage() {
               </p>
             </div>
             <div className="bg-orange-50 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-800 mb-1">
+              <h3 className="font-semibold text-[var(--foreground)] mb-1">
                 Advanced Cursive Letters
               </h3>
               <p className="text-sm">
@@ -318,15 +318,15 @@ export default function CursiveNameTracingPage() {
       {/* FAQ */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] text-center mb-8">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 What is cursive name tracing?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Cursive name tracing worksheets let children practice writing
                 their name in connected cursive letters. Each worksheet shows
                 the name in dotted cursive with writing guidelines so children
@@ -335,10 +335,10 @@ export default function CursiveNameTracingPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 What age should children start cursive handwriting?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Most children begin learning cursive in 2nd or 3rd grade (ages
                 7-9), after mastering print handwriting. However, some programs
                 introduce cursive earlier. Our worksheets work for any age
@@ -346,10 +346,10 @@ export default function CursiveNameTracingPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 How do I create a cursive name tracing worksheet?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Use our name tracing generator &mdash; type any name, select
                 the cursive font style, customize the size and number of
                 practice rows, then download as a print-ready PDF. No account
@@ -357,20 +357,20 @@ export default function CursiveNameTracingPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Can I trace full sentences in cursive?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Yes! Our generator supports names, words, and short phrases.
                 Type any text you want children to practice in cursive and
                 generate a tracing worksheet instantly.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Are cursive tracing worksheets really free?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Yes, the core cursive name tracing generator is completely free
                 with no sign-up required. Generate unlimited cursive worksheets
                 and download them as PDFs.
@@ -383,10 +383,10 @@ export default function CursiveNameTracingPage() {
       {/* CTA */}
       <section className="py-10 bg-purple-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">
             Ready to Practice Cursive?
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--muted)] mb-4">
             Generate custom cursive name tracing worksheets in seconds. Type
             any name, download as PDF, and print.
           </p>
@@ -402,7 +402,7 @@ export default function CursiveNameTracingPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -410,10 +410,10 @@ export default function CursiveNameTracingPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets in print or cursive.
               </p>
             </Link>
@@ -421,10 +421,10 @@ export default function CursiveNameTracingPage() {
               href="/letter-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Letter Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Printable A-Z letter tracing with stroke guides and writing lines.
               </p>
             </Link>
@@ -432,10 +432,10 @@ export default function CursiveNameTracingPage() {
               href="/alphabet-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Alphabet Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Full alphabet sets with uppercase and lowercase options.
               </p>
             </Link>
@@ -444,15 +444,15 @@ export default function CursiveNameTracingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
           <span className="mx-2">&middot;</span>
           From the makers of{" "}
-          <a href="https://classroomseatingchartmaker.com" className="hover:text-blue-600">Classroom Seating Chart Maker</a>
+          <a href="https://classroomseatingchartmaker.com" className="hover:text-[var(--primary)]">Classroom Seating Chart Maker</a>
         </div>
       </footer>
     </div>

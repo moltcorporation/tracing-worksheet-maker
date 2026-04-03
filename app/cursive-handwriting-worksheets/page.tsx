@@ -119,7 +119,7 @@ const faqJsonLd = {
 
 export default function CursiveHandwritingWorksheetsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--background)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -136,19 +136,19 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* Hero */}
       <section className="bg-gradient-to-b from-indigo-50 to-white py-12 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <nav className="text-sm text-gray-500 mb-4">
-            <Link href="/" className="hover:text-blue-600">
+          <nav className="text-sm text-[var(--muted-light)] mb-4">
+            <Link href="/" className="hover:text-[var(--primary)]">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-gray-700">
+            <span className="text-[var(--foreground)]">
               Cursive Handwriting Worksheets
             </span>
           </nav>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
             Free Cursive Handwriting Worksheet Generator
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
+          <p className="text-lg text-[var(--muted)] max-w-2xl mx-auto mb-6">
             Create printable cursive handwriting practice sheets with connected
             letters, writing guides, and dotted tracing outlines. Name tracing,
             letter tracing, and more — all free.
@@ -165,15 +165,15 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* Worksheet Types */}
       <section className="py-12 bg-white">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             Cursive Worksheet Types
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-indigo-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Cursive Name Tracing
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Type any name and generate a personalized cursive tracing
                 worksheet. Children practice writing their own name in connected
                 cursive letters with dotted guides.
@@ -186,10 +186,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               </Link>
             </div>
             <div className="bg-indigo-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Cursive Letter Tracing
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Practice individual cursive letters A-Z. Select specific letters
                 to focus on or generate a full alphabet sheet. Each letter
                 includes writing guidelines and stroke start markers.
@@ -202,10 +202,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               </Link>
             </div>
             <div className="bg-indigo-50 rounded-lg p-5">
-              <h3 className="font-semibold text-gray-800 mb-2">
+              <h3 className="font-semibold text-[var(--foreground)] mb-2">
                 Cursive Number Practice
               </h3>
-              <p className="text-sm text-gray-600 mb-3">
+              <p className="text-sm text-[var(--muted)] mb-3">
                 Generate cursive-style number tracing worksheets for 0-9.
                 Combine with letter practice for comprehensive cursive
                 handwriting development.
@@ -224,7 +224,7 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* Features */}
       <section className="py-12">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             What Makes Our Cursive Worksheets Effective
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -245,10 +245,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   Connected Cursive Letters
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Letters flow together naturally, teaching proper cursive
                   connections from the start. Not just italic print — real
                   connected cursive forms.
@@ -272,10 +272,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   Three-Line Writing Guides
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Baseline, midline, and top line guides teach consistent letter
                   height and spacing — essential for readable cursive.
                 </p>
@@ -298,10 +298,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   Adjustable Size &amp; Rows
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Customize letter size from large (beginners) to small
                   (advanced). Set 3-10 practice rows per page to match student
                   level and attention span.
@@ -325,10 +325,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   High-Quality PDF Download
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Download worksheets as crisp, print-ready PDFs on standard US
                   Letter paper. Print as many copies as you need.
                 </p>
@@ -341,7 +341,7 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* How to Use */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-6">
             How to Create Cursive Handwriting Worksheets
           </h2>
           <div className="space-y-4">
@@ -350,10 +350,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 1
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   Choose your mode
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Select name tracing for personalized worksheets, letter
                   tracing for A-Z practice, or number tracing for 0-9.
                 </p>
@@ -364,10 +364,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 2
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   Select Cursive style
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Switch from Print to Cursive handwriting style. The preview
                   updates instantly so you can see connected cursive letters
                   before downloading.
@@ -379,10 +379,10 @@ export default function CursiveHandwritingWorksheetsPage() {
                 3
               </div>
               <div>
-                <h3 className="font-semibold text-gray-800">
+                <h3 className="font-semibold text-[var(--foreground)]">
                   Customize and download
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--muted)] mt-1">
                   Adjust letter size and rows per page, then download as a
                   high-quality PDF. Print and distribute to your class or child.
                 </p>
@@ -403,10 +403,10 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* Teaching Tips */}
       <section className="py-12">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-4">
             Teaching Cursive Handwriting: Best Practices
           </h2>
-          <div className="space-y-4 text-gray-600">
+          <div className="space-y-4 text-[var(--muted)]">
             <ol className="list-decimal list-inside space-y-2">
               <li>
                 <strong>Start with name tracing</strong> — children connect
@@ -440,15 +440,15 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* FAQ */}
       <section className="py-12 bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] text-center mb-8">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 How do I generate cursive handwriting worksheets?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Use our free cursive worksheet generator: select cursive
                 handwriting style, type a name or choose letters to trace,
                 adjust size and rows, then download as a print-ready PDF. No
@@ -456,10 +456,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 What cursive styles are available?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Our generator offers a connected cursive style with flowing
                 letterforms ideal for handwriting practice. Letters connect
                 naturally just like real cursive writing, with dotted outlines
@@ -467,21 +467,21 @@ export default function CursiveHandwritingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Can I create cursive letter tracing worksheets for specific
                 letters?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Yes! Switch to letter tracing mode and select any combination of
                 A-Z letters. Each letter gets its own practice row with dotted
                 cursive outlines, writing guidelines, and stroke guides.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 What grade level are these cursive worksheets for?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Our cursive worksheets work for all levels — from 2nd graders
                 just learning cursive to older students refining their
                 handwriting. Adjust the letter size and rows per page to match
@@ -489,10 +489,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Are the cursive handwriting worksheets free to download?
               </h3>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-[var(--muted)] mt-1">
                 Yes, the cursive handwriting worksheet generator is completely
                 free. Generate unlimited worksheets with cursive name tracing,
                 letter tracing, and number tracing, then download as
@@ -506,10 +506,10 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* CTA */}
       <section className="py-10 bg-indigo-50">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-xl font-bold text-gray-900 mb-3">
+          <h2 className="text-xl font-bold text-[var(--foreground)] mb-3">
             Start Creating Cursive Worksheets
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[var(--muted)] mb-4">
             Generate custom cursive handwriting practice sheets in seconds.
             Names, letters, numbers — all with connected cursive letterforms.
           </p>
@@ -525,7 +525,7 @@ export default function CursiveHandwritingWorksheetsPage() {
       {/* Cross-links */}
       <section className="py-10">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-xl font-bold text-[var(--foreground)] text-center mb-6">
             More Tracing Worksheets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -533,10 +533,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               href="/cursive-name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Cursive Name Tracing
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Personalized cursive name tracing worksheets for any name.
               </p>
             </Link>
@@ -544,10 +544,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               href="/letter-tracing-worksheets"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Letter Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Printable A-Z letter tracing with stroke guides and writing
                 lines.
               </p>
@@ -556,10 +556,10 @@ export default function CursiveHandwritingWorksheetsPage() {
               href="/name-tracing"
               className="block bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow"
             >
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-[var(--foreground)]">
                 Name Tracing Worksheets
               </h3>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--muted-light)] mt-1">
                 Create personalized name tracing sheets in print or cursive
                 style.
               </p>
@@ -569,9 +569,9 @@ export default function CursiveHandwritingWorksheetsPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-gray-400">
-          <Link href="/" className="hover:text-blue-600">
+      <footer className="border-t border-[var(--border)] bg-white">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center text-xs text-[var(--muted-light)]">
+          <Link href="/" className="hover:text-[var(--primary)]">
             Tracing Worksheet Maker
           </Link>{" "}
           &mdash; Free printable tracing worksheets
@@ -579,7 +579,7 @@ export default function CursiveHandwritingWorksheetsPage() {
           From the makers of{" "}
           <a
             href="https://classroomseatingchartmaker.com"
-            className="hover:text-blue-600"
+            className="hover:text-[var(--primary)]"
           >
             Classroom Seating Chart Maker
           </a>

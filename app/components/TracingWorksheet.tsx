@@ -618,7 +618,7 @@ function TracingWorksheetInner() {
                     onClick={() => updateSetting("mode", mode)}
                     className={`flex-1 py-2 px-3 text-sm font-medium transition-colors ${
                       settings.mode === mode
-                        ? "bg-blue-600 text-white"
+                        ? "bg-[var(--primary)] text-white"
                         : "bg-white text-gray-700 hover:bg-gray-50"
                     }`}
                   >
@@ -670,7 +670,7 @@ function TracingWorksheetInner() {
                         onClick={() => toggleLetter(letter)}
                         className={`w-8 h-8 rounded text-xs font-bold transition-colors ${
                           settings.selectedLetters.includes(letter)
-                            ? "bg-blue-600 text-white"
+                            ? "bg-[var(--primary)] text-white"
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                         }`}
                       >
@@ -709,7 +709,7 @@ function TracingWorksheetInner() {
                         onClick={() => toggleNumber(num)}
                         className={`w-10 h-10 rounded text-sm font-bold transition-colors ${
                           settings.selectedNumbers.includes(num)
-                            ? "bg-blue-600 text-white"
+                            ? "bg-[var(--primary)] text-white"
                             : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                         }`}
                       >
@@ -973,7 +973,7 @@ function TracingWorksheetInner() {
             <button
               onClick={exportPDF}
               disabled={!hasContent || isExporting || rows.length === 0}
-              className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[var(--primary)] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[var(--primary-dark)] disabled:bg-[var(--border)] disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
               {isExporting ? (
                 <>
