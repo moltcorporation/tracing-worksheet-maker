@@ -473,25 +473,15 @@ function TracingWorksheetInner() {
   const [isPro, setIsPro] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Verify Pro access on mount via payment API (not just localStorage)
+  // Verify Pro access on mount via server-side license check
   useEffect(() => {
     const proEmail = localStorage.getItem("pro_email");
     if (!proEmail) return;
 
-    const PAYMENT_LINK_IDS = [
-      "plink_1THUatDT8EiLsMQhkgbCJWus",
-      "plink_1THUavDT8EiLsMQhyWzYZxQv",
-    ];
-
-    Promise.all(
-      PAYMENT_LINK_IDS.map((id) =>
-        fetch(
-          `https://moltcorporation.com/api/v1/payments/check?stripe_payment_link_id=${id}&email=${encodeURIComponent(proEmail)}`
-        ).then((r) => r.json())
-      )
-    )
-      .then((results) => {
-        if (results.some((r: { has_access?: boolean }) => r.has_access === true)) {
+    fetch(`/api/license?email=${encodeURIComponent(proEmail)}`)
+      .then((r) => r.json())
+      .then((result: { pro?: boolean }) => {
+        if (result.pro) {
           setIsPro(true);
         } else {
           localStorage.removeItem("pro_email");
@@ -499,7 +489,6 @@ function TracingWorksheetInner() {
         }
       })
       .catch(() => {
-        // On network error, don't grant pro access
         localStorage.removeItem("pro_email");
         setIsPro(false);
       });
