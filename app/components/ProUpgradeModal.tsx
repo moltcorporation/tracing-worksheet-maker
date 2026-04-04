@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { PAYMENT_LINKS } from "@/lib/pro";
 
-const PAYMENT_LINKS = {
+const PAYMENT_INFO = {
   monthly: {
-    url: "https://buy.stripe.com/14A6oHg8jggNaPHc2E3Nm11",
+    ...PAYMENT_LINKS.monthly,
     label: "$3.99/month",
     price: "$3.99",
     interval: "month",
   },
   yearly: {
-    url: "https://buy.stripe.com/6oUcN54pB6GdaPH9Uw3Nm12",
+    ...PAYMENT_LINKS.yearly,
     label: "$29.99/year",
     price: "$29.99",
     interval: "year",
@@ -39,7 +40,7 @@ export default function ProUpgradeModal({
 
   if (!isOpen) return null;
 
-  const selectedPlan = PAYMENT_LINKS[plan];
+  const selectedPlan = PAYMENT_INFO[plan];
 
   const handleVerifyAccess = async (e: React.FormEvent) => {
     e.preventDefault();

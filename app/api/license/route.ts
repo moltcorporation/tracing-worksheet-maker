@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { checkProAccess } from "@/lib/license";
+import { checkProAccess } from "@/lib/pro";
 
 export const dynamic = "force-dynamic";
 
