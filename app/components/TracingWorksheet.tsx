@@ -729,6 +729,19 @@ function TracingWorksheetInner() {
 
           if (i > 0) pdf.addPage();
           pdf.addImage(imgData, "PNG", 0, 0, 8.5, 11);
+
+          // Add watermark to free tier PDFs
+          if (!isPro) {
+            pdf.setFont("helvetica", "normal");
+            pdf.setFontSize(9);
+            pdf.setTextColor(180, 180, 180);
+            pdf.text(
+              "Made with TracingWorksheetMaker.com — Upgrade to Pro for clean exports",
+              4.25,
+              10.7,
+              { align: "center" }
+            );
+          }
         }
 
         pdf.save("bulk-tracing-worksheets.pdf");
@@ -748,6 +761,19 @@ function TracingWorksheetInner() {
       });
 
       pdf.addImage(imgData, "PNG", 0, 0, 8.5, 11);
+
+      // Add watermark to free tier PDFs
+      if (!isPro) {
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(9);
+        pdf.setTextColor(180, 180, 180);
+        pdf.text(
+          "Made with TracingWorksheetMaker.com — Upgrade to Pro for clean exports",
+          4.25,
+          10.7,
+          { align: "center" }
+        );
+      }
 
       const filename =
         settings.mode === "name"
