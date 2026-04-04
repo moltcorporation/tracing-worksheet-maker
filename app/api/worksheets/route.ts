@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { checkProAccess } from "@/lib/license";
 import { users, worksheets } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 
@@ -27,6 +28,11 @@ async function getOrCreateUser(email: string) {
 export async function GET(request: NextRequest) {
   const email = request.nextUrl.searchParams.get("email");
   if (!email) {
+    return NextResponse.json({ worksheets: [] });
+  }
+
+  const hasPro = await checkProAccess(email);
+  if (!hasPro) {
     return NextResponse.json({ worksheets: [] });
   }
 
@@ -71,6 +77,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
+      );
+    }
+
+    const hasPro = await checkProAccess(email);
+    if (!hasPro) {
+      return NextResponse.json(
+        { error: "Pro subscription required" },
+        { status: 403 }
       );
     }
 
