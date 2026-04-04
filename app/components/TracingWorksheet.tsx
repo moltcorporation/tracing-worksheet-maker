@@ -282,11 +282,24 @@ function WorksheetRow({
 
 // Generate rows for worksheet based on mode
 function generateRows(settings: WorksheetSettings): string[][] {
-  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage } =
+  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage, customWords } =
     settings;
 
   switch (mode) {
     case "name": {
+      // If custom words are provided, use each word as a separate row
+      if (customWords.trim()) {
+        const words = customWords
+          .split("\n")
+          .map((w) => w.trim())
+          .filter((w) => w.length > 0);
+        if (words.length === 0) return [];
+        const rows: string[][] = [];
+        for (const word of words.slice(0, rowsPerPage)) {
+          rows.push(word.toUpperCase().split(""));
+        }
+        return rows;
+      }
       if (!nameText.trim()) return [];
       const text = nameText.toUpperCase().trim();
       const rows: string[][] = [];
@@ -471,6 +484,8 @@ function TracingWorksheetInner() {
   const [proFeatureName, setProFeatureName] = useState("");
   const [fontDataUrl, setFontDataUrl] = useState<string | undefined>();
   const [isPro, setIsPro] = useState(false);
+  const [savedWorksheets, setSavedWorksheets] = useState<{ id: string; name: string; settings: WorksheetSettings; createdAt: string }[]>([]);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const svgRef = useRef<SVGSVGElement>(null);
 
   // Verify Pro access on mount via server-side license check
@@ -546,6 +561,83 @@ function TracingWorksheetInner() {
     setIsPro(true);
   }, []);
 
+  // Load saved worksheets when Pro is verified
+  useEffect(() => {
+    if (!isPro) return;
+    const email = localStorage.getItem("pro_email");
+    if (!email) return;
+    fetch(`/api/worksheets?email=${encodeURIComponent(email)}`)
+      .then((r) => r.json())
+      .then((data: { worksheets: typeof savedWorksheets }) => {
+        if (data.worksheets) setSavedWorksheets(data.worksheets);
+      })
+      .catch(() => {});
+  }, [isPro]);
+
+  const saveWorksheet = useCallback(async () => {
+    const email = localStorage.getItem("pro_email");
+    if (!email) return;
+    setSaveStatus("saving");
+    try {
+      const name =
+        settings.mode === "name"
+          ? settings.nameText || "Untitled"
+          : settings.mode === "letters"
+            ? "Letter Tracing"
+            : "Number Tracing";
+      const res = await fetch("/api/worksheets", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name, settings }),
+      });
+      if (res.ok) {
+        setSaveStatus("saved");
+        // Reload saved list
+        const listRes = await fetch(`/api/worksheets?email=${encodeURIComponent(email)}`);
+        const data = await listRes.json();
+        if (data.worksheets) setSavedWorksheets(data.worksheets);
+        setTimeout(() => setSaveStatus("idle"), 2000);
+      } else {
+        setSaveStatus("idle");
+      }
+    } catch {
+      setSaveStatus("idle");
+    }
+  }, [settings]);
+
+  const loadWorksheet = useCallback((saved: typeof savedWorksheets[number]) => {
+    setSettings(saved.settings as WorksheetSettings);
+  }, []);
+
+  // Render an SVG string to a canvas and return it as a PNG data URL
+  const renderSvgToImage = useCallback(
+    (svgData: string): Promise<string> => {
+      return new Promise((resolve, reject) => {
+        const svgBlob = new Blob([svgData], {
+          type: "image/svg+xml;charset=utf-8",
+        });
+        const url = URL.createObjectURL(svgBlob);
+        const canvas = document.createElement("canvas");
+        const scale = 3;
+        canvas.width = 612 * scale;
+        canvas.height = 792 * scale;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) { reject(new Error("Canvas context not available")); return; }
+        const img = new Image();
+        img.onload = () => {
+          ctx.fillStyle = "white";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(url);
+          resolve(canvas.toDataURL("image/png", 1.0));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("SVG render failed")); };
+        img.src = url;
+      });
+    },
+    []
+  );
+
   const exportPDF = useCallback(async () => {
     if (!svgRef.current) return;
     setIsExporting(true);
@@ -557,63 +649,81 @@ function TracingWorksheetInner() {
         setFontDataUrl(url);
       }
 
+      // Check for bulk names — generate one page per name
+      const bulkNamesList = settings.bulkNames
+        .split("\n")
+        .map((n) => n.trim())
+        .filter((n) => n.length > 0);
+
+      if (bulkNamesList.length > 1) {
+        // Bulk export: one PDF page per name
+        const pdf = new jsPDF({ orientation: "portrait", unit: "in", format: "letter" });
+        const svgElement = svgRef.current;
+
+        for (let i = 0; i < bulkNamesList.length; i++) {
+          // Temporarily update the SVG title and rows for this name
+          const nameSettings = { ...settings, nameText: bulkNamesList[i], customWords: "", bulkNames: "" };
+          const nameRows = generateRows(nameSettings);
+          if (nameRows.length === 0) continue;
+
+          // Build an SVG string for this name by cloning and modifying
+          const clone = svgElement.cloneNode(true) as SVGSVGElement;
+          // Update the title text
+          const titleEl = clone.querySelector("text[font-size='18']");
+          if (titleEl) titleEl.textContent = `Trace: ${bulkNamesList[i]}`;
+          // Update the row texts
+          const rowTexts = clone.querySelectorAll("text[font-size]");
+          let rowIdx = 0;
+          rowTexts.forEach((el) => {
+            const fs = el.getAttribute("font-size");
+            if (fs && parseInt(fs) > 20 && parseInt(fs) !== 18) {
+              if (rowIdx < nameRows.length) {
+                el.textContent = nameRows[rowIdx].join("");
+                rowIdx++;
+              }
+            }
+          });
+
+          const svgData = new XMLSerializer().serializeToString(clone);
+          const imgData = await renderSvgToImage(svgData);
+
+          if (i > 0) pdf.addPage();
+          pdf.addImage(imgData, "PNG", 0, 0, 8.5, 11);
+        }
+
+        pdf.save("bulk-tracing-worksheets.pdf");
+        setIsExporting(false);
+        return;
+      }
+
+      // Single page export
       const svgElement = svgRef.current;
       const svgData = new XMLSerializer().serializeToString(svgElement);
-      const svgBlob = new Blob([svgData], {
-        type: "image/svg+xml;charset=utf-8",
+      const imgData = await renderSvgToImage(svgData);
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "in",
+        format: "letter",
       });
-      const url = URL.createObjectURL(svgBlob);
 
-      // Create a canvas to render SVG at high DPI
-      const canvas = document.createElement("canvas");
-      const scale = 3; // 3x for ~216 DPI (good print quality)
-      canvas.width = 612 * scale;
-      canvas.height = 792 * scale;
-      const ctx = canvas.getContext("2d");
+      pdf.addImage(imgData, "PNG", 0, 0, 8.5, 11);
 
-      if (!ctx) throw new Error("Canvas context not available");
+      const filename =
+        settings.mode === "name"
+          ? `trace-${settings.nameText.toLowerCase().replace(/\s+/g, "-") || "worksheet"}.pdf`
+          : `${settings.mode}-tracing-worksheet.pdf`;
 
-      const img = new Image();
-      img.onload = () => {
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        URL.revokeObjectURL(url);
-
-        const imgData = canvas.toDataURL("image/png", 1.0);
-
-        // Create PDF at US Letter size
-        const pdf = new jsPDF({
-          orientation: "portrait",
-          unit: "in",
-          format: "letter",
-        });
-
-        pdf.addImage(imgData, "PNG", 0, 0, 8.5, 11);
-
-        const filename =
-          settings.mode === "name"
-            ? `trace-${settings.nameText.toLowerCase().replace(/\s+/g, "-") || "worksheet"}.pdf`
-            : `${settings.mode}-tracing-worksheet.pdf`;
-
-        pdf.save(filename);
-        setIsExporting(false);
-      };
-
-      img.onerror = () => {
-        URL.revokeObjectURL(url);
-        setIsExporting(false);
-      };
-
-      img.src = url;
+      pdf.save(filename);
+      setIsExporting(false);
     } catch {
       setIsExporting(false);
     }
-  }, [settings.mode, settings.nameText, settings.handwritingStyle, fontDataUrl]);
+  }, [settings, fontDataUrl, renderSvgToImage]);
 
   const rows = generateRows(settings);
   const hasContent =
-    settings.mode !== "name" || settings.nameText.trim().length > 0;
+    settings.mode !== "name" || settings.nameText.trim().length > 0 || settings.customWords.trim().length > 0;
 
   return (
     <div className="bg-[#fef7f0]">
@@ -962,8 +1072,15 @@ function TracingWorksheetInner() {
 
             {/* Save Worksheets - Pro Feature */}
             <button
-              onClick={() => openProModal("Save & Organize Worksheets")}
-              className="w-full bg-white border border-[#e9d5ff] rounded-lg shadow p-3 flex items-center justify-center gap-2 text-sm text-gray-500 hover:bg-[#fef7f0] transition-colors"
+              onClick={isPro ? saveWorksheet : () => openProModal("Save & Organize Worksheets")}
+              disabled={saveStatus === "saving"}
+              className={`w-full border rounded-lg shadow p-3 flex items-center justify-center gap-2 text-sm transition-colors ${
+                isPro
+                  ? saveStatus === "saved"
+                    ? "bg-green-50 border-green-300 text-green-700"
+                    : "bg-white border-[#7c3aed] text-[#7c3aed] hover:bg-[#f5f3ff]"
+                  : "bg-white border-[#e9d5ff] text-gray-500 hover:bg-[#fef7f0]"
+              }`}
             >
               <svg
                 className="w-4 h-4"
@@ -978,11 +1095,40 @@ function TracingWorksheetInner() {
                   d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
                 />
               </svg>
-              Save Worksheet
-              <span className="inline-flex items-center gap-1 bg-[#f5f3ff] text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded-full">
-                PRO
-              </span>
+              {saveStatus === "saving"
+                ? "Saving..."
+                : saveStatus === "saved"
+                  ? "Saved!"
+                  : "Save Worksheet"}
+              {!isPro && (
+                <span className="inline-flex items-center gap-1 bg-[#f5f3ff] text-[#7c3aed] text-xs font-semibold px-1.5 py-0.5 rounded-full">
+                  PRO
+                </span>
+              )}
             </button>
+
+            {/* Saved Worksheets List - Pro */}
+            {isPro && savedWorksheets.length > 0 && (
+              <div className="bg-white rounded-lg shadow p-4">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Saved Worksheets
+                </label>
+                <div className="space-y-1 max-h-40 overflow-y-auto">
+                  {savedWorksheets.map((w) => (
+                    <button
+                      key={w.id}
+                      onClick={() => loadWorksheet(w)}
+                      className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-[#f5f3ff] transition-colors text-gray-700 truncate"
+                    >
+                      {w.name}
+                      <span className="text-xs text-gray-400 ml-2">
+                        {new Date(w.createdAt).toLocaleDateString()}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Export Button */}
             <button
