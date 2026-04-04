@@ -521,7 +521,29 @@ function TracingWorksheetInner() {
   const [isPro, setIsPro] = useState(false);
   const [savedWorksheets, setSavedWorksheets] = useState<{ id: string; name: string; settings: WorksheetSettings; createdAt: string }[]>([]);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [dailyDownloads, setDailyDownloads] = useState(0);
+  const [showLimitModal, setShowLimitModal] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
+
+  const FREE_DAILY_LIMIT = 3;
+
+  // Load daily download count from localStorage
+  useEffect(() => {
+    const stored = localStorage.getItem("twm_downloads");
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        const today = new Date().toDateString();
+        if (data.date === today) {
+          setDailyDownloads(data.count);
+        } else {
+          localStorage.setItem("twm_downloads", JSON.stringify({ date: today, count: 0 }));
+        }
+      } catch {
+        localStorage.removeItem("twm_downloads");
+      }
+    }
+  }, []);
 
   // Verify Pro access on mount via server-side license check
   useEffect(() => {
@@ -674,8 +696,29 @@ function TracingWorksheetInner() {
     []
   );
 
+  const trackDownload = useCallback(() => {
+    const today = new Date().toDateString();
+    const stored = localStorage.getItem("twm_downloads");
+    let count = 1;
+    if (stored) {
+      try {
+        const data = JSON.parse(stored);
+        count = data.date === today ? data.count + 1 : 1;
+      } catch { /* reset */ }
+    }
+    localStorage.setItem("twm_downloads", JSON.stringify({ date: today, count }));
+    setDailyDownloads(count);
+  }, []);
+
   const exportPDF = useCallback(async () => {
     if (!svgRef.current) return;
+
+    // Enforce daily download limit for free users
+    if (!isPro && dailyDownloads >= FREE_DAILY_LIMIT) {
+      setShowLimitModal(true);
+      return;
+    }
+
     setIsExporting(true);
 
     try {
@@ -745,6 +788,7 @@ function TracingWorksheetInner() {
         }
 
         pdf.save("bulk-tracing-worksheets.pdf");
+        if (!isPro) trackDownload();
         setIsExporting(false);
         return;
       }
@@ -781,11 +825,12 @@ function TracingWorksheetInner() {
           : `${settings.mode}-tracing-worksheet.pdf`;
 
       pdf.save(filename);
+      if (!isPro) trackDownload();
       setIsExporting(false);
     } catch {
       setIsExporting(false);
     }
-  }, [settings, fontDataUrl, renderSvgToImage]);
+  }, [settings, fontDataUrl, renderSvgToImage, isPro, dailyDownloads, trackDownload]);
 
   const rows = generateRows(settings);
   const hasContent =
@@ -1244,6 +1289,13 @@ function TracingWorksheetInner() {
                 </>
               )}
             </button>
+            {!isPro && (
+              <p className="text-xs text-gray-500 text-center mt-1">
+                {dailyDownloads >= FREE_DAILY_LIMIT
+                  ? "Daily limit reached — upgrade to Pro for unlimited"
+                  : `${FREE_DAILY_LIMIT - dailyDownloads} free download${FREE_DAILY_LIMIT - dailyDownloads === 1 ? "" : "s"} remaining today`}
+              </p>
+            )}
           </div>
 
           {/* Preview */}
@@ -1291,6 +1343,39 @@ function TracingWorksheetInner() {
         featureName={proFeatureName}
         onProVerified={handleProVerified}
       />
+
+      {/* Daily Download Limit Modal */}
+      {showLimitModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-md w-full p-6 shadow-xl">
+            <div className="text-center">
+              <div className="mx-auto w-12 h-12 bg-[#f5f3ff] rounded-full flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-[#7c3aed]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m0 0v2m0-2h2m-2 0H10m9.374-7.424A9 9 0 1112 3a9 9 0 017.374 11.576z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Daily Download Limit Reached</h3>
+              <p className="text-gray-600 mb-4">
+                Free accounts can download {FREE_DAILY_LIMIT} PDFs per day. Upgrade to Pro for unlimited downloads and watermark-free exports.
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowLimitModal(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  Maybe Later
+                </button>
+                <button
+                  onClick={() => { setShowLimitModal(false); openProModal("Unlimited Downloads"); }}
+                  className="flex-1 px-4 py-2 bg-[#7c3aed] text-white rounded-lg hover:bg-[#6d28d9] transition-colors font-semibold"
+                >
+                  Upgrade to Pro
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
