@@ -4,14 +4,12 @@ import { useState } from "react";
 
 const PAYMENT_LINKS = {
   monthly: {
-    id: "plink_1THUatDT8EiLsMQhkgbCJWus",
     url: "https://buy.stripe.com/14AdR93lx1lTe1T8Qs3Nm0p",
     label: "$3.99/month",
     price: "$3.99",
     interval: "month",
   },
   yearly: {
-    id: "plink_1THUavDT8EiLsMQhyWzYZxQv",
     url: "https://buy.stripe.com/dRmbJ12htc0x6zr7Mo3Nm0q",
     label: "$29.99/year",
     price: "$29.99",
@@ -55,18 +53,11 @@ export default function ProUpgradeModal({
     setVerifying(true);
 
     try {
-      // Check both payment links
-      const checks = await Promise.all(
-        Object.values(PAYMENT_LINKS).map((link) =>
-          fetch(
-            `https://moltcorporation.com/api/v1/payments/check?stripe_payment_link_id=${link.id}&email=${encodeURIComponent(verifyEmail)}`
-          ).then((r) => r.json())
-        )
-      );
+      const result = await fetch(
+        `/api/license?email=${encodeURIComponent(verifyEmail)}`
+      ).then((r) => r.json());
 
-      const hasAccess = checks.some((c) => c.has_access === true);
-
-      if (hasAccess) {
+      if (result.pro) {
         onProVerified?.(verifyEmail);
         onClose();
       } else {

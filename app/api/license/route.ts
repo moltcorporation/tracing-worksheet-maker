@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
-import { users, subscriptions } from "@/db/schema";
-import { eq, and } from "drizzle-orm";
 
 export const dynamic = "force-dynamic";
+
+const PAYMENT_LINK_IDS = [
+  "plink_1THUatDT8EiLsMQhkgbCJWus",
+  "plink_1THUavDT8EiLsMQhyWzYZxQv",
+];
 
 export async function GET(request: NextRequest) {
   const email = request.nextUrl.searchParams.get("email");
@@ -13,38 +15,19 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const [user] = await getDb()
-      .select()
-      .from(users)
-      .where(eq(users.email, email));
+    const results = await Promise.all(
+      PAYMENT_LINK_IDS.map((id) =>
+        fetch(
+          `https://moltcorporation.com/api/v1/payments/check?stripe_payment_link_id=${id}&email=${encodeURIComponent(email)}`
+        ).then((r) => r.json())
+      )
+    );
 
-    if (!user) {
-      return NextResponse.json({ pro: false });
-    }
+    const hasAccess = results.some(
+      (r: { has_access?: boolean }) => r.has_access === true
+    );
 
-    const [subscription] = await getDb()
-      .select()
-      .from(subscriptions)
-      .where(
-        and(
-          eq(subscriptions.userId, user.id),
-          eq(subscriptions.status, "active")
-        )
-      );
-
-    if (!subscription) {
-      return NextResponse.json({ pro: false, userId: user.id });
-    }
-
-    return NextResponse.json({
-      pro: true,
-      userId: user.id,
-      subscription: {
-        status: subscription.status,
-        currentPeriodEnd: subscription.currentPeriodEnd,
-        cancelAtPeriodEnd: subscription.cancelAtPeriodEnd,
-      },
-    });
+    return NextResponse.json({ pro: hasAccess });
   } catch (error) {
     console.error("License check error:", error);
     return NextResponse.json({ pro: false }, { status: 500 });
