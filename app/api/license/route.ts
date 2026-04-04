@@ -3,6 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 
 const PAYMENT_LINK_IDS = [
+  "plink_1TI7YTDT8EiLsMQhNLtL44CD",
+  "plink_1TI7YUDT8EiLsMQhaA4vFMTi",
+  "plink_1TI1c6DT8EiLsMQhwCIk4x6s",
+  "plink_1TI1c7DT8EiLsMQhFoCGVwTo",
   "plink_1THUatDT8EiLsMQhkgbCJWus",
   "plink_1THUavDT8EiLsMQhyWzYZxQv",
 ];
