@@ -440,7 +440,7 @@ function WorksheetPreview({
           fill="#bbb"
           textAnchor="middle"
         >
-          tracingworksheetmaker.com
+          nametracingmaker.com
         </text>
       </svg>
     </div>
