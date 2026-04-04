@@ -3,6 +3,12 @@
 import { useState, useRef, useCallback, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { jsPDF } from "jspdf";
+import {
+  getDailyDownloadCount,
+  canDownload,
+  incrementDownload,
+  FREE_DAILY_LIMIT,
+} from "@/lib/free-tier";
 import ProUpgradeModal from "./ProUpgradeModal";
 
 type Mode = "name" | "letters" | "numbers";
@@ -525,24 +531,9 @@ function TracingWorksheetInner() {
   const [showLimitModal, setShowLimitModal] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const FREE_DAILY_LIMIT = 3;
-
-  // Load daily download count from localStorage
+  // Load daily download count from free-tier utility
   useEffect(() => {
-    const stored = localStorage.getItem("twm_downloads");
-    if (stored) {
-      try {
-        const data = JSON.parse(stored);
-        const today = new Date().toDateString();
-        if (data.date === today) {
-          setDailyDownloads(data.count);
-        } else {
-          localStorage.setItem("twm_downloads", JSON.stringify({ date: today, count: 0 }));
-        }
-      } catch {
-        localStorage.removeItem("twm_downloads");
-      }
-    }
+    setDailyDownloads(getDailyDownloadCount());
   }, []);
 
   // Verify Pro access on mount via server-side license check
@@ -697,24 +688,15 @@ function TracingWorksheetInner() {
   );
 
   const trackDownload = useCallback(() => {
-    const today = new Date().toDateString();
-    const stored = localStorage.getItem("twm_downloads");
-    let count = 1;
-    if (stored) {
-      try {
-        const data = JSON.parse(stored);
-        count = data.date === today ? data.count + 1 : 1;
-      } catch { /* reset */ }
-    }
-    localStorage.setItem("twm_downloads", JSON.stringify({ date: today, count }));
-    setDailyDownloads(count);
+    incrementDownload();
+    setDailyDownloads(getDailyDownloadCount());
   }, []);
 
   const exportPDF = useCallback(async () => {
     if (!svgRef.current) return;
 
     // Enforce daily download limit for free users
-    if (!isPro && dailyDownloads >= FREE_DAILY_LIMIT) {
+    if (!isPro && !canDownload()) {
       setShowLimitModal(true);
       return;
     }
@@ -1291,7 +1273,7 @@ function TracingWorksheetInner() {
             </button>
             {!isPro && (
               <p className="text-xs text-gray-500 text-center mt-1">
-                {dailyDownloads >= FREE_DAILY_LIMIT
+                {!canDownload()
                   ? "Daily limit reached — upgrade to Pro for unlimited"
                   : `${FREE_DAILY_LIMIT - dailyDownloads} free download${FREE_DAILY_LIMIT - dailyDownloads === 1 ? "" : "s"} remaining today`}
               </p>
