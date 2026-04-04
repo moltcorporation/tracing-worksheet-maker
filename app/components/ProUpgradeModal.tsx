@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackProUpgradeClicked } from "@/lib/analytics";
 
 const PAYMENT_LINKS = {
   monthly: {
@@ -201,6 +202,7 @@ export default function ProUpgradeModal({
               href={selectedPlan.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackProUpgradeClicked(selectedPlan.interval)}
               className="block w-full text-center bg-gradient-to-r from-[#7c3aed] to-[#ec4899] text-white py-3 px-4 rounded-xl font-bold hover:shadow-lg transition-all"
             >
               Subscribe Now

@@ -9,6 +9,11 @@ import {
   incrementDownload,
   FREE_DAILY_LIMIT,
 } from "@/lib/free-tier";
+import {
+  trackPdfExported,
+  trackWorksheetCreated,
+  trackWatermarkVisible,
+} from "@/lib/analytics";
 import ProUpgradeModal from "./ProUpgradeModal";
 
 type Mode = "name" | "letters" | "numbers";
@@ -704,6 +709,9 @@ function TracingWorksheetInner() {
     setIsExporting(true);
 
     try {
+      // Track worksheet creation attempt
+      trackWorksheetCreated(settings.mode);
+
       // Ensure custom font data is embedded before serialization
       if (settings.handwritingStyle === "cursive" && !fontDataUrl) {
         const url = await getCursiveFontDataUrl();
@@ -757,6 +765,7 @@ function TracingWorksheetInner() {
 
           // Add watermark to free tier PDFs
           if (!isPro) {
+            trackWatermarkVisible("bulk");
             pdf.setFont("helvetica", "normal");
             pdf.setFontSize(9);
             pdf.setTextColor(180, 180, 180);
@@ -770,6 +779,7 @@ function TracingWorksheetInner() {
         }
 
         pdf.save("bulk-tracing-worksheets.pdf");
+        trackPdfExported("bulk", isPro);
         if (!isPro) trackDownload();
         setIsExporting(false);
         return;
@@ -790,6 +800,7 @@ function TracingWorksheetInner() {
 
       // Add watermark to free tier PDFs
       if (!isPro) {
+        trackWatermarkVisible("single");
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(9);
         pdf.setTextColor(180, 180, 180);
@@ -807,6 +818,7 @@ function TracingWorksheetInner() {
           : `${settings.mode}-tracing-worksheet.pdf`;
 
       pdf.save(filename);
+      trackPdfExported("single", isPro);
       if (!isPro) trackDownload();
       setIsExporting(false);
     } catch {
