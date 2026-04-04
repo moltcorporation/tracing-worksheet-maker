@@ -28,22 +28,33 @@ const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const DIGITS = "0123456789".split("");
 
 function getFontFamily(style: HandwritingStyle): string {
-  return style === "cursive"
-    ? "'Dancing Script', cursive"
-    : "'Comic Sans MS', 'Comic Sans', cursive";
+  switch (style) {
+    case "cursive":
+      return "'Dancing Script', cursive";
+    case "dnealian":
+      return "'Architects Daughter', cursive";
+    default:
+      return "'Comic Sans MS', 'Comic Sans', cursive";
+  }
 }
 
 // Fetch font file and convert to base64 data URL for SVG embedding
-let cachedFontDataUrl: string | null = null;
-async function getCursiveFontDataUrl(): Promise<string> {
-  if (cachedFontDataUrl) return cachedFontDataUrl;
-  const resp = await fetch("/fonts/DancingScript-Regular.ttf");
+const fontCache: Record<string, string> = {};
+async function getFontDataUrl(path: string): Promise<string> {
+  if (fontCache[path]) return fontCache[path];
+  const resp = await fetch(path);
   const buf = await resp.arrayBuffer();
   const base64 = btoa(
     new Uint8Array(buf).reduce((s, b) => s + String.fromCharCode(b), "")
   );
-  cachedFontDataUrl = `data:font/truetype;base64,${base64}`;
-  return cachedFontDataUrl;
+  fontCache[path] = `data:font/truetype;base64,${base64}`;
+  return fontCache[path];
+}
+async function getCursiveFontDataUrl(): Promise<string> {
+  return getFontDataUrl("/fonts/DancingScript-Regular.ttf");
+}
+async function getDnealianFontDataUrl(): Promise<string> {
+  return getFontDataUrl("/fonts/ArchitectsDaughter-Regular.ttf");
 }
 
 const DEFAULT_SETTINGS: WorksheetSettings = {
@@ -89,14 +100,24 @@ function WritingLines({
   y,
   width,
   height,
+  lineStyle = "standard",
 }: {
   y: number;
   width: number;
   height: number;
+  lineStyle?: LineStyle;
 }) {
+  if (lineStyle === "blank") {
+    return <g />;
+  }
+
   const baseline = y + height;
   const midline = y + height * 0.5;
   const topline = y;
+
+  // Adjust line weights based on style
+  const isWide = lineStyle === "wide-ruled";
+  const isNarrow = lineStyle === "narrow-ruled";
 
   return (
     <g>
@@ -106,8 +127,8 @@ function WritingLines({
         y1={topline}
         x2={width}
         y2={topline}
-        stroke="#ccc"
-        strokeWidth={0.5}
+        stroke={isWide ? "#bbb" : "#ccc"}
+        strokeWidth={isWide ? 0.8 : 0.5}
         strokeDasharray="2,4"
       />
       {/* Midline - dashed */}
@@ -116,7 +137,7 @@ function WritingLines({
         y1={midline}
         x2={width}
         y2={midline}
-        stroke="#aaa"
+        stroke={isNarrow ? "#bbb" : "#aaa"}
         strokeWidth={0.5}
         strokeDasharray="6,4"
       />
@@ -234,6 +255,7 @@ function WorksheetRow({
   showGuideLines,
   showStrokeGuides,
   handwritingStyle = "print",
+  lineStyle = "standard",
 }: {
   chars: string[];
   y: number;
@@ -243,6 +265,7 @@ function WorksheetRow({
   showGuideLines: boolean;
   showStrokeGuides?: boolean;
   handwritingStyle?: HandwritingStyle;
+  lineStyle?: LineStyle;
 }) {
   const padding = 20;
   const usableWidth = width - padding * 2;
@@ -254,7 +277,7 @@ function WorksheetRow({
   return (
     <g>
       {showGuideLines && (
-        <WritingLines y={y} width={width} height={rowHeight} />
+        <WritingLines y={y} width={width} height={rowHeight} lineStyle={lineStyle} />
       )}
       {chars.map((char, i) => {
         const cx = padding + i * charSpacing + charSpacing / 2;
@@ -346,10 +369,12 @@ function WorksheetPreview({
   settings,
   svgRef,
   fontDataUrl,
+  dnealianFontDataUrl,
 }: {
   settings: WorksheetSettings;
   svgRef: React.RefObject<SVGSVGElement | null>;
   fontDataUrl?: string;
+  dnealianFontDataUrl?: string;
 }) {
   const rows = generateRows(settings);
   // US Letter dimensions in mm, scaled for SVG viewBox
@@ -376,16 +401,24 @@ function WorksheetPreview({
         xmlns="http://www.w3.org/2000/svg"
         style={{ backgroundColor: "white" }}
       >
-        {/* Embed cursive font for self-contained SVG (needed for PDF export) */}
-        {settings.handwritingStyle === "cursive" && fontDataUrl && (
+        {/* Embed custom fonts for self-contained SVG (needed for PDF export) */}
+        {(settings.handwritingStyle === "cursive" || settings.handwritingStyle === "dnealian") && (
           <defs>
             <style>{`
+              ${settings.handwritingStyle === "cursive" && fontDataUrl ? `
               @font-face {
                 font-family: 'Dancing Script';
                 font-style: normal;
                 font-weight: 400;
                 src: url('${fontDataUrl}') format('truetype');
-              }
+              }` : ""}
+              ${settings.handwritingStyle === "dnealian" && dnealianFontDataUrl ? `
+              @font-face {
+                font-family: 'Architects Daughter';
+                font-style: normal;
+                font-weight: 400;
+                src: url('${dnealianFontDataUrl}') format('truetype');
+              }` : ""}
             `}</style>
           </defs>
         )}
@@ -440,6 +473,7 @@ function WorksheetPreview({
               showGuideLines={settings.showGuideLines}
               showStrokeGuides={i === 0}
               handwritingStyle={settings.handwritingStyle}
+              lineStyle={settings.lineStyle}
             />
           ))}
         </g>
@@ -483,6 +517,7 @@ function TracingWorksheetInner() {
   const [showProModal, setShowProModal] = useState(false);
   const [proFeatureName, setProFeatureName] = useState("");
   const [fontDataUrl, setFontDataUrl] = useState<string | undefined>();
+  const [dnealianFontDataUrl, setDnealianFontDataUrl] = useState<string | undefined>();
   const [isPro, setIsPro] = useState(false);
   const [savedWorksheets, setSavedWorksheets] = useState<{ id: string; name: string; settings: WorksheetSettings; createdAt: string }[]>([]);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
@@ -509,9 +544,10 @@ function TracingWorksheetInner() {
       });
   }, []);
 
-  // Pre-load cursive font data for SVG embedding
+  // Pre-load custom font data for SVG embedding
   useEffect(() => {
     getCursiveFontDataUrl().then(setFontDataUrl);
+    getDnealianFontDataUrl().then(setDnealianFontDataUrl);
   }, []);
 
   // Sync style from URL search params
@@ -643,10 +679,14 @@ function TracingWorksheetInner() {
     setIsExporting(true);
 
     try {
-      // If cursive, ensure font data is embedded before serialization
+      // Ensure custom font data is embedded before serialization
       if (settings.handwritingStyle === "cursive" && !fontDataUrl) {
         const url = await getCursiveFontDataUrl();
         setFontDataUrl(url);
+      }
+      if (settings.handwritingStyle === "dnealian" && !dnealianFontDataUrl) {
+        const url = await getDnealianFontDataUrl();
+        setDnealianFontDataUrl(url);
       }
 
       // Check for bulk names — generate one page per name
@@ -1187,7 +1227,7 @@ function TracingWorksheetInner() {
                 Preview
               </h2>
               {hasContent && rows.length > 0 ? (
-                <WorksheetPreview settings={settings} svgRef={svgRef} fontDataUrl={fontDataUrl} />
+                <WorksheetPreview settings={settings} svgRef={svgRef} fontDataUrl={fontDataUrl} dnealianFontDataUrl={dnealianFontDataUrl} />
               ) : (
                 <div className="bg-white rounded-lg shadow-lg p-12 text-center text-gray-400">
                   <svg
