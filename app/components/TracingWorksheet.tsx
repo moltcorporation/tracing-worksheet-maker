@@ -41,7 +41,7 @@ const DIGITS = "0123456789".split("");
 function getFontFamily(style: HandwritingStyle): string {
   switch (style) {
     case "cursive":
-      return "'Dancing Script', cursive";
+      return "'Cedarville Cursive', cursive";
     case "dnealian":
       return "'Architects Daughter', cursive";
     default:
@@ -62,7 +62,7 @@ async function getFontDataUrl(path: string): Promise<string> {
   return fontCache[path];
 }
 async function getCursiveFontDataUrl(): Promise<string> {
-  return getFontDataUrl("/fonts/DancingScript-Regular.ttf");
+  return getFontDataUrl("/fonts/CedarvilleCursive.ttf");
 }
 async function getDnealianFontDataUrl(): Promise<string> {
   return getFontDataUrl("/fonts/ArchitectsDaughter-Regular.ttf");
@@ -214,26 +214,12 @@ function StrokeGuide({
   size: number;
   handwritingStyle?: HandwritingStyle;
 }) {
-  // Show a small number indicating stroke start position
   const isNumber = /[0-9]/.test(char);
   const guideY = y - size * 0.85;
   const guideX = x - size * 0.15;
 
   return (
     <g>
-      {/* Solid guide letter */}
-      <text
-        x={x}
-        y={y}
-        fontSize={size * 0.35}
-        fontFamily={getFontFamily(handwritingStyle)}
-        fill="#ddd"
-        textAnchor="middle"
-        dominantBaseline="alphabetic"
-      >
-        {char}
-      </text>
-      {/* Start dot */}
       <circle
         cx={guideX}
         cy={guideY}
@@ -316,8 +302,13 @@ function WorksheetRow({
 
 // Generate rows for worksheet based on mode
 function generateRows(settings: WorksheetSettings): string[][] {
-  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage, customWords } =
+  const { mode, nameText, selectedLetters, selectedNumbers, rowsPerPage, customWords, handwritingStyle } =
     settings;
+
+  const isCursive = handwritingStyle === "cursive";
+  const titleCase = (w: string) =>
+    w.length === 0 ? w : w[0].toUpperCase() + w.slice(1).toLowerCase();
+  const formatWord = (w: string) => (isCursive ? titleCase(w) : w.toUpperCase());
 
   switch (mode) {
     case "name": {
@@ -330,12 +321,12 @@ function generateRows(settings: WorksheetSettings): string[][] {
         if (words.length === 0) return [];
         const rows: string[][] = [];
         for (const word of words.slice(0, rowsPerPage)) {
-          rows.push(word.toUpperCase().split(""));
+          rows.push(formatWord(word).split(""));
         }
         return rows;
       }
       if (!nameText.trim()) return [];
-      const text = nameText.toUpperCase().trim();
+      const text = formatWord(nameText.trim());
       const rows: string[][] = [];
       // First row: the name with guides
       rows.push(text.split(""));
@@ -418,7 +409,7 @@ function WorksheetPreview({
             <style>{`
               ${settings.handwritingStyle === "cursive" && fontDataUrl ? `
               @font-face {
-                font-family: 'Dancing Script';
+                font-family: 'Cedarville Cursive';
                 font-style: normal;
                 font-weight: 400;
                 src: url('${fontDataUrl}') format('truetype');
